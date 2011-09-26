@@ -81,7 +81,7 @@ class ArrayAnim{
     posY=120;
 //    arrayFont=loadFont("Courier");
     textAlign(CENTER);
-    sqsz=40;
+    sqsz=30;
     int j=0;
     arcarray=new int[9];
     for(int i=3;i>=0;i--){
@@ -364,23 +364,23 @@ class ArrayAnim{
   void drawSplitter(){
     stroke(255);
     fill(255);
-    int topX= sqsz*3+(splitterPosition*sqsz);
-    int topY= sqsz*2;
-    int endpt= sqsz*(sz+3);
+    int topX= posX+(splitterPosition*sqsz);
+    int topY= posY-40;
+    int endpt= posX+(sqsz*sz);
     strokeWeight(3);
     line(topX,topY, topX, topY+30);
     strokeWeight(1);
     if(splitterPosition !=0){
-      text(splitterLeftLabel,sqsz+15,topY+17);    
+      text(splitterLeftLabel,posX-40,topY+17);    
       fill(splitterLeftColour);
       stroke(splitterLeftColour);
-      line(sqsz*3,topY+15,topX-5,topY+15);
-      triangle(sqsz*3,topY+15,sqsz*3+10,topY+10,sqsz*3+10,topY+20);
+      line(posX,topY+15,topX-5,topY+15);
+      triangle(posX,topY+15,posX+10,topY+10,posX+10,topY+20);
     }
     if(splitterPosition!=sz){
       fill(#FFFFFF);
       stroke(#FFFFFF);
-      text(splitterRightLabel,endpt+45,topY+17);    
+      text(splitterRightLabel,endpt+40,topY+17);    
       fill(splitterRightColour);
       stroke(splitterRightColour);
       line(topX+5,topY+15,endpt,topY+15);
