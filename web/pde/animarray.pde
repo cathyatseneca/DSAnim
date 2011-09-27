@@ -1,23 +1,3 @@
-void drawSqWithNum(int x,int c,color co,int sz,int offsetX,int offsetY){
-  stroke(0);
-  fill(255);
-  rect(offsetX+x*(sz),offsetY,sz,sz);
-  fill(co);
-//  textFont(fontA, 24);
-  if(c>0)
-    text(c,offsetX+((x+0.5)*sz),offsetY+(sz*0.5)+9);
-}
-void drawSquare(int x,int sz, int offsetX,int offsetY){
-  stroke(0);
-  fill(255);
-  rect(offsetX+x*(sz),offsetY,sz,sz);
-}
-
-void drawTriangle(int x, int sz,int posX,int posY){
-  stroke(255);
-  fill(255);
-  triangle(posX+((x+0.5)*sz),posY+sz, posX+((x+0.5)*sz)-10,posY+sz+10,posX+((x+0.5)*sz)+10, posY+sz+10);
-}
 
 void drawBar(int idx,int value,color co,int sz,int posX,int posY){
   stroke(co);
