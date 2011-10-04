@@ -213,10 +213,10 @@ class ArrayAnim{
        drawTemp();
        for(int i=0;i<sz;i++){
         if(i==from){
-          drawSquare(i,sqsz,posX,posY);
+          drawSquare(sqsz,posX+i*sqsz,posY);
         }
         else{
-          drawSqWithNum(i,data[i],letterColours[i],sqsz,posX,posY);
+          drawSqWithNum(data[i],letterColours[i],sqsz,posX+i*sqsz,posY);
         }
       }
       int diff=from*sqsz;
@@ -256,24 +256,24 @@ class ArrayAnim{
   
   void drawTemp(){
     if(temp>0){
-      drawSqWithNum(0,temp,#000000,sqsz,posX,posY+50);
+      drawSqWithNum(temp,#000000,sqsz,posX,posY+50);
     }
     else{
-      drawSquare(0,sqsz,posX,posY+50);
+      drawSquare(sqsz,posX,posY+50);
     }
   }
   void drawIndicators(){
     for(int i=0;i<numIndicators;i++){
-      drawTriangle(indicators[i],sqsz,posX,posY);
+      drawTriangle(sqsz,posX+indicators[i]*sqsz,posY);
     }
   }
   void drawStable(){
     for(int i=0;i<sz;i++){
       if(data[i] > 0){
-        drawSqWithNum(i,data[i],letterColours[i],sqsz,posX,posY);
+        drawSqWithNum(data[i],letterColours[i],sqsz,posX+i*sqsz,posY);
       }
       else{
-        drawSquare(i,sqsz,posX,posY);
+        drawSquare(sqsz,posX+i*sqsz,posY);
       }
     }
     if(hasTemp==true){
@@ -294,10 +294,10 @@ class ArrayAnim{
        }
        for(int i=0;i<sz;i++){
         if(i==to || i==from){
-          drawSquare(i,sqsz,posX,posY);
+          drawSquare(sqsz,posX+i*sqsz,posY);
         }
         else{
-          drawSqWithNum(i,data[i],letterColours[i],sqsz,posX,posY);
+          drawSqWithNum(data[i],letterColours[i],sqsz,posX+i*sqsz,posY);
         }
       }
       int diff=(from-to)*sqsz;
@@ -322,10 +322,10 @@ class ArrayAnim{
       }
       for(int i=0;i<sz;i++){
         if(i==to || i==from){
-          drawSquare(i,sqsz,posX,posY);
+          drawSquare(sqsz,posX+i*sqsz,posY);
         }
         else{
-          drawSqWithNum(i,data[i],letterColours[i],sqsz,posX,posY);
+          drawSqWithNum(data[i],letterColours[i],sqsz,posX+i*sqsz,posY);
         }    
       }
       int diff=(to-from)*sqsz;
