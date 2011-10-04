@@ -6,25 +6,25 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 animarray-p5 utils-p5
+p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5
 
-bubble-p5: p5-dir $(PDE_DIR)/bubble.pde $(PDE_DIR)/animarray.pde $(PDE_DIR)/utils.pde
+bubble-p5: p5-dir $(PDE_DIR)/bubble.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/bubble
 	cp $(PDE_DIR)/bubble.pde $(P5_DIR)/bubble/bubble.pde
-	cp $(PDE_DIR)/animarray.pde $(P5_DIR)/bubble/animarray.pde
+	cp $(PDE_DIR)/arrayanim.pde $(P5_DIR)/bubble/arrayanim.pde
 	cp $(PDE_DIR)/utils.pde $(P5_DIR)/bubble/utils.pde
 
-insertion-p5: p5-dir $(PDE_DIR)/insertion.pde $(PDE_DIR)/animarray.pde $(PDE_DIR)/utils.pde
+insertion-p5: p5-dir $(PDE_DIR)/insertion.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/insertion
 	cp $(PDE_DIR)/insertion.pde $(P5_DIR)/insertion/insertion.pde
-	cp $(PDE_DIR)/animarray.pde $(P5_DIR)/insertion/animarray.pde
+	cp $(PDE_DIR)/arrayanim.pde $(P5_DIR)/insertion/arrayanim.pde
 	cp $(PDE_DIR)/utils.pde $(P5_DIR)/insertion/utils.pde
 	
-animarray-p5: p5-dir $(PDE_DIR)/animarraytest.pde $(PDE_DIR)/animarray.pde $(PDE_DIR)/utils.pde
-	@@mkdir $(P5_DIR)/animarraytest
-	cp $(PDE_DIR)/animarraytest.pde $(P5_DIR)/animarraytest/animarraytest.pde
-	cp $(PDE_DIR)/animarray.pde $(P5_DIR)/animarraytest/animarray.pde
-	cp $(PDE_DIR)/utils.pde $(P5_DIR)/animarraytest/utils.pde
+arrayanim-p5: p5-dir $(PDE_DIR)/arrayanimtest.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
+	@@mkdir $(P5_DIR)/arrayanimtest
+	cp $(PDE_DIR)/arrayanimtest.pde $(P5_DIR)/arrayanimtest/arrayanimtest.pde
+	cp $(PDE_DIR)/arrayanim.pde $(P5_DIR)/arrayanimtest/arrayanim.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/arrayanimtest/utils.pde
 
 utils-p5: p5-dir $(PDE_DIR)/utiltest.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/utiltest
