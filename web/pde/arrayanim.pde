@@ -102,6 +102,10 @@ class ArrayAnim{
     state=STABLE;
     currFrame=0;
   }
+  void setPos(int x,int y){
+    posX=x;
+    posY=y;
+  }
   void setLetterColour(int pos,color c){
     letterColours[pos]=c;
   }
@@ -351,7 +355,7 @@ class ArrayAnim{
     line(topX,topY, topX, topY+30);
     strokeWeight(1);
     if(splitterPosition !=0){
-      text(splitterLeftLabel,posX-40,topY+17);    
+      text(splitterLeftLabel,posX-30,topY+17);    
       fill(splitterLeftColour);
       stroke(splitterLeftColour);
       line(posX,topY+15,topX-5,topY+15);
@@ -360,7 +364,7 @@ class ArrayAnim{
     if(splitterPosition!=sz){
       fill(#FFFFFF);
       stroke(#FFFFFF);
-      text(splitterRightLabel,endpt+40,topY+17);    
+      text(splitterRightLabel,endpt+30,topY+17);    
       fill(splitterRightColour);
       stroke(splitterRightColour);
       line(topX+5,topY+15,endpt,topY+15);
