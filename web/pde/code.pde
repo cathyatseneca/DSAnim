@@ -33,9 +33,10 @@ class Code{
       highlighter=ln-1;
   }
   void draw(){
+    textAlign(LEFT);
     fill(#FFFFFF);
     stroke(#000000);
-    rect(posX,posY,codeWidth,posY+sz*lineHeight);
+    rect(posX,posY,codeWidth,sz*lineHeight+10);
     fill(#FFFF99);
     stroke(#FFFFFF);
     rect(posX+5,posY+(highlighter*lineHeight+lineHeight/4),codeWidth-10,lineHeight);

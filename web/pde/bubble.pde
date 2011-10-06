@@ -3,6 +3,7 @@ class BubbleSort{
   int currJ;
   boolean sorted;
   int sortLength;
+  Code src;
   BubbleSort(int sz){
     arr=new ArrayAnim(sz);
     arr.splitterOn("unsorted","sorted",#FF0000,#00FF00,sz);
@@ -14,16 +15,35 @@ class BubbleSort{
     currJ=0;
     sorted=false;
     sortLength=sz- 1;
+    src=new Code(20);
+    setCode();
+  }
+  void setCode(){
+    src.append("void BubbleSort(int array[],int sz){");
+    src.append("  int i;");
+    src.append("  int j;");
+    src.append("  for (i=0; i<sz; i++) {");
+    src.append("    for (j=0; j<size-1-i; j++){:");
+    src.append("      if (array[j+1] < array[j]) {");
+    src.append("        swap(array[j],array[j+1]);"); 
+    src.append("       }");
+    src.append("    }");
+    src.append("  }");
+    src.append("}");
+    src.setHighLighter(5);
+    src.setPos(550,100);
   }
   void draw(){
     if(!sorted){
       if(arr.state==arr.STABLE){
         if(arr.atIdx(currJ)>arr.atIdx(currJ+1)){
+          src.setHighLighter(7);
           arr.setLetterColour(currJ,#ff0000);
           arr.setLetterColour(currJ+1,#ff0000);
           arr.swap(currJ,currJ+1);
         }
         if(arr.state==arr.STABLE){
+          src.setHighLighter(6);
           arr.setLetterColour(currJ+1,#000000);
           arr.setLetterColour(currJ,#000000);
           currJ++;
@@ -31,6 +51,7 @@ class BubbleSort{
           arr.changeIndicator(0,currJ);
           arr.changeIndicator(1,currJ+1);
           if(currJ >= sortLength){
+            src.setHighLighter(4);
             currJ=0;
             arr.changeIndicator(0,currJ);
             arr.changeIndicator(1,currJ+1);
@@ -46,6 +67,7 @@ class BubbleSort{
       arr.setSplitterPosition(0);
     }
     arr.draw();
+    src.draw();
   }
 }
 
