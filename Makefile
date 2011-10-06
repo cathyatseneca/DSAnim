@@ -6,7 +6,7 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5
+p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5
 
 bubble-p5: p5-dir $(PDE_DIR)/bubble.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/bubble
@@ -30,6 +30,11 @@ utils-p5: p5-dir $(PDE_DIR)/utiltest.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/utiltest
 	cp $(PDE_DIR)/utiltest.pde $(P5_DIR)/utiltest/utiltest.pde
 	cp $(PDE_DIR)/utils.pde $(P5_DIR)/utiltest/utils.pde
+
+code-p5: p5-dir $(PDE_DIR)/code.pde $(PDE_DIR)/codetest.pde
+	@@mkdir $(P5_DIR)/codetest
+	cp $(PDE_DIR)/codetest.pde $(P5_DIR)/codetest/codetest.pde
+	cp $(PDE_DIR)/code.pde $(P5_DIR)/codetest/code.pde
 	
 clean:
 	@@rm -fr $(P5_DIR) 
