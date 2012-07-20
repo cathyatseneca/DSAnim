@@ -1,0 +1,17 @@
+This project is a response to the lack of non-plugin based web animations for common 
+computer programming algorithm. The animations are written in Processing and 
+delivered with Processing.js 
+(see http://processingjs.org)
+
+File Organization:
+
+In order to load the sketches within the Processing IDE, all the files related to a specific
+animation must be placed in the same folder.  Multiple sketches cannot exist in the same
+directory.  This limitation is a Processing IDE issue but not a Processing.js one. Many of the
+algorithms will share common animation objects.  Thus, in order to look at sketches inside the
+processing IDE, these shared objects will need to be duplicated.  To avoid duplication, this
+source repository will place all pde files inside a single pde directory with a make file that
+will correctly duplicate the pde source into correct folders to be viewed inside the processing
+IDE.
+
+
