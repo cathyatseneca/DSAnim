@@ -14,7 +14,7 @@ class Code{
     highlighter=1;
     posX=100;
     posY=100;
-    lineHeight=24;
+    lineHeight=22;
     codeWidth=300;
   }
   void setPos(int x,int y){
@@ -22,7 +22,7 @@ class Code{
     posY=y;
   }
   void setWidth(int w){
-    codeWidth=300;
+    codeWidth=w;
   }
   void append(String s){
     lines[sz]=s;

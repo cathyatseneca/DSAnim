@@ -16,6 +16,7 @@ class BubbleSort{
     sorted=false;
     sortLength=sz- 1;
     src=new Code(20);
+    src.setWidth(225);
     setCode();
   }
   void setCode(){
@@ -76,7 +77,7 @@ int count;
 ArrayAnim arr;
 //PFont fontA = loadFont("Courier");
 void setup(){
- size(900,500);
+ size(800,500);
  background(33,66,99);
  bubble=new BubbleSort(15);
  frameRate(1);
