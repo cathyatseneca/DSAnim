@@ -64,11 +64,12 @@ InsertionSort insertion;
 //PFont fontA = loadFont("Courier");
 void setup(){
  size(800,500);
- background(33,66,99);
+ background(46,129,215);
  insertion=new InsertionSort(15);
  frameRate(1);
 }
 void draw(){
+  background(46,129,215);
   insertion.draw();  
 }
 
@@ -76,8 +77,8 @@ void draw(){
 ArrayAnim arr;
 int count;
 void setup(){
-   size(800,500);
- background(33,66,99);
+    size(800,500);
+    background(46,129,215);
     arr=new ArrayAnim(15);
     arr.splitterOn("sorted","unsorted",#00FF00,#FF0000,0);
     arr.barsOn();

@@ -83,5 +83,6 @@ void setup(){
  frameRate(1);
 }
 void draw(){
+   background(46,129,215);
    bubble.draw();   
 }
