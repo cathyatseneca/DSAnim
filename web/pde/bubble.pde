@@ -77,7 +77,7 @@ ArrayAnim arr;
 //PFont fontA = loadFont("Courier");
 void setup(){
  size(900,500);
- background(33,66,99);
+ background(46,129,215);
  bubble=new BubbleSort(15);
  frameRate(1);
 }
