@@ -184,7 +184,6 @@ class ArrayAnim{
     splitterPosition=idx;
   }
   void draw(){
-    background(33,66,99);
     switch(state){
       case 1: 
          drawStable();
