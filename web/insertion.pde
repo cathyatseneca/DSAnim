@@ -12,7 +12,7 @@ class InsertionSort{
     array_.barsOn();
     array_.fillRandom();
     array_.addIndicator(0);
-    array_.setPos(60,100);
+    array_.setPos(20,100);
     array_.tempOn();
     currJ_=1;
     cap_=sz;
@@ -81,14 +81,15 @@ class InsertionSort{
     src_.append("  }");
     src_.append("}");
     src_.setHighLighter(4);
-    src_.setPos(550,100);
+    src_.setPos(480,100);
+    src_.setWidth(275);
   }
 }
 
 InsertionSort insertion;
 //PFont fontA = loadFont("Courier");
 void setup(){
- size(900,500);
+ size(800,500);
  background(46,129,215);
  insertion=new InsertionSort(15);
  frameRate(1);
