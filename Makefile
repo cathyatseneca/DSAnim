@@ -1,5 +1,5 @@
 WEB_DIR := web
-PDE_DIR := $(WEB_DIR)/pde
+PDE_DIR := $(WEB_DIR)
 P5_DIR  := p5
 
 

@@ -8,7 +8,8 @@ void setup(){
  count=0;
 }
 void draw(){
-  arr.draw();
+ background(33,66,99);
+ arr.draw();
   arr.tempOn();
   count++;
   if(count==5)
