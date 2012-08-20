@@ -355,7 +355,10 @@ class ArrayAnim{
     line(topX,topY, topX, topY+30);
     strokeWeight(1);
     if(splitterPosition_ !=0){
-      text(splitterLeftLabel_,posX_-30,topY+17);    
+      pushStyle();
+      textAlign(LEFT);
+      text(splitterLeftLabel_,posX_,topY);    
+      popStyle();
       fill(splitterLeftColour_);
       stroke(splitterLeftColour_);
       line(posX_,topY+15,topX-5,topY+15);
@@ -364,7 +367,7 @@ class ArrayAnim{
     if(splitterPosition_!=sz_){
       fill(#FFFFFF);
       stroke(#FFFFFF);
-      text(splitterRightLabel_,endpt+30,topY+17);    
+      text(splitterRightLabel_,endpt,topY);    
       fill(splitterRightColour_);
       stroke(splitterRightColour_);
       line(topX+5,topY+15,endpt,topY+15);

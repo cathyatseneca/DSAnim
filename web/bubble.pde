@@ -11,7 +11,7 @@ class BubbleSort{
     array_.fillRandom();
     array_.addIndicator(0);
     array_.addIndicator(1);
-    array_.setPos(60,100);
+    array_.setPos(20,100);
     currJ_=0;
     sorted_=false;
     sortLength_=sz- 1;
@@ -31,7 +31,8 @@ class BubbleSort{
     src_.append("  }");
     src_.append("}");
     src_.setHighLighter(5);
-    src_.setPos(550,100);
+    src_.setPos(480,100);
+    src_.setWidth(250);
   }
   void draw(){
     if(!sorted_){
@@ -78,7 +79,7 @@ int count;
 ArrayAnim arr;
 //PFont fontA = loadFont("Courier");
 void setup(){
- size(900,500);
+ size(800,500);
  background(46,129,215);
  bubble=new BubbleSort(15);
  frameRate(1);
