@@ -56,8 +56,10 @@ class BubbleSort{
             array_.changeIndicator(0,currJ_);
             array_.changeIndicator(1,currJ_+1);
             sortLength_--;
-            if(sortLength_==0)
+            if(sortLength_==0){
               sorted_=true;
+              src_.setHighLighter(11);
+            }
           }
           array_.setSplitterPosition(sortLength_+1);
         }
