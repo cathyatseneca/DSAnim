@@ -6,7 +6,7 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5
+p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5
 
 bubble-p5: p5-dir $(PDE_DIR)/bubble.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/bubble
@@ -37,6 +37,28 @@ code-p5: p5-dir $(PDE_DIR)/code.pde $(PDE_DIR)/codetest.pde
 	@@mkdir $(P5_DIR)/codetest
 	cp $(PDE_DIR)/codetest.pde $(P5_DIR)/codetest/codetest.pde
 	cp $(PDE_DIR)/code.pde $(P5_DIR)/codetest/code.pde
-	
+
+animation-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt
+	@@mkdir $(P5_DIR)/animation
+	cp $(PDE_DIR)/animationtest.pde $(P5_DIR)/animation/animationtest.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/animation/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/animation/animationobject.pde
+	cp $(PDE_DIR)/animation.pde $(P5_DIR)/animation/animation.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/animation/constants.pde
+	cp $(PDE_DIR)/code.pde $(P5_DIR)/animation/code.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/animation/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/animation/utils.pde
+	cp $(PDE_DIR)/bubble.txt $(P5_DIR)/animation/bubble.txt
+
+
+animatedarray-p5: p5-dir $(PDE_DIR)/animatedarraytest.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/constants.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animationobject.pde
+	@@mkdir $(P5_DIR)/animatedarraytest
+	cp $(PDE_DIR)/animatedarraytest.pde $(P5_DIR)/animatedarraytest/animatedarraytest.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/animatedarraytest/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/animatedarraytest/utils.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/animatedarraytest/constatns.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/animatedarraytest/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/animatedarraytest/animationobject.pde
+
 clean:
 	@@rm -fr $(P5_DIR) 

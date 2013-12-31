@@ -4,9 +4,9 @@
 //area.
 //co is colour of text
 //sz is size of the square
-void drawSqWithNum(int c,color co,int sz,int offsetX,int offsetY){
+void drawSqWithNum(int c,color co, color bg, int sz,int offsetX,int offsetY){
   stroke(0);
-  fill(255);
+  fill(bg);
   rect(offsetX,offsetY,sz,sz);
   fill(co);
   if(c>0){
@@ -18,9 +18,9 @@ void drawSqWithNum(int c,color co,int sz,int offsetX,int offsetY){
 //draws a square 
 //offsetX and offsetY are positional offset from top left corner of draw
 //area.  X is the number of squares away from offsetX position
-void drawSquare(int sz, int offsetX,int offsetY){
+void drawSquare(int sz, color bg, int offsetX,int offsetY){
   stroke(0);
-  fill(255);
+  fill(bg);
   rect(offsetX,offsetY,sz,sz);
 }
 

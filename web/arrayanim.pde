@@ -89,6 +89,7 @@ class ArrayAnim{
     indicators_=new int[c];
     setconstants();
     state_=STABLE;
+    super(posX_,posY_);
   }
   ArrayAnim(int [] arr,int c){
     sz_=c;
@@ -101,11 +102,13 @@ class ArrayAnim{
     setconstants();
     state_=STABLE;
     currFrame_=0;
+    super(posX_,posY_);
   }
   int state(){return state_;}
-  void setPos(int x,int y){
+  void setPosition(int x,int y){
     posX_=x;
     posY_=y;
+    super.setPosition(x,y);
   }
   void setLetterColour(int pos,color c){
     letterColours_[pos]=c;
