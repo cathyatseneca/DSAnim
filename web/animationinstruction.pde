@@ -5,6 +5,7 @@ class AnimationInstruction{
 	int a_;
 	int b_;
 	int c_;
+	int d_;
 	boolean completed_;
 	AnimationInstruction(int objectId,int instruction, int a){
 		objectId_=objectId;
@@ -28,6 +29,16 @@ class AnimationInstruction{
 		a_=a;
 		b_=b;
 		c_=c;
+		completed_=false;
+	}
+	AnimationInstruction(int objectId,int instruction, int a,int b,int c,int d){
+		objectId_=objectId;
+		instruction_=instruction;
+		numParams_=3;
+		a_=a;
+		b_=b;
+		c_=c;
+		d_=d;
 		completed_=false;
 	}
 	void setCompleted(boolean completed){
@@ -71,6 +82,12 @@ class AnimationStep{
 	void add(int objectId, int instruction,int a,int b,int c){
 		if(numInstructions_ < maxInstructions_){
 			instructions_[numInstructions_] = new AnimationInstruction(objectId,instruction,a,b,c);
+			numInstructions_++;
+		}
+	}
+	void add(int objectId, int instruction,int a,int b,int c,int d){
+		if(numInstructions_ < maxInstructions_){
+			instructions_[numInstructions_] = new AnimationInstruction(objectId,instruction,a,b,c,d);
 			numInstructions_++;
 		}
 	}

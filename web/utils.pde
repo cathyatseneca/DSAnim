@@ -27,10 +27,10 @@ void drawSquare(int sz, color bg, int offsetX,int offsetY){
 //draws a  triangle that is placed under a square that has size of sz.
 //posX and posY are positional offset from top left corner of draw
 //area and the position of the square
-void drawTriangle(int sz,int posX,int posY){
-  stroke(255);
-  fill(255);
-  triangle(posX+0.5*sz,posY+sz, posX+(0.5*sz)-10,posY+sz+10,posX+(0.5*sz)+10, posY+sz+10);
+void drawTriangle(color co, int sz,int posX,int posY){
+  stroke(co);
+  fill(co);
+  triangle(posX,posY,posX+10,posY+10,posX-10,posY+10);
 }
 
 

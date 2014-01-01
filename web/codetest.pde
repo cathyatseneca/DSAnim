@@ -1,7 +1,8 @@
-Code bubblecode=new Code(20);
+AnimatedCode bubblecode;
 int count;
 int ln;
 void setup(){
+  bubblecode=new AnimatedCode("bubble.txt",100,100);
   size(500,500);
   bubblecode.append("line 1");
   bubblecode.append("line 2");

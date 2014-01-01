@@ -2,12 +2,13 @@ Animation anim;
 void setup(){
 	size(800,500);
 	anim=new Animation(800, 500);
-	Code a=new Code("bubble.txt");
+	AnimatedCode a=new AnimatedCode("bubble.txt", 480,100);
 	int [] array=new int[15];
 	for(int i=0;i<15;i++){
 		array[i]=int(random(1,99));
 	}
-	AnimatedArray arr=new AnimatedArray(array,15);
+	AnimatedArray arr=new AnimatedArray(array,15,100,100);
+	arr.hasBars_=true;
 	int tmp;
 	anim.addObject(a);
 	anim.addObject(arr);

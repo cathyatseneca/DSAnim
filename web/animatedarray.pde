@@ -1,3 +1,11 @@
+void drawBar(int idx,float value,float maxHeight, color co,int sz,int posX,int posY){
+	stroke(co);
+	fill(co);
+	int ystart=posY+sz*2+10;
+	int xstart=posX+idx*sz+sz/2-10;
+	value=value/99;
+	rect(xstart,ystart+(maxHeight-(value*maxHeight)),20,value*maxHeight);
+}
 class AnimatedArray extends AnimationObject{
 	int [] data_;
 	boolean [] isEmpty_;
@@ -11,9 +19,11 @@ class AnimatedArray extends AnimationObject{
 	int from_;
 	float stateStartTime_;
 	float animationDuration_;
+	boolean hasBars_;
 	AnimationInstruction ai_;
-	AnimatedArray(int [] data,int sz){
-		super(120,120);
+	float maxHeight_;
+	AnimatedArray(int [] data,int sz,int x,int y){
+		super(x,y);
 		cap_=MAXARRAY;
 		sz_=sz;
 		sqsz_=30;
@@ -22,7 +32,7 @@ class AnimatedArray extends AnimationObject{
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
 		state_=STABLE;
-		animationDuration_=2000;   //2000 millis = 2 sec
+		animationDuration_=500;   //1000 millis = 1 sec
 		for(int i=0;i<sz;i++){
 			data_[i]=data[i];
 			dataColours_[i]=color(0);
@@ -35,9 +45,10 @@ class AnimatedArray extends AnimationObject{
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 		}
+		maxHeight_=100;
 	}
-	AnimatedArray(int cap){
-		super(120,120);
+	AnimatedArray(int cap,int x, int y){
+		super(x,y);
 		cap_=cap;
 		sz_=cap;
 		sqsz_=30;
@@ -46,13 +57,14 @@ class AnimatedArray extends AnimationObject{
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
 		state_=STABLE;
-		animationDuration_=2000;   //2000 millis = 2 sec
+		animationDuration_=500;   //1000 millis = 1 sec
 		for(int i=0;i<cap_;i++){
 			dataColours_[i]=color(0);
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 		}
 		fillRandom();
+		maxHeight_=100;
 	}
 	void process(AnimationInstruction ai){
 		ai_=ai;
@@ -63,7 +75,22 @@ class AnimatedArray extends AnimationObject{
 				to_=ai.b_;
 				stateStartTime_=millis();
 				break;
+			case SETFONTCOLOUR:
+				ai.setCompleted(true);
+				dataColours_[ai.a_]=color(ai.b_,ai.c_,ai.d_);
+				break;				
+			case SETBGCOLOUR:
+				ai.setCompleted(true);
+				squareColours_[ai.a_]=color(ai.b_,ai.c_,ai.d_);
+				break;				
 		}
+	}
+	void drawBars(){
+    	for(int i=0;i<sz_;i++){
+      		if(data_[i]>0){
+        		drawBar(i,data_[i],maxHeight_,#FFFFFF,sqsz_,x_,y_);
+		    }
+	    }   
 	}
 	void drawStable(){
 		for(int i=0;i<sz_;i++){
@@ -90,14 +117,14 @@ class AnimatedArray extends AnimationObject{
 	      	float start = x_+(from_+0.5)*sqsz_;
 	      	float end = x_+(to_+0.5)*sqsz_;
 	      	float half= (start+end)/2;
-	      	float height=100;
+	      	float height=50;
 	      	float x=bezierPoint(start,half,half,end,t);
-	      	float y=bezierPoint(y_+(sqsz_*0.5),y_-height,y_-height,y_+(sqsz_*0.5),t);
+	      	float y=bezierPoint(y_+(sqsz_*0.5),y_-height+9,y_-height+9,y_+(sqsz_*0.5)+9,t);
 	      	fill(dataColours_[from_]);
 	      	text(data_[from_],x,y);	
 
 	      	x=bezierPoint(end,half,half,start,t);
-	      	y=bezierPoint(y_+(sqsz_*0.5),y_+height,y_+height,y_+(sqsz_*0.5),t);
+	      	y=bezierPoint(y_+(sqsz_*0.5),y_+height+9,y_+height+9,y_+(sqsz_*0.5)+9,t);
 	      	fill(dataColours_[to_]);
 	      	text(data_[to_],x,y);
 	    }
@@ -115,6 +142,9 @@ class AnimatedArray extends AnimationObject{
 				drawStable(); break;
 			case SWAP:
 				drawSwap(); break;
+		}
+		if(hasBars_){
+			drawBars();
 		}
 	}
 	void fillRandom(){

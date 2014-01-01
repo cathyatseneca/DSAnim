@@ -12,7 +12,7 @@ class Animation{
 	int animationMode_;
 	float minimumDuration_;
 	float stepStart_;
-
+	color bgColour_;
 
 	Animation(int width, int height){
 		width_=width;
@@ -20,13 +20,17 @@ class Animation{
 		currStep_=0;
 		numSteps_=0;
 		steps_=new AnimationStep[MAXSTEPS];
-		capacity_=20;
+		capacity_=MAXOBJECTS;
 		objects_=new AnimationObject[capacity_];
 		numObjects_=0;
 		animationState_=PAUSED;
 		animationMode_=CONTINUOUS;
-		minimumDuration_=500;  //1000 millisecond minimum duration
+		minimumDuration_=250;  //1000 millisecond minimum duration
 		stepStart_=millis();
+		bgColour_=color(30,60,90);
+	}
+	void setColour(color c){
+		bgColour_=c;
 	}
 	void setMode(int mode){
 		animationMode_=mode;
@@ -93,6 +97,14 @@ class Animation{
 		}
 		return rc;
 	}
+	boolean addToStep(int stepNumber,int objectId,int instruction, int a,int b,int c,int d){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].add(objectId, instruction, a,b,c,d);
+			rc=true;
+		}
+		return rc;
+	}
 	boolean addInstruction(int objectId,int instruction, int a){
 		return addToStep(numSteps_-1, objectId, instruction, a);
 	}
@@ -101,6 +113,9 @@ class Animation{
 	}
 	boolean addInstruction(int objectId,int instruction, int a,int b,int c){
 		return addToStep(numSteps_-1, objectId, instruction, a,b,c);
+	}
+	boolean addInstruction(int objectId,int instruction, int a,int b,int c,int d){
+		return addToStep(numSteps_-1, objectId, instruction, a,b,c,d);
 	}
 	void start(){
 		for(int i=0;i<steps_[currStep_].numInstructions_;i++){
@@ -124,7 +139,7 @@ class Animation{
 	}
 	void draw(){
 		if(currStep_ < numSteps_){
-			background(33,66,99);
+			background(bgColour_);
 			for(int i=0;i<numObjects_;i++){
 				objects_[i].draw();
 			}

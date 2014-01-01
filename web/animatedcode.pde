@@ -1,4 +1,4 @@
-class Code extends AnimationObject{
+class AnimatedCode extends AnimationObject{
     String [] lines_;
     int cap_;
     int sz_;
@@ -6,17 +6,7 @@ class Code extends AnimationObject{
     int lineHeight_;
     int codeWidth_;
     PFont font_;
-    Code(int numLines,int x,int y){
-        super(x,y);
-        font_=createFont("Courier", 12);
-        lines_=new String[numLines];
-        cap_=numLines;
-        sz_=0;
-        highlighter_=1;
-        lineHeight_=14;
-        codeWidth_=300;
-    }
-    Code(String filename,int x,int y){
+    AnimatedCode(String filename,int x,int y){
         super(x,y);
         font_=createFont("Courier", 12);
         lines_=loadStrings(filename);
@@ -61,4 +51,4 @@ class Code extends AnimationObject{
         }
         popStyle();
     }
-}
+};
