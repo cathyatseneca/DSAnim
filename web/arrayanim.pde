@@ -25,7 +25,7 @@ class ArrayAnim{
   int sz_;        //size of array (how much array currently holds)
   int state_;     //state of animation
   int to_;        //index of where value is going to (or left value for swap)
-  int from_;      //index of where value is coming from (or right value for swap
+  int from_;      //index of where value is coming from (or right value for swap)
   int sqsz_;
   int []arcArray_;  
   int posX_;      //x position of arrayindex 0
@@ -89,6 +89,7 @@ class ArrayAnim{
     indicators_=new int[c];
     setconstants();
     state_=STABLE;
+    super(posX_,posY_);
   }
   ArrayAnim(int [] arr,int c){
     sz_=c;
@@ -101,11 +102,13 @@ class ArrayAnim{
     setconstants();
     state_=STABLE;
     currFrame_=0;
+    super(posX_,posY_);
   }
   int state(){return state_;}
-  void setPos(int x,int y){
+  void setPosition(int x,int y){
     posX_=x;
     posY_=y;
+    super.setPosition(x,y);
   }
   void setLetterColour(int pos,color c){
     letterColours_[pos]=c;
