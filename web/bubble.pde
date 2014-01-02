@@ -39,6 +39,7 @@ void bubble(int array[],int sz){
     }
     bubbleSort.addStep();
     bubbleSort.addInstruction(2,SET,0);
+    bubbleSort.addInstruction(0,SET,0);
 }
 void setup(){
     size(800,500);
@@ -51,10 +52,12 @@ void setup(){
     }
     arr=new AnimatedArray(array,15,15,100);
     arr.hasBars_=true;
+    arr.setBarOffset(70);
     split=new Splitter("unsorted","sorted",color(255,0,0),color(0,255,0),15,30,15,50);
-    jIndicator = new Indicator("j",color(255,255,255),30,30,140);
+    jIndicator = new Indicator("j",color(255,255,255),30,30,90);
     jPlusIndicator = new Indicator("j+1",color(255,255,255),30,30,140);
     jPlusIndicator.setPosition(1);
+    jIndicator.pointDown();
     split.setPosition(15);
     int tmp;
     bubbleSort.addObject(code);
@@ -67,6 +70,7 @@ void setup(){
 }
 void draw(){
     bubbleSort.draw();
+
 }
 
 

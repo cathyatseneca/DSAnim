@@ -44,7 +44,9 @@ class AnimatedCode extends AnimationObject{
         rect(x_,y_,codeWidth_,sz_*lineHeight_+10);
         fill(#FFFF99);
         stroke(#FFFFFF);
-        rect(x_+5,y_+(highlighter_*lineHeight_+lineHeight_/4),codeWidth_-10,lineHeight_);
+        if(highlighter_!=-1){
+            rect(x_+5,y_+(highlighter_*lineHeight_+lineHeight_/4),codeWidth_-10,lineHeight_);
+        } 
         fill(#000000);
         for(int i=0;i<sz_;i++){
             text(lines_[i],x_+10,y_+((i+1)*lineHeight_));

@@ -1,7 +1,7 @@
-void drawBar(int idx,float value,float maxHeight, color co,int sz,int posX,int posY){
+void drawBar(int idx,float value,float maxHeight, int yOffset, color co,int sz,int posX,int posY){
 	stroke(co);
 	fill(co);
-	int ystart=posY+sz*2+10;
+	int ystart=posY+yOffset;
 	int xstart=posX+idx*sz+sz/2-10;
 	value=value/99;
 	rect(xstart,ystart+(maxHeight-(value*maxHeight)),20,value*maxHeight);
@@ -20,8 +20,13 @@ class AnimatedArray extends AnimationObject{
 	float stateStartTime_;
 	float animationDuration_;
 	boolean hasBars_;
+	int barOffset_;
 	AnimationInstruction ai_;
 	float maxHeight_;
+	int moveX_;
+	int moveY_;
+	int moveIdx_;
+
 	AnimatedArray(int [] data,int sz,int x,int y){
 		super(x,y);
 		cap_=MAXARRAY;
@@ -46,6 +51,7 @@ class AnimatedArray extends AnimationObject{
 			isEmpty_[i]=true;
 		}
 		maxHeight_=100;
+		barOffset_ = 50;
 	}
 	AnimatedArray(int cap,int x, int y){
 		super(x,y);
@@ -75,6 +81,12 @@ class AnimatedArray extends AnimationObject{
 				to_=ai.b_;
 				stateStartTime_=millis();
 				break;
+			case MOVE:
+				state_=MOVE;
+				from_=ai.a_;
+				to_=ai.b_;
+				stateStartTime_=millis();
+				break;
 			case SETFONTCOLOUR:
 				ai.setCompleted(true);
 				dataColours_[ai.a_]=color(ai.b_,ai.c_,ai.d_);
@@ -82,19 +94,88 @@ class AnimatedArray extends AnimationObject{
 			case SETBGCOLOUR:
 				ai.setCompleted(true);
 				squareColours_[ai.a_]=color(ai.b_,ai.c_,ai.d_);
+				break;
+			case MOVEFROM:
+				state_=MOVEFROM;
+				moveIdx_=ai.a_;
+				moveX_=ai.b_;
+				moveY_=ai.c_;
+				stateStartTime_=millis();
+				isEmpty_[moveIdx_]=true;
 				break;				
+			case MOVETO:
+				state_=MOVETO;
+				moveVal_=ai.a_;
+				moveIdx_=ai.b_;
+				moveX_=ai.c_;
+				moveY_=ai.d_;
+				stateStartTime_=millis();
+				break;
+			}
+	}
+	void drawMoveFrom(){
+		drawStable();
+		float currTime=millis();
+		if(currTime - stateStartTime_ < animationDuration_){
+
+			float startX=((x_+moveIdx_*sqsz_)+(0.5*sqsz_));
+			float startY=y_+sqsz_*0.5+5;
+			float len=dist(0,0,startX,startY);
+			float vX=(startX-moveX_)/len*10;
+			float vY=(startY-moveY_)/len*10;
+			float t=(currTime-stateStartTime_)/animationDuration_;
+			float cpX=(startX+moveX_)/2-vY;
+			float cpY=(startY+moveY_)/2+vX;
+		    float x=bezierPoint(startX,cpX,cpX,moveX_,t);
+		    float y=bezierPoint(startY,cpY,cpY,moveY_,t);
+		    fill(dataColours_[moveIdx_]);
+		    text(data_[moveIdx_],x,y);
 		}
+		else{
+			ai_.setCompleted(true);
+	    	state_=STABLE;
+
+		}
+
+
+	}
+	void drawMoveTo(){
+		drawStable();
+		float currTime=millis();
+		if(currTime - stateStartTime_ < animationDuration_){
+
+			float startX=((x_+moveIdx_*sqsz_)+(0.5*sqsz_));
+			float startY=y_+sqsz_*0.5+5;
+			float len=dist(0,0,startX,startY);
+			float vX=(startX-moveX_)/len*10;
+			float vY=(startY-moveY_)/len*10;
+			float t=(currTime-stateStartTime_)/animationDuration_;
+			float cpX=(startX+moveX_)/2-vY;
+			float cpY=(startY+moveY_)/2+vX;
+		    float x=bezierPoint(moveX_,cpX,cpX,startX,t);
+		    float y=bezierPoint(moveY_,cpY,cpY,startY,t);
+		    fill(dataColours_[moveIdx_]);
+		    text(moveVal_,x,y);		}
+		else{
+			data_[moveIdx_]=moveVal_;
+			isEmpty_[moveIdx_]=false;
+			ai_.setCompleted(true);
+	    	state_=STABLE;
+	    	drawStable();
+		}
+
+
 	}
 	void drawBars(){
     	for(int i=0;i<sz_;i++){
-      		if(data_[i]>0){
-        		drawBar(i,data_[i],maxHeight_,#FFFFFF,sqsz_,x_,y_);
+      		if(!isEmpty_[i]){
+        		drawBar(i,data_[i],maxHeight_,barOffset_,#FFFFFF,sqsz_,x_,y_);
 		    }
 	    }   
 	}
 	void drawStable(){
 		for(int i=0;i<sz_;i++){
-			if(data_[i] > 0){
+			if(isEmpty_[i] != true){
 				drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,x_+i*sqsz_,y_);
 			}
 			else{
@@ -119,12 +200,12 @@ class AnimatedArray extends AnimationObject{
 	      	float half= (start+end)/2;
 	      	float height=50;
 	      	float x=bezierPoint(start,half,half,end,t);
-	      	float y=bezierPoint(y_+(sqsz_*0.5),y_-height+9,y_-height+9,y_+(sqsz_*0.5)+9,t);
+	      	float y=bezierPoint(y_+(sqsz_*0.5)+5,y_-height+5,y_-height+5,y_+(sqsz_*0.5)+5,t);
 	      	fill(dataColours_[from_]);
 	      	text(data_[from_],x,y);	
 
 	      	x=bezierPoint(end,half,half,start,t);
-	      	y=bezierPoint(y_+(sqsz_*0.5),y_+height+9,y_+height+9,y_+(sqsz_*0.5)+9,t);
+	      	y=bezierPoint(y_+(sqsz_*0.5)+5,y_+height+5,y_+height+5,y_+(sqsz_*0.5)+5,t);
 	      	fill(dataColours_[to_]);
 	      	text(data_[to_],x,y);
 	    }
@@ -134,6 +215,38 @@ class AnimatedArray extends AnimationObject{
 	    	data_[from_]=tmp;
 	    	ai_.setCompleted(true);
 	    	state_=STABLE;
+	    	drawStable();
+	    }
+	}
+	void drawMove(){
+		float currTime=millis();
+		if(currTime - stateStartTime_ < animationDuration_){
+	    	for(int i=0;i<sz_;i++){
+    	    	if(i==to_ || i==from_){
+        	  		drawSquare(sqsz_,squareColours_[i],x_+i*sqsz_,y_);
+        		}
+       			else{
+          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,x_+i*sqsz_,y_);
+        		}
+	      	}
+	      	float t=(currTime-stateStartTime_)/animationDuration_;
+	      	float start = x_+(from_+0.5)*sqsz_;
+	      	float end = x_+(to_+0.5)*sqsz_;
+	      	float half= (start+end)/2;
+	      	float height=50;
+	      	float x=bezierPoint(start,half,half,end,t);
+	      	float y=bezierPoint(y_+(sqsz_*0.5),y_-height+9,y_-height+9,y_+(sqsz_*0.5)+9,t);
+	      	fill(dataColours_[from_]);
+	      	text(data_[from_],x,y);	
+
+	    }
+	    else{
+	    	data_[to_]=data_[from_];
+	    	isEmpty_[from_]=true;
+	    	isEmpty_[to_]=false;
+	    	ai_.setCompleted(true);
+	    	state_=STABLE;
+	    	drawStable();
 	    }
 	}
 	void draw(){
@@ -142,6 +255,12 @@ class AnimatedArray extends AnimationObject{
 				drawStable(); break;
 			case SWAP:
 				drawSwap(); break;
+			case MOVETO:
+				drawMoveTo(); break;
+			case MOVEFROM:
+				drawMoveFrom(); break;
+			case MOVE:
+				drawMove(); break;		
 		}
 		if(hasBars_){
 			drawBars();
@@ -152,5 +271,14 @@ class AnimatedArray extends AnimationObject{
       		data_[i]=int(random(1,99));
     	}
    		sz_=cap_;
+  	}
+  	void reset(int [] array,int sz){
+    	for(int i=0;i<sz;i++){
+      		data_[i]=array[i];
+    	}
+   		sz_=sz;
+  	}
+  	void setBarOffset(int offset){
+  		barOffset_=offset;
   	}
 };

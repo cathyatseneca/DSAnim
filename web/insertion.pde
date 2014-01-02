@@ -1,102 +1,77 @@
-class InsertionSort{
-  ArrayAnim array_;
-  int currJ_;
-  boolean sorted_;
-  int sortLength_;
-  boolean freshLoop_;  //true each time we increase the size of "sorted" array
-  int cap_;
-  Code src_;
-  InsertionSort(int sz){
-    array_=new ArrayAnim(sz);
-    array_.splitterOn("sorted","unsorted",#00FF00,#FF0000,1);
-    array_.barsOn();
-    array_.fillRandom();
-    array_.addIndicator(0);
-    array_.setPos(20,100);
-    array_.tempOn();
-    currJ_=1;
-    cap_=sz;
-    sorted_=false;
-    sortLength_=1;
-    freshLoop_=true;
-    src_=new Code(20);
-    setCode();
-  }
-  void draw(){
-    if(!sorted_){
-      if(array_.state()==array_.STABLE){
-        if(freshLoop_){
-          array_.moveToTemp(currJ_);
-          freshLoop_=false;
-          array_.setSplitterPosition(sortLength_+1);
-          src_.setHighLighter(5);
-        }
-        else{
-          if(currJ_==0){
-            array_.moveFromTemp(0);
-            sortLength_++;
-            currJ_=sortLength_;
-            freshLoop_=true;
-            array_.changeIndicator(0,currJ_-1);
-            src_.setHighLighter(9);
-          }
-          else{
-            if(array_.atIdx(currJ_-1) > array_.temp_){
-              if(currJ_!=0){
-                array_.changeIndicator(0,currJ_-1);
-              }
-              array_.move(currJ_-1,currJ_);
-              currJ_--;
-              src_.setHighLighter(7);
-            }
-            else{
-              array_.moveFromTemp(currJ_);
-              sortLength_++;
-              currJ_=sortLength_;
-              freshLoop_=true;
-              array_.changeIndicator(0,currJ_-1);
-              src_.setHighLighter(9);
-            }
-          }
-          if(sortLength_==cap_){
-            sorted_=true;
-            src_.setHighLighter(11);
-          }
-        }
-      }
-    }     
-    array_.draw();
-    src_.draw();
-  }
-  void setCode(){
-    src_.append("void InsertionSort(int arr[],int size){");
-    src_.append("  int curr");
-    src_.append("  int i, j;");
-    src_.append("  for(i=1;i<size;i++){");
-    src_.append("    curr=arr[i];");
-    src_.append("    for(j=i;j>0 && arr[j-1] > curr;j--){");
-    src_.append("      arr[j]=arr[j-1];");
-    src_.append("    }");
-    src_.append("    arr[j]=curr;");
-    src_.append("  }");
-    src_.append("}");
-    src_.setHighLighter(4);
-    src_.setPos(480,100);
-    src_.setWidth(275);
-  }
-}
 
-InsertionSort insertion;
-//PFont fontA = loadFont("Courier");
+Animation insertionSort;
+AnimatedCode code;
+Splitter split;
+AnimatedArray arr;
+Indicator jIndicator;
+AnimatedVariable animatedVar;
+
+void insertion(int arr[],int size){
+    int curr;
+    int i,j;
+    for(i=0;i<size;i++){
+        insertionSort.addStep();
+        insertionSort.addInstruction(0,SET,4);
+        curr=arr[i];
+        insertionSort.addStep();
+        insertionSort.addInstruction(0,SET,5);
+        insertionSort.addInstruction(2,SET,i+1);
+        insertionSort.addInstruction(4,MOVEFROM,i,30,315);
+        insertionSort.addStep();
+        insertionSort.addInstruction(1,SET,curr);
+        insertionSort.addInstruction(1,SETEMPTY,0);
+        insertionSort.addInstruction(3,SET,i);
+        for(j=i;j>0 && arr[j-1] > curr;j--){
+            insertionSort.addStep();
+            insertionSort.addInstruction(0,SET,6);
+            insertionSort.addInstruction(3,SET,j);
+
+            arr[j]=arr[j-1];
+            insertionSort.addStep();
+            insertionSort.addInstruction(4,MOVE,j-1,j);
+            insertionSort.addInstruction(0,SET,7);
+        }
+
+        arr[j]=curr;
+        insertionSort.addStep();
+        insertionSort.addInstruction(1,SETEMPTY,1);
+        insertionSort.addInstruction(0,SET,9);
+        insertionSort.addInstruction(4,MOVETO,curr,j,30,315);
+    }
+    insertionSort.addStep();
+    insertionSort.addInstruction(0,SET,0);
+    insertionSort.addInstruction(3,SETVISIBILITY,HIDDEN);
+}
 void setup(){
- size(800,500);
- background(46,129,215);
- insertion=new InsertionSort(15);
- frameRate(1);
+    size(800,500);
+    insertionSort=new Animation(800, 500);
+    code=new AnimatedCode("insertion.txt", 480,100);
+    insertionSort.setColour(color(46,129,215));
+    int [] array=new int[15];
+    for(int i=0;i<15;i++){
+        array[i]=int(random(1,99));
+    }
+    arr=new AnimatedArray(array,15,15,250);
+    arr.hasBars_=true;
+    arr.setBarOffset(-120);
+    split=new Splitter("sorted","unsorted",color(0,255,0),color(255,0,0),15,30,15,85);
+    jIndicator = new Indicator("",color(255,255,255),30,30,250);
+    jIndicator.pointDown();
+    jIndicator.setColour(color(189,252,201));
+    animatedVar=new AnimatedVariable(0,30,15,300);
+
+
+    int tmp;
+    insertionSort.addObject(code);
+    insertionSort.addObject(animatedVar);
+    insertionSort.addObject(split);
+    insertionSort.addObject(jIndicator);
+    insertionSort.addObject(arr);
+    insertion(array,15);
+    insertionSort.start();
 }
 void draw(){
-  background(46,129,215);
-  insertion.draw();  
+    insertionSort.draw();
 }
 
 
