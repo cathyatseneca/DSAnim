@@ -95,6 +95,12 @@ class AnimatedArray extends AnimationObject{
 				ai.setCompleted(true);
 				squareColours_[ai.a_]=color(ai.b_,ai.c_,ai.d_);
 				break;
+			case SETALLBGCOLOUR:
+				ai.setCompleted(true);
+				for(int i=0;i<sz_;i++){
+					squareColours_[i]=color(ai.a_,ai.b_,ai.c_);
+				}
+				break;
 			case MOVEFROM:
 				state_=MOVEFROM;
 				moveIdx_=ai.a_;

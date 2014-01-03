@@ -49,7 +49,7 @@ class Indicator extends AnimationObject{
 			else{
 				drawDownTriangle(indicatorColour_,incrementSize_, x_+position_*incrementSize_,y_);
 				textAlign(CENTER);
-				text(label_,x_+position_*incrementSize_,y_-20);
+				text(label_,x_+position_*incrementSize_,y_-15);
 			}
 		}
 	}
