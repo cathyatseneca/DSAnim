@@ -4,9 +4,9 @@
 //area.
 //co is colour of text
 //sz is size of the square
-void drawSqWithNum(int c,color co,int sz,int offsetX,int offsetY){
+void drawSqWithNum(int c,color co, color bg, int sz,int offsetX,int offsetY){
   stroke(0);
-  fill(255);
+  fill(bg);
   rect(offsetX,offsetY,sz,sz);
   fill(co);
   if(c>0){
@@ -18,19 +18,26 @@ void drawSqWithNum(int c,color co,int sz,int offsetX,int offsetY){
 //draws a square 
 //offsetX and offsetY are positional offset from top left corner of draw
 //area.  X is the number of squares away from offsetX position
-void drawSquare(int sz, int offsetX,int offsetY){
+void drawSquare(int sz, color bg, int offsetX,int offsetY){
   stroke(0);
-  fill(255);
+  fill(bg);
   rect(offsetX,offsetY,sz,sz);
 }
 
 //draws a  triangle that is placed under a square that has size of sz.
 //posX and posY are positional offset from top left corner of draw
 //area and the position of the square
-void drawTriangle(int sz,int posX,int posY){
-  stroke(255);
-  fill(255);
-  triangle(posX+0.5*sz,posY+sz, posX+(0.5*sz)-10,posY+sz+10,posX+(0.5*sz)+10, posY+sz+10);
+void drawTriangle(color co, int sz,int posX,int posY){
+  stroke(co);
+  fill(co);
+  triangle(posX,posY,posX+10,posY+10,posX-10,posY+10);
 }
 
-
+//draws a  triangle that is placed under a square that has size of sz.
+//posX and posY are positional offset from top left corner of draw
+//area and the position of the square
+void drawDownTriangle(color co, int sz,int posX,int posY){
+  stroke(co);
+  fill(co);
+  triangle(posX,posY,posX+10,posY-10,posX-10,posY-10);
+}

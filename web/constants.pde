@@ -1,0 +1,25 @@
+//animation states
+final int PAUSED = 1;
+final int RUNNING = 2;
+final int HIDDEN = 3;
+final int VISIBLE = 4;
+//animation mode
+final int STEP = 1;
+final int CONTINUOUS = 2;
+//instructions and states
+final int PAUSE = 1;
+final int SWAP = 2;
+final int MOVEFROM = 3;
+final int MOVETO = 4;
+final int STABLE = 5;
+final int SET = 6;
+final int SETFONTCOLOUR = 7;
+final int SETBGCOLOUR = 8;
+final int SETEMPTY = 9;
+final int SETVISIBILITY = 10;
+final int SETALLBGCOLOUR = 11;
+//maximums
+final int MAXSTEPS = 1000;
+final int MAXINSTRUCTIONS = 5;
+final int MAXARRAY = 15;
+final int MAXOBJECTS = 20;

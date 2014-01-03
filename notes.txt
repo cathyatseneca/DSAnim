@@ -1,0 +1,20 @@
+run algorithm to produce animation command time line.
+commands are:
+	- pause
+	- array: swap index1 index2
+	- array: move dest src
+	- array: move indicator which indicator, toIndex
+	- splitter: move split
+	- code: change highlight
+	- code: change code piece (for bigger pieces)
+	- tree: move value from fromNode to Node
+	- tree: single left rotation parent
+	- tree: single right rotation parent
+	- tree: double left rotation parent
+	- tree: double right rotation parent
+	- linked list: removelink fromNode, toNode
+	- linked list: addlink fromNode, toNode
+	- linked list: reorganize (rearrange nodes so that links are ordered)
+	- linked list: add node
+	- linked list: delete node
+	- swap between two animation objects 
