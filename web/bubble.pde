@@ -50,12 +50,12 @@ void setup(){
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
     }
-    arr=new AnimatedArray(array,15,15,100);
+    arr=new AnimatedArray(array,15,15,120);
     arr.hasBars_=true;
     arr.setBarOffset(70);
     split=new Splitter("unsorted","sorted",color(255,0,0),color(0,255,0),15,30,15,50);
-    jIndicator = new Indicator("j",color(255,255,255),30,30,90);
-    jPlusIndicator = new Indicator("j+1",color(255,255,255),30,30,140);
+    jIndicator = new Indicator("j",color(255,255,255),30,30,120);
+    jPlusIndicator = new Indicator("j+1",color(255,255,255),30,30,150);
     jPlusIndicator.setPosition(1);
     jIndicator.pointDown();
     split.setPosition(15);
