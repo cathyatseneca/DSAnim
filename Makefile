@@ -22,12 +22,21 @@ bubble-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/bubble.pde $(PDE_DIR)/anim
 	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/bubble/splitter.pde
 	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/bubble/indicator.pde
 
-insertion-p5: p5-dir $(PDE_DIR)/insertion.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
+insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
 	@@mkdir $(P5_DIR)/insertion
+	cp $(PDE_DIR)/animation.pde $(P5_DIR)/insertion/animation.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/insertion/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/insertion/animationobject.pde
 	cp $(PDE_DIR)/insertion.pde $(P5_DIR)/insertion/insertion.pde
-	cp $(PDE_DIR)/arrayanim.pde $(P5_DIR)/insertion/arrayanim.pde
-	cp $(PDE_DIR)/utils.pde $(P5_DIR)/insertion/utils.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/insertion/constants.pde
 	cp $(PDE_DIR)/animatedcode.pde $(P5_DIR)/insertion/animatedcode.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/insertion/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/insertion/utils.pde
+	cp $(PDE_DIR)/insertion.txt $(P5_DIR)/insertion/insertion.txt
+	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/insertion/splitter.pde
+	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/insertion/indicator.pde
+	cp $(PDE_DIR)/animatedvariable.pde $(P5_DIR)/insertion/animatedvariable.pde
+
 	
 arrayanim-p5: p5-dir $(PDE_DIR)/arrayanimtest.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/arrayanimtest

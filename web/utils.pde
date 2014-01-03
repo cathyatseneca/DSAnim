@@ -33,4 +33,11 @@ void drawTriangle(color co, int sz,int posX,int posY){
   triangle(posX,posY,posX+10,posY+10,posX-10,posY+10);
 }
 
-
+//draws a  triangle that is placed under a square that has size of sz.
+//posX and posY are positional offset from top left corner of draw
+//area and the position of the square
+void drawDownTriangle(color co, int sz,int posX,int posY){
+  stroke(co);
+  fill(co);
+  triangle(posX,posY,posX+10,posY-10,posX-10,posY-10);
+}
