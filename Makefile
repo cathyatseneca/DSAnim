@@ -6,7 +6,7 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5
+p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5 selection-p5
 
 bubble-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/bubble.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde
 	@@mkdir $(P5_DIR)/bubble
@@ -37,6 +37,20 @@ insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR
 	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/insertion/indicator.pde
 	cp $(PDE_DIR)/animatedvariable.pde $(P5_DIR)/insertion/animatedvariable.pde
 
+selection-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/selection.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
+	@@mkdir $(P5_DIR)/selection
+	cp $(PDE_DIR)/animation.pde $(P5_DIR)/selection/animation.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/selection/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/selection/animationobject.pde
+	cp $(PDE_DIR)/selection.pde $(P5_DIR)/selection/selection.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/selection/constants.pde
+	cp $(PDE_DIR)/animatedcode.pde $(P5_DIR)/selection/animatedcode.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/selection/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/selection/utils.pde
+	cp $(PDE_DIR)/selection.txt $(P5_DIR)/selection/selection.txt
+	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/selection/splitter.pde
+	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/selection/indicator.pde
+	cp $(PDE_DIR)/animatedvariable.pde $(P5_DIR)/selection/animatedvariable.pde
 	
 arrayanim-p5: p5-dir $(PDE_DIR)/arrayanimtest.pde $(PDE_DIR)/arrayanim.pde $(PDE_DIR)/utils.pde
 	@@mkdir $(P5_DIR)/arrayanimtest
