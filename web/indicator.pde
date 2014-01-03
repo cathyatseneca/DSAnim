@@ -4,7 +4,7 @@ class Indicator extends AnimationObject{
 	int incrementSize_;
 	int position_;        //position of pointy end
 	boolean up_;
-	void state_;
+	int state_;
 
 	Indicator(String label, color indicatorColour,int sz, int x, int y){
 		super(x,y);

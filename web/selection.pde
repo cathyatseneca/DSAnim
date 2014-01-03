@@ -64,7 +64,7 @@ void selectionSort(int arr[],int size){
 void setup(){
     size(800,500);
     anim=new Animation(800, 500);
-    code=new AnimatedCode("selection.txt", 480,100);
+    code=new AnimatedCode("selection.txt", 480,80);
     anim.setColour(color(46,129,215));
     int [] array=new int[15];
     for(int i=0;i<15;i++){

@@ -26,6 +26,7 @@ class AnimatedArray extends AnimationObject{
 	int moveX_;
 	int moveY_;
 	int moveIdx_;
+	int moveVal_;
 
 	AnimatedArray(int [] data,int sz,int x,int y){
 		super(x,y);
