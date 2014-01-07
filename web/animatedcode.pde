@@ -18,7 +18,7 @@ class AnimatedCode extends AnimationObject{
 
     } 
     void setWidth(int w){
-        codeWidth_=300;
+        codeWidth_=w;
     }
     void append(String s){
         lines_[sz_]=s;

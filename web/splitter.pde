@@ -25,9 +25,24 @@ class Splitter extends AnimationObject{
 			position_=pos;
 		}
 	}
+	void setNumUnits(int sz){
+		numUnits_=sz;
+	}
 	void process(AnimationInstruction ai){
-		setPosition(ai.a_);
-		ai.setCompleted(true);
+		switch(ai.instruction_){
+			case SET:
+				setPosition(ai.a_);
+				ai.setCompleted(true);
+				break;
+			case CHANGESIZE:
+				setNumUnits(ai.a_);
+				ai.setCompleted(true);
+			case CHANGEPOSITION:
+				x_=ai.a_;
+				y_=ai.b_;
+				ai.setCompleted(true);
+
+		}
 	}
 	void draw(){
 		stroke(255);

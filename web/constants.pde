@@ -18,8 +18,10 @@ final int SETBGCOLOUR = 8;
 final int SETEMPTY = 9;
 final int SETVISIBILITY = 10;
 final int SETALLBGCOLOUR = 11;
+final int SETFONTCOLOURINRANGE = 12;
+final int SETALLFONTCOLOUR = 13;
 //maximums
-final int MAXSTEPS = 1000;
+final int MAXSTEPS = 2000;
 final int MAXINSTRUCTIONS = 5;
-final int MAXARRAY = 15;
+final int MAXARRAY = 20;
 final int MAXOBJECTS = 20;
