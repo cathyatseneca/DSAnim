@@ -105,6 +105,14 @@ class Animation{
 		}
 		return rc;
 	}
+	boolean addToStep(int stepNumber,int objectId,int instruction, int a,int b,int c,int d,int e){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].add(objectId, instruction, a,b,c,d,e);
+			rc=true;
+		}
+		return rc;
+	}
 	boolean addInstruction(int objectId,int instruction, int a){
 		return addToStep(numSteps_-1, objectId, instruction, a);
 	}
@@ -114,8 +122,12 @@ class Animation{
 	boolean addInstruction(int objectId,int instruction, int a,int b,int c){
 		return addToStep(numSteps_-1, objectId, instruction, a,b,c);
 	}
+
 	boolean addInstruction(int objectId,int instruction, int a,int b,int c,int d){
 		return addToStep(numSteps_-1, objectId, instruction, a,b,c,d);
+	}
+	boolean addInstruction(int objectId,int instruction, int a,int b,int c,int d,int e){
+		return addToStep(numSteps_-1, objectId, instruction, a,b,c,d,e);
 	}
 	void start(){
 		for(int i=0;i<steps_[currStep_].numInstructions_;i++){

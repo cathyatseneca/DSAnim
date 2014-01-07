@@ -102,6 +102,12 @@ class AnimatedArray extends AnimationObject{
 					squareColours_[i]=color(ai.a_,ai.b_,ai.c_);
 				}
 				break;
+			case SETALLFONTCOLOUR:
+				ai.setCompleted(true);
+				for(int i=0;i<sz_;i++){
+					dataColours_[i]=color(ai.a_,ai.b_,ai.c_);
+				}
+				break;
 			case MOVEFROM:
 				state_=MOVEFROM;
 				moveIdx_=ai.a_;
@@ -117,6 +123,12 @@ class AnimatedArray extends AnimationObject{
 				moveX_=ai.c_;
 				moveY_=ai.d_;
 				stateStartTime_=millis();
+				break;
+			case SETFONTCOLOURINRANGE:
+				ai.setCompleted(true);
+				for(int i=ai.a_;i<ai.b_;i++){
+					dataColours_[i]=color(ai.c_,ai.d_,ai.e_);
+				}
 				break;
 			}
 	}

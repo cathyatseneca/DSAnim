@@ -6,7 +6,7 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5 selection-p5
+p5-all: p5-dir $(PDE_DIR) quick-p5 bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5 selection-p5
 
 bubble-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/bubble.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde
 	@@mkdir $(P5_DIR)/bubble
@@ -22,7 +22,20 @@ bubble-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/bubble.pde $(PDE_DIR)/anim
 	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/bubble/splitter.pde
 	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/bubble/indicator.pde
 
-insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
+quick-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/quick.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde
+	@@mkdir $(P5_DIR)/quick
+	cp $(PDE_DIR)/animation.pde $(P5_DIR)/quick/animation.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/quick/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/quick/animationobject.pde
+	cp $(PDE_DIR)/quick.pde $(P5_DIR)/quick/quick.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/quick/constants.pde
+	cp $(PDE_DIR)/animatedcode.pde $(P5_DIR)/quick/animatedcode.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/quick/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/quick/utils.pde
+	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/quick/splitter.pde
+	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/quick/indicator.pde
+
+insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/insertion.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
 	@@mkdir $(P5_DIR)/insertion
 	cp $(PDE_DIR)/animation.pde $(P5_DIR)/insertion/animation.pde
 	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/insertion/animationinstruction.pde
@@ -37,7 +50,7 @@ insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR
 	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/insertion/indicator.pde
 	cp $(PDE_DIR)/animatedvariable.pde $(P5_DIR)/insertion/animatedvariable.pde
 
-selection-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/selection.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
+selection-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/selection.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/selection.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
 	@@mkdir $(P5_DIR)/selection
 	cp $(PDE_DIR)/animation.pde $(P5_DIR)/selection/animation.pde
 	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/selection/animationinstruction.pde
