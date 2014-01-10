@@ -11,6 +11,7 @@ class AnimatedArray extends AnimationObject{
 	boolean [] isEmpty_;
 	color [] dataColours_;
 	color [] squareColours_;
+	int [] gap_;
 	int cap_;
 	int sz_;
 	int state_;
@@ -37,16 +38,19 @@ class AnimatedArray extends AnimationObject{
 		isEmpty_= new boolean[cap_];
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
+		gap_ = new int[cap_];
 		state_=STABLE;
 		animationDuration_=500;   //1000 millis = 1 sec
 		for(int i=0;i<sz;i++){
 			data_[i]=data[i];
+			gap_[i]=0;
 			dataColours_[i]=color(0);
 			squareColours_[i]=color(255);
 			isEmpty_[i]=false;
 		}
 		for(int i=sz_;i<cap_;i++){
 			data_[i]=0;
+			gap_[i]=0;
 			dataColours_[i]=color(0);
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
@@ -63,12 +67,14 @@ class AnimatedArray extends AnimationObject{
 		isEmpty_= new boolean[cap_];
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
+		gap_ = new int[cap_];
 		state_=STABLE;
 		animationDuration_=500;   //1000 millis = 1 sec
 		for(int i=0;i<cap_;i++){
 			dataColours_[i]=color(0);
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
+			gap_[i]=0;
 		}
 		fillRandom();
 		maxHeight_=100;
@@ -123,6 +129,10 @@ class AnimatedArray extends AnimationObject{
 				moveX_=ai.c_;
 				moveY_=ai.d_;
 				stateStartTime_=millis();
+				break;
+			case ADDGAP:
+				gap_[ai.a_]=sqsz_/2;
+				ai.setCompleted(true);
 				break;
 			case SETFONTCOLOURINRANGE:
 				ai.setCompleted(true);
@@ -193,13 +203,15 @@ class AnimatedArray extends AnimationObject{
 	    }   
 	}
 	void drawStable(){
+		int gap=0;
 		for(int i=0;i<sz_;i++){
 			if(isEmpty_[i] != true){
-				drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,x_+i*sqsz_,y_);
+				drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap+x_+i*sqsz_,y_);
 			}
 			else{
-				drawSquare(sqsz_,squareColours_[i],x_+i*sqsz_,y_);
+				drawSquare(sqsz_,squareColours_[i],gap+x_+i*sqsz_,y_);
 			}
+			gap+=gap_[i];
 		}
 	}
 	void drawSwap(){
@@ -207,11 +219,12 @@ class AnimatedArray extends AnimationObject{
 		if(currTime - stateStartTime_ < animationDuration_){
 	    	for(int i=0;i<sz_;i++){
     	    	if(i==to_ || i==from_){
-        	  		drawSquare(sqsz_,squareColours_[i],x_+i*sqsz_,y_);
+        	  		drawSquare(sqsz_,squareColours_[i],gap+x_+i*sqsz_,y_);
         		}
        			else{
-          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,x_+i*sqsz_,y_);
+          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap+x_+i*sqsz_,y_);
         		}
+        		gap+=gap_[i];
 	      	}
 	      	float t=(currTime-stateStartTime_)/animationDuration_;
 	      	float start = x_+(from_+0.5)*sqsz_;

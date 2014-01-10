@@ -20,6 +20,7 @@ final int SETVISIBILITY = 10;
 final int SETALLBGCOLOUR = 11;
 final int SETFONTCOLOURINRANGE = 12;
 final int SETALLFONTCOLOUR = 13;
+final int ADDGAP = 14;
 //maximums
 final int MAXSTEPS = 2000;
 final int MAXINSTRUCTIONS = 5;
