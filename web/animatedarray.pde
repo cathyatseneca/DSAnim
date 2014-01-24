@@ -11,7 +11,10 @@ class AnimatedArray extends AnimationObject{
 	boolean [] isEmpty_;
 	color [] dataColours_;
 	color [] squareColours_;
-	int [] gap_;
+	int [] gap_;    //accounts for putting gaps into array
+	                //cummulative size of gaps so that
+	                //it is easier to find location of
+	                //array[i]
 	int cap_;
 	int sz_;
 	int state_;
@@ -88,8 +91,8 @@ class AnimatedArray extends AnimationObject{
 				to_=ai.b_;
 				stateStartTime_=millis();
 				break;
-			case MOVE:
-				state_=MOVE;
+			case MOVELOCATION:
+				state_=MOVELOCATION;
 				from_=ai.a_;
 				to_=ai.b_;
 				stateStartTime_=millis();
@@ -131,23 +134,56 @@ class AnimatedArray extends AnimationObject{
 				stateStartTime_=millis();
 				break;
 			case ADDGAP:
-				gap_[ai.a_]=sqsz_/2;
+				for(int i=ai.a_;i<sz_-1;i++){
+					gap_[i+1]+=(sqsz_/2);
+				}
+				ai.setCompleted(true);
+				break;
+			case REMOVEGAP:
+				for(int i=ai.a_;i<sz_-1;i++){
+					gap_[i+1]-=(sqsz_/2);
+				}
 				ai.setCompleted(true);
 				break;
 			case SETFONTCOLOURINRANGE:
 				ai.setCompleted(true);
-				for(int i=ai.a_;i<ai.b_;i++){
+				for(int i=ai.a_;i<=ai.b_;i++){
 					dataColours_[i]=color(ai.c_,ai.d_,ai.e_);
 				}
 				break;
+			case SETBGCOLOURINRANGE:
+				ai.setCompleted(true);
+				for(int i=ai.a_;i<=ai.b_;i++){
+					squareColours_[i]=color(ai.c_,ai.d_,ai.e_);
+				}
+				break;
+			case SETEMPTY:
+				ai.setCompleted(true);
+				isEmpty_[ai.a_]=true;
+				break;
+			case SETFILLED:
+				ai.setCompleted(true);
+				isEmpty_[ai.a_]=false;
+				break;
+			case SET:
+				ai.setCompleted(true);
+				data_[ai.a_]=ai.b_;
+				break;
+			default:
+				println("error no such instruction: " + ai.instruction_);
 			}
+	}
+	void clear(){
+		for(int i=0;i<cap_;i++){
+			isEmpty_[i]=true;
+		}
 	}
 	void drawMoveFrom(){
 		drawStable();
 		float currTime=millis();
 		if(currTime - stateStartTime_ < animationDuration_){
 
-			float startX=((x_+moveIdx_*sqsz_)+(0.5*sqsz_));
+			float startX=((gap_[moveIdx_]+x_+moveIdx_*sqsz_)+(0.5*sqsz_));
 			float startY=y_+sqsz_*0.5+5;
 			float len=dist(0,0,startX,startY);
 			float vX=(startX-moveX_)/len*10;
@@ -173,7 +209,7 @@ class AnimatedArray extends AnimationObject{
 		float currTime=millis();
 		if(currTime - stateStartTime_ < animationDuration_){
 
-			float startX=((x_+moveIdx_*sqsz_)+(0.5*sqsz_));
+			float startX=((gap_[moveIdx_]+x_+moveIdx_*sqsz_)+(0.5*sqsz_));
 			float startY=y_+sqsz_*0.5+5;
 			float len=dist(0,0,startX,startY);
 			float vX=(startX-moveX_)/len*10;
@@ -203,32 +239,31 @@ class AnimatedArray extends AnimationObject{
 	    }   
 	}
 	void drawStable(){
-		int gap=0;
 		for(int i=0;i<sz_;i++){
 			if(isEmpty_[i] != true){
-				drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap+x_+i*sqsz_,y_);
+				drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap_[i]+x_+i*sqsz_,y_);
 			}
 			else{
-				drawSquare(sqsz_,squareColours_[i],gap+x_+i*sqsz_,y_);
+				drawSquare(sqsz_,squareColours_[i],gap_[i]+x_+i*sqsz_,y_);
 			}
-			gap+=gap_[i];
+
 		}
 	}
 	void drawSwap(){
 		float currTime=millis();
+		int gap;
 		if(currTime - stateStartTime_ < animationDuration_){
 	    	for(int i=0;i<sz_;i++){
     	    	if(i==to_ || i==from_){
-        	  		drawSquare(sqsz_,squareColours_[i],gap+x_+i*sqsz_,y_);
+        	  		drawSquare(sqsz_,squareColours_[i],gap_[i]+x_+i*sqsz_,y_);
         		}
        			else{
-          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap+x_+i*sqsz_,y_);
+          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap_[i]+x_+i*sqsz_,y_);
         		}
-        		gap+=gap_[i];
 	      	}
 	      	float t=(currTime-stateStartTime_)/animationDuration_;
-	      	float start = x_+(from_+0.5)*sqsz_;
-	      	float end = x_+(to_+0.5)*sqsz_;
+	      	float start = gap_[from_]+x_+(from_+0.5)*sqsz_;
+	      	float end = gap_[to_]+x_+(to_+0.5)*sqsz_;
 	      	float half= (start+end)/2;
 	      	float height=50;
 	      	float x=bezierPoint(start,half,half,end,t);
@@ -255,15 +290,15 @@ class AnimatedArray extends AnimationObject{
 		if(currTime - stateStartTime_ < animationDuration_){
 	    	for(int i=0;i<sz_;i++){
     	    	if(i==to_ || i==from_){
-        	  		drawSquare(sqsz_,squareColours_[i],x_+i*sqsz_,y_);
+        	  		drawSquare(sqsz_,squareColours_[i],gap_[i]+x_+i*sqsz_,y_);
         		}
        			else{
-          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,x_+i*sqsz_,y_);
+          			drawSqWithNum(data_[i],dataColours_[i],squareColours_[i],sqsz_,gap_[i]+x_+i*sqsz_,y_);
         		}
 	      	}
 	      	float t=(currTime-stateStartTime_)/animationDuration_;
-	      	float start = x_+(from_+0.5)*sqsz_;
-	      	float end = x_+(to_+0.5)*sqsz_;
+	      	float start = gap_[from_]+x_+(from_+0.5)*sqsz_;
+	      	float end = gap_[to_]+x_+(to_+0.5)*sqsz_;
 	      	float half= (start+end)/2;
 	      	float height=50;
 	      	float x=bezierPoint(start,half,half,end,t);
@@ -291,7 +326,7 @@ class AnimatedArray extends AnimationObject{
 				drawMoveTo(); break;
 			case MOVEFROM:
 				drawMoveFrom(); break;
-			case MOVE:
+			case MOVELOCATION:
 				drawMove(); break;		
 		}
 		if(hasBars_){

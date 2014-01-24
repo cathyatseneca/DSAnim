@@ -133,6 +133,7 @@ class AnimationStep{
 			println("  object: " + instructions_[i].objectId_);
 			println("  instruction #: "+instructions_[i].instruction_);
 			println("  # of parameters: " + instructions_[i].numParams_);
+			println("  iscompleted : "+instructions_[i].isCompleted());
 			println("  parameters:");
 			switch(instructions_[i].numParams_){
 				case 1:	println("a: "+ instructions_[i].a_); break;

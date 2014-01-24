@@ -21,8 +21,14 @@ final int SETALLBGCOLOUR = 11;
 final int SETFONTCOLOURINRANGE = 12;
 final int SETALLFONTCOLOUR = 13;
 final int ADDGAP = 14;
+final int REMOVEGAP = 15;
+final int SETPOS = 16;
+final int SETFILLED = 18;
+final int MOVELOCATION = 19;
+final int SETBGCOLOURINRANGE = 20;
+final int SETRANGE = 21;
 //maximums
 final int MAXSTEPS = 2000;
-final int MAXINSTRUCTIONS = 5;
+final int MAXINSTRUCTIONS = 6;
 final int MAXARRAY = 20;
 final int MAXOBJECTS = 20;

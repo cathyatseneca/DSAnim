@@ -1,44 +1,23 @@
-void MergeSort(int arr[],int tmp[],int start,int end){
-  //if the array is more than one element big
-  if(start<end){
-    int mid=(start+end)/2;
-    MergeSort(arr,tmp,start,mid);
-    MergeSort(arr,tmp,mid+1,end);
-    Merge(arr,tmp,start,mid+1,end);
-  }
-}
-
-void Merge(int arr[],int tmp[],int startA,int startB,int endB){
+void Merge(int arr[],int tmp[],
+     int startA,int startB,int endB){
   int aptr=startA;
   int bptr=startB;
   int idx=startA;
   while(aptr < startB && bptr < endB+1){
     if(arr[aptr] < arr[bptr]){
-       tmp[idx]=arr[aptr];
-       idx++;
-       aptr++;
+       tmp[idx++]=arr[aptr++];
     }
     else{
-       tmp[idx++]=arr[bptr];
-       bptr++;
+       tmp[idx++]=arr[bptr++];
     }
   }
   while(aptr<startB){
-    tmp[idx]=arr[aptr];
-    idx++;
-    aptr++;    
+    tmp[idx++]=arr[aptr++];
   }
   while(bptr < endB+1){
-    tmp[idx++]=arr[bptr];
-    bptr++;
+    tmp[idx++]=arr[bptr++];
   }
   for(int i=startA;i<=endB;i++){
     arr[i]=tmp[i];
   }
-}
-
-void MergeSort(int arr[],int size){
-  int* tmp=new int[size];
-  MergeSort(arr,tmp,0,size-1);
-  delete [] tmp;
 }
