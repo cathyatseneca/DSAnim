@@ -8,9 +8,10 @@ AnimatedCode code;
  
 void QuickSort(int arr[], int left, int right){
     if(left<right){
-        int pivotpt=int(random(left,right));
+        int pivotpt=int((left+right)/2);
         int pivot=arr[pivotpt];
         anim.addStep();
+        anim.addInstruction(3,SETVISIBILITY,VISIBLE);
         anim.addInstruction(3,SET,pivotpt);
         anim.addInstruction(4,SET,4);
         int i=left;
@@ -24,6 +25,11 @@ void QuickSort(int arr[], int left, int right){
         arr[right]=tmp;
 
         pivotpt=right;
+
+        anim.addStep();
+        anim.addInstruction(1,SETVISIBILITY,VISIBLE);
+        anim.addInstruction(2,SETVISIBILITY,VISIBLE);
+
 
         anim.addStep();
         anim.addInstruction(1,SET,i);
@@ -72,20 +78,45 @@ void QuickSort(int arr[], int left, int right){
         arr[pivotpt]=tmp;
         anim.addStep();
         anim.addInstruction(4,SET,20);
-        anim.addInstruction(0,SWAP,i,pivotpt);
+        if(i!=pivotpt){
+            anim.addInstruction(0,SWAP,i,pivotpt);
+        }
         anim.addStep();
         anim.addInstruction(0,SETBGCOLOUR,i,189,252,201);
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,i+1,right,200,200,200);
+        anim.addInstruction(0,SETFONTCOLOURINRANGE,i,right,200,200,200);
         anim.addInstruction(4,SET,21);
+        anim.addInstruction(1,SETVISIBILITY,HIDDEN);
+        anim.addInstruction(2,SETVISIBILITY,HIDDEN);
+        anim.addInstruction(3,SETVISIBILITY,HIDDEN);
+        anim.addStep();
+        anim.addInstruction(0,ADDGAP,i-1);
+        anim.addInstruction(1,ADDGAP,i-1);
+        anim.addInstruction(2,ADDGAP,i-1);
+        anim.addInstruction(3,ADDGAP,i-1);
         QuickSort(arr,left,i-1);
         anim.addStep();
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,left,i-1,200,200,200);
+        anim.addInstruction(0,REMOVEGAP,i-1);
+        anim.addInstruction(1,REMOVEGAP,i-1);
+        anim.addInstruction(2,REMOVEGAP,i-1);
+        anim.addInstruction(3,REMOVEGAP,i-1);
+        anim.addStep();
+        anim.addInstruction(0,SETFONTCOLOURINRANGE,left,i,200,200,200);
         anim.addInstruction(0,SETFONTCOLOURINRANGE,i+1,right,0,0,0);
         anim.addInstruction(4,SET,22);
+        anim.addStep();
+        anim.addInstruction(0,ADDGAP,i);
+        anim.addInstruction(1,ADDGAP,i);
+        anim.addInstruction(2,ADDGAP,i);
+        anim.addInstruction(3,ADDGAP,i);
         QuickSort(arr,i+1,right);
         anim.addStep();
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,left,i-1,0,0,0);
+        anim.addInstruction(0,REMOVEGAP,i);
+        anim.addInstruction(1,REMOVEGAP,i);
+        anim.addInstruction(2,REMOVEGAP,i);
+        anim.addInstruction(3,REMOVEGAP,i);
     }
+    anim.addStep();
+    anim.addInstruction(0,SETBGCOLOURINRANGE,left,right,189,252,201);
 }
  
 
@@ -102,8 +133,8 @@ void quickSort(int arr[],int size){
 }
 
 void setup(){
-    size(800,500);
-    anim=new Animation(800, 500);
+    size(900,500);
+    anim=new Animation(900, 500);
     anim.setColour(color(46,129,215));
     int [] array=new int[15];
     for(int i=0;i<15;i++){
@@ -116,7 +147,7 @@ void setup(){
     jIndicator = new Indicator("j",color(189,252,201),30,30,260);
     pivotIndicator=new Indicator("pivot",color(255,255,255),30,30,230);
     pivotIndicator.pointDown();
-    code=new AnimatedCode("quick.txt", 480,50);
+    code=new AnimatedCode("quick.txt", 580,50);
     code.setWidth(310);
 
     int tmp;

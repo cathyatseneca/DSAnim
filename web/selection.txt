@@ -8,6 +8,9 @@ void selectionSort(int arr[],int size){
 				minIdx=j;
 			}
 		}
-		swap(arr[i],arr[minIdx]);
+		//swap
+		tmp=arr[i];
+		arr[i]=arr[minIdx];
+		arr[minIdx]=tmp;
 	}
 }

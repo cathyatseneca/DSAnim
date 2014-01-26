@@ -150,24 +150,27 @@ class Animation{
 
 	}
 	void draw(){
-		if(currStep_ < numSteps_){
-			background(bgColour_);
-			for(int i=0;i<numObjects_;i++){
-				objects_[i].draw();
-			}
-			float currTime=millis();
-			//println(currTime-stepStart_);
-			if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
-				currStep_++;
-				for(int i=0;i<steps_[currStep_].numInstructions_;i++){
-					int id = steps_[currStep_].instructions_[i].objectId_;
-					objects_[id].process(steps_[currStep_].instructions_[i]);
+		if(animationMode_ == CONTINUOUS){
+			if(currStep_ < numSteps_){
+				background(bgColour_);
+				for(int i=0;i<numObjects_;i++){
+					objects_[i].draw();
 				}
-				stepStart_=millis();
+				float currTime=millis();
+				//println(currTime-stepStart_);
+				if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
+					currStep_++;
+					for(int i=0;i<steps_[currStep_].numInstructions_;i++){
+						int id = steps_[currStep_].instructions_[i].objectId_;
+						objects_[id].process(steps_[currStep_].instructions_[i]);
+					}
+					stepStart_=millis();
+				}
+			//println(currStep_ + " " + numSteps_);
 			}
-		}
-		else{
-			setState(PAUSED);
+			else{
+				setState(PAUSED);
+			}
 		}
 	}
 

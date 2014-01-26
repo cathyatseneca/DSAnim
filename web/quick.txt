@@ -1,7 +1,7 @@
 void quick(int arr[],int left,int right){
   if(left<right){
     int sz=right-left+1;
-    int pivotpt=left+rand()%sz;   
+    int pivotpt=(left+right)/2;   
     int i=left;
     int j=right-1;
     int pivot=arr[pivotpt];

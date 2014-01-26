@@ -24,7 +24,7 @@ void bubble(int array[],int sz){
                 bubbleSort.addInstruction(1,SETFONTCOLOUR,j,255,0,0);
                 bubbleSort.addInstruction(1,SETFONTCOLOUR,j+1,255,0,0);
                 bubbleSort.addStep();
-                bubbleSort.addInstruction(0,SET,7);
+                bubbleSort.addInstruction(0,SETRANGE,7,11);
                 bubbleSort.addInstruction(1,SWAP,j,j+1);
                 tmp=array[j];
                 array[j]=array[j+1];
@@ -35,11 +35,15 @@ void bubble(int array[],int sz){
             }
         }
         bubbleSort.addStep();
-        bubbleSort.addInstruction(2,SET,15-(i+1));
+        bubbleSort.addInstruction(2,SET,sz-(i+1));
+        bubbleSort.addInstruction(1,SETBGCOLOUR,sz-(i+1),189,252,201);
     }
     bubbleSort.addStep();
     bubbleSort.addInstruction(2,SET,0);
     bubbleSort.addInstruction(0,SET,0);
+    bubbleSort.addInstruction(1,SETBGCOLOUR,0,189,252,201);
+    bubbleSort.addInstruction(3,SETVISIBILITY,HIDDEN);
+    bubbleSort.addInstruction(4,SETVISIBILITY,HIDDEN);
 }
 void setup(){
     size(800,500);
@@ -56,7 +60,7 @@ void setup(){
     split=new Splitter("unsorted","sorted",color(255,0,0),color(0,255,0),15,30,15,50);
     jIndicator = new Indicator("j",color(255,255,255),30,30,120);
     jPlusIndicator = new Indicator("j+1",color(255,255,255),30,30,150);
-    jPlusIndicator.setPosition(1);
+    jPlusIndicator.setIdx(1);
     jIndicator.pointDown();
     split.setPosition(15);
     int tmp;
