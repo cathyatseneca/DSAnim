@@ -16,12 +16,16 @@ void MergeSort(int arr[],int tmp[],int start,int end){
     anim.addInstruction(0,ADDGAP,mid);
     anim.addInstruction(2,ADDGAP,mid);
     anim.addInstruction(3,ADDGAP,mid);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,200,200,200);
     anim.addInstruction(5,SET,11);
     MergeSort(arr,tmp,start,mid);
     anim.addStep();
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,0,0,0);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,200,200,200);
     anim.addInstruction(5,SET,12);
     MergeSort(arr,tmp,mid+1,end);
     anim.addStep();
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,0,0,0);
     anim.addInstruction(5,SET,13);
     anim.addStep();
     anim.addInstruction(5,SETVISIBILITY,HIDDEN);
@@ -31,6 +35,8 @@ void MergeSort(int arr[],int tmp[],int start,int end){
     anim.addInstruction(5,SETVISIBILITY,VISIBLE);
     anim.addInstruction(6,SETVISIBILITY,HIDDEN);
   }
+  anim.addStep();
+  anim.addInstruction(0,SETBGCOLOURINRANGE,start,end,189,252,201);
 }
 
 void Merge(int arr[],int tmp[],int startA,int startB,int endB){
@@ -52,7 +58,7 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
     anim.addInstruction(5,SET,7);
     if(arr[aptr] < arr[bptr]){
       anim.addStep();
-      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,255,0);
+      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,255);
       anim.addInstruction(0,SETFONTCOLOUR,bptr,255,0,0);
       anim.addInstruction(5,SET,8);
       tmp[idx]=arr[aptr];
@@ -77,7 +83,7 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
     else{
       anim.addStep();
       anim.addInstruction(0,SETFONTCOLOUR,aptr,255,0,0);
-      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,255,0);
+      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,255);
       anim.addInstruction(5,SET,11);
       tmp[idx]=arr[bptr];
       anim.addStep();

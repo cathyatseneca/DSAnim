@@ -234,7 +234,7 @@ class AnimatedArray extends AnimationObject{
 	void drawBars(){
     	for(int i=0;i<sz_;i++){
       		if(!isEmpty_[i]){
-        		drawBar(i,data_[i],maxHeight_,barOffset_,#FFFFFF,sqsz_,x_,y_);
+        		drawBar(i,data_[i],maxHeight_,barOffset_,#FFFFFF,sqsz_,gap_[i]+x_,y_);
 		    }
 	    }   
 	}
