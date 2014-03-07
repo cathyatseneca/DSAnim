@@ -6,7 +6,7 @@ P5_DIR  := p5
 p5-dir: clean
 	@@mkdir $(P5_DIR)
 
-p5-all: p5-dir $(PDE_DIR) quick-p5 bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5 selection-p5
+p5-all: p5-dir $(PDE_DIR) merge-p5 quick-p5 bubble-p5 insertion-p5 arrayanim-p5 utils-p5 code-p5 animation-p5 animatedarray-p5 splitter-p5 selection-p5
 
 bubble-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/bubble.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/bubble.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde
 	@@mkdir $(P5_DIR)/bubble
@@ -34,6 +34,18 @@ quick-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/quick.pde $(PDE_DIR)/animat
 	cp $(PDE_DIR)/utils.pde $(P5_DIR)/quick/utils.pde
 	cp $(PDE_DIR)/splitter.pde $(P5_DIR)/quick/splitter.pde
 	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/quick/indicator.pde
+
+merge-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/merge.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/indicator.pde
+	@@mkdir $(P5_DIR)/merge
+	cp $(PDE_DIR)/animation.pde $(P5_DIR)/merge/animation.pde
+	cp $(PDE_DIR)/animationinstruction.pde $(P5_DIR)/merge/animationinstruction.pde
+	cp $(PDE_DIR)/animationobject.pde $(P5_DIR)/merge/animationobject.pde
+	cp $(PDE_DIR)/merge.pde $(P5_DIR)/merge/merge.pde
+	cp $(PDE_DIR)/constants.pde $(P5_DIR)/merge/constants.pde
+	cp $(PDE_DIR)/animatedcode.pde $(P5_DIR)/merge/animatedcode.pde
+	cp $(PDE_DIR)/animatedarray.pde $(P5_DIR)/merge/animatedarray.pde
+	cp $(PDE_DIR)/utils.pde $(P5_DIR)/merge/utils.pde
+	cp $(PDE_DIR)/indicator.pde $(P5_DIR)/merge/indicator.pde
 
 insertion-p5: p5-dir $(PDE_DIR)/animation.pde $(PDE_DIR)/insertion.pde $(PDE_DIR)/animationobject.pde $(PDE_DIR)/animationinstruction.pde $(PDE_DIR)/animatedarray.pde $(PDE_DIR)/utils.pde $(PDE_DIR)/insertion.txt $(PDE_DIR)/splitter.pde $(PDE_DIR)/indicator.pde $(PDE_DIR)/animatedvariable.pde
 	@@mkdir $(P5_DIR)/insertion

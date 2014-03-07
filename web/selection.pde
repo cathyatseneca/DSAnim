@@ -39,7 +39,7 @@ void selectionSort(int arr[],int size){
             anim.addInstruction(4,SETVISIBILITY,HIDDEN);
             anim.addInstruction(2,SETVISIBILITY,HIDDEN);
             anim.addInstruction(3,SWAP,minIdx,i);
-            anim.addInstruction(0,SET,11);
+            anim.addInstruction(0,SETRANGE,11,14);
             tmp=arr[i];
             arr[i]=arr[minIdx];
             arr[minIdx]=tmp;
@@ -55,7 +55,6 @@ void selectionSort(int arr[],int size){
     }
     anim.addStep();
     anim.addInstruction(1,SET,size);
-    anim.addInstruction(3,SETALLBGCOLOUR,255,255,255);
     anim.addInstruction(2,SETVISIBILITY,HIDDEN);
     anim.addInstruction(4,SETVISIBILITY,HIDDEN);
     anim.addInstruction(0,SET,0);
@@ -70,13 +69,13 @@ void setup(){
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
     }
-    arr=new AnimatedArray(array,15,15,230);
+    arr=new AnimatedArray(array,15,15,280);
     arr.hasBars_=true;
     arr.setBarOffset(-130);
-    split=new Splitter("sorted","unsorted",color(0,255,0),color(255,0,0),15,30,15,290);
-    minIndicator = new Indicator("minIdx",color(255,255,255),30,30,260);
+    split=new Splitter("sorted","unsorted",color(0,255,0),color(255,0,0),15,30,15,340);
+    minIndicator = new Indicator("minIdx",color(255,255,255),30,30,310);
     minIndicator.setColour(color(189,252,201));
-    jIndicator = new Indicator("j",color(255,255,255),30,30,230);
+    jIndicator = new Indicator("j",color(255,255,255),30,30,280);
     jIndicator.setColour(color(189,252,201));
     jIndicator.pointDown();
     jIndicator.setVisibility(HIDDEN);

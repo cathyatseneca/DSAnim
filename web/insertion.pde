@@ -9,6 +9,8 @@ AnimatedVariable animatedVar;
 void insertion(int arr[],int size){
     int curr;
     int i,j;
+    insertionSort.addStep();
+    insertionSort.addInstruction(4,SETBGCOLOUR,0,189,252,201);
     for(i=0;i<size;i++){
         insertionSort.addStep();
         insertionSort.addInstruction(0,SET,4);
@@ -20,6 +22,7 @@ void insertion(int arr[],int size){
         insertionSort.addStep();
         insertionSort.addInstruction(1,SET,curr);
         insertionSort.addInstruction(1,SETEMPTY,0);
+        insertionSort.addInstruction(3,SETVISIBILITY,VISIBLE);
         insertionSort.addInstruction(3,SET,i);
         for(j=i;j>0 && arr[j-1] > curr;j--){
             insertionSort.addStep();
@@ -28,14 +31,16 @@ void insertion(int arr[],int size){
 
             arr[j]=arr[j-1];
             insertionSort.addStep();
-            insertionSort.addInstruction(4,MOVE,j-1,j);
+            insertionSort.addInstruction(4,MOVELOCATION,j-1,j);
             insertionSort.addInstruction(0,SET,7);
         }
 
         arr[j]=curr;
         insertionSort.addStep();
+        insertionSort.addInstruction(3,SETVISIBILITY,HIDDEN);
         insertionSort.addInstruction(1,SETEMPTY,1);
         insertionSort.addInstruction(0,SET,9);
+        insertionSort.addInstruction(4,SETBGCOLOUR,i,189,252,201);
         insertionSort.addInstruction(4,MOVETO,curr,j,30,315);
     }
     insertionSort.addStep();
