@@ -336,6 +336,14 @@ nav ol {
   list-style: none;
   list-style-image: none;
 }
+nav li{
+float:left;
+}
+nav a
+{
+display:block;
+width:120px;
+}
 
 /* =============================================================================
    Embedded content
