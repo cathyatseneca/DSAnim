@@ -3,6 +3,7 @@ and labels at both ends.*/
 
 class AnimatedVariable extends AnimationObject{
 	int value_;
+	int initial_;
 	color textColour_;
 	color bgColour_;
 	int size_;
@@ -12,9 +13,10 @@ class AnimatedVariable extends AnimationObject{
 		super(x,y);
 		value_=v;
 		size_=size;
+		initial_=v;
 		textColour_=color(0);
 		bgColour_=color(255);
-		isEmpty_=0;
+		isEmpty_=1;
 
 	}
 	void setEmpty(int e){
@@ -39,6 +41,12 @@ class AnimatedVariable extends AnimationObject{
 				ai.setCompleted(true);
 				break;
 		}
+	}
+	void restart(){
+		value_=initial_;
+		textColour_=color(0);
+		bgColour_=color(255);
+		isEmpty_=1;
 	}
 	void draw(){
     	if(isEmpty_==0){

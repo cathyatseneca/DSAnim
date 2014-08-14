@@ -7,6 +7,7 @@ void drawBar(int idx,float value,float maxHeight, int yOffset, color co,int sz,i
 	rect(xstart,ystart+(maxHeight-(value*maxHeight)),20,value*maxHeight);
 }
 class AnimatedArray extends AnimationObject{
+	int [] initial_;
 	int [] data_;
 	boolean [] isEmpty_;
 	color [] dataColours_;
@@ -38,6 +39,7 @@ class AnimatedArray extends AnimationObject{
 		sz_=sz;
 		sqsz_=30;
 		data_ = new int [cap_];
+		initial_=new int[cap_];
 		isEmpty_= new boolean[cap_];
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
@@ -46,6 +48,50 @@ class AnimatedArray extends AnimationObject{
 		animationDuration_=500;   //1000 millis = 1 sec
 		for(int i=0;i<sz;i++){
 			data_[i]=data[i];
+			initial_[i]=data[i];
+			gap_[i]=0;
+			dataColours_[i]=color(0);
+			squareColours_[i]=color(255);
+			isEmpty_[i]=false;
+		}
+		for(int i=sz_;i<cap_;i++){
+			data_[i]=0;
+			initial_[i]=0;
+			gap_[i]=0;
+			dataColours_[i]=color(0);
+			squareColours_[i]=color(255);
+			isEmpty_[i]=true;
+		}
+		maxHeight_=100;
+		barOffset_ = 50;
+		moveX_=moveY_=moveIdx_=moveVal_=0;
+	}
+	AnimatedArray(int cap,int x, int y){
+		super(x,y);
+		cap_=cap;
+		sz_=cap;
+		sqsz_=30;
+		data_ = new int [cap_];
+		isEmpty_= new boolean[cap_];
+		dataColours_=new color[cap_];
+		squareColours_=new color[cap_];
+		gap_ = new int[cap_];
+		state_=STABLE;
+		animationDuration_=250;   //1000 millis = 1 sec
+		for(int i=0;i<cap_;i++){
+			dataColours_[i]=color(0);
+			squareColours_[i]=color(255);
+			isEmpty_[i]=true;
+			gap_[i]=0;
+		}
+		fillRandom();
+		maxHeight_=100;
+		barOffset_=50;
+	}
+	void restart(){
+		state_=STABLE;
+		for(int i=0;i<sz_;i++){
+			data_[i]=initial_[i];
 			gap_[i]=0;
 			dataColours_[i]=color(0);
 			squareColours_[i]=color(255);
@@ -59,28 +105,10 @@ class AnimatedArray extends AnimationObject{
 			isEmpty_[i]=true;
 		}
 		maxHeight_=100;
-		barOffset_ = 50;
-	}
-	AnimatedArray(int cap,int x, int y){
-		super(x,y);
-		cap_=cap;
-		sz_=cap;
-		sqsz_=30;
-		data_ = new int [cap_];
-		isEmpty_= new boolean[cap_];
-		dataColours_=new color[cap_];
-		squareColours_=new color[cap_];
-		gap_ = new int[cap_];
-		state_=STABLE;
-		animationDuration_=500;   //1000 millis = 1 sec
-		for(int i=0;i<cap_;i++){
-			dataColours_[i]=color(0);
-			squareColours_[i]=color(255);
-			isEmpty_[i]=true;
-			gap_[i]=0;
-		}
-		fillRandom();
-		maxHeight_=100;
+		moveX_=moveY_=moveIdx_=moveVal_=0;
+		stateStartTime_=millis();
+
+
 	}
 	void process(AnimationInstruction ai){
 		ai_=ai;
@@ -96,6 +124,11 @@ class AnimatedArray extends AnimationObject{
 				from_=ai.a_;
 				to_=ai.b_;
 				stateStartTime_=millis();
+
+				println("moveto idx:" + to_);
+				println("movefrom idx:" + from_);
+				println("move v:"+ data_[from_]);
+
 				break;
 			case SETFONTCOLOUR:
 				ai.setCompleted(true);
@@ -124,6 +157,8 @@ class AnimatedArray extends AnimationObject{
 				moveY_=ai.c_;
 				stateStartTime_=millis();
 				isEmpty_[moveIdx_]=true;
+				println("from moveIdx:" + moveIdx_);
+				println("from v:"+ data_[moveIdx_]);
 				break;				
 			case MOVETO:
 				state_=MOVETO;
@@ -132,6 +167,8 @@ class AnimatedArray extends AnimationObject{
 				moveX_=ai.c_;
 				moveY_=ai.d_;
 				stateStartTime_=millis();
+				println("to moveIdx:" + moveIdx_);
+				println("to v:"+ moveVal_);
 				break;
 			case ADDGAP:
 				for(int i=ai.a_;i<sz_-1;i++){
