@@ -189,8 +189,10 @@ void setup(){
         data[i]=int(random(1,99));
     }
     array=new AnimatedArray(data,15,15,80);
-    array2=new AnimatedArray(data,15,15,200);
-    array2.clear();
+    //println("there");
+    array2=new AnimatedArray(15,15,200);
+    //println("everywhere");
+    //array2.clear();
     array.hasBars_=false;
     aIndicator = new Indicator("aptr",color(255,255,255),30,30,80);
     aIndicator.setColour(color(189,252,201));

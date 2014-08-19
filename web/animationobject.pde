@@ -26,4 +26,7 @@ class AnimationObject{
 	void process(AnimationInstruction ai){
 		
 	}
+	void restart(){
+		
+	}
 };
