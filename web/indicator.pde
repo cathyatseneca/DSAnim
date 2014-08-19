@@ -36,12 +36,13 @@ class Indicator extends AnimationObject{
 			gap_[i]=0;
 		}
 	}
-
 	void restart(){
 		position_=initialPosition_;
 		for(int i=0;i<30;i++){
 			gap_[i]=0;
-		}		
+		}
+		//println("in indicator restart" );
+		
 	}
 	void setIdx(int pos){
 		position_=pos;

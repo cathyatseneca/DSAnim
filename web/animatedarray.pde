@@ -32,7 +32,7 @@ class AnimatedArray extends AnimationObject{
 	int moveY_;
 	int moveIdx_;
 	int moveVal_;
-
+	boolean emptyInit_;
 	AnimatedArray(int [] data,int sz,int x,int y){
 		super(x,y);
 		cap_=MAXARRAY;
@@ -65,13 +65,15 @@ class AnimatedArray extends AnimationObject{
 		maxHeight_=100;
 		barOffset_ = 50;
 		moveX_=moveY_=moveIdx_=moveVal_=0;
+		emptyInit_=false;
 	}
 	AnimatedArray(int cap,int x, int y){
 		super(x,y);
-		cap_=cap;
+		cap_=MAXARRAY;
 		sz_=cap;
 		sqsz_=30;
 		data_ = new int [cap_];
+		initial_=new int[cap_];
 		isEmpty_= new boolean[cap_];
 		dataColours_=new color[cap_];
 		squareColours_=new color[cap_];
@@ -83,19 +85,34 @@ class AnimatedArray extends AnimationObject{
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 			gap_[i]=0;
+			initial_[i]=0;
+			data_[i]=0;
 		}
-		fillRandom();
+//		fillRandom();
 		maxHeight_=100;
 		barOffset_=50;
+		emptyInit_=true;
 	}
 	void restart(){
 		state_=STABLE;
-		for(int i=0;i<sz_;i++){
-			data_[i]=initial_[i];
-			gap_[i]=0;
-			dataColours_[i]=color(0);
-			squareColours_[i]=color(255);
-			isEmpty_[i]=false;
+		if(emptyInit_ == false){
+			for(int i=0;i<sz_;i++){
+				data_[i]=initial_[i];
+				gap_[i]=0;
+				dataColours_[i]=color(0);
+				squareColours_[i]=color(255);
+				isEmpty_[i]=false;
+			}
+		}
+		else{
+			for(int i=0;i<sz_;i++){
+				data_[i]=initial_[i];
+				gap_[i]=0;
+				dataColours_[i]=color(0);
+				squareColours_[i]=color(255);
+				isEmpty_[i]=true;
+			}
+
 		}
 		for(int i=sz_;i<cap_;i++){
 			data_[i]=0;
@@ -124,11 +141,6 @@ class AnimatedArray extends AnimationObject{
 				from_=ai.a_;
 				to_=ai.b_;
 				stateStartTime_=millis();
-
-				println("moveto idx:" + to_);
-				println("movefrom idx:" + from_);
-				println("move v:"+ data_[from_]);
-
 				break;
 			case SETFONTCOLOUR:
 				ai.setCompleted(true);
@@ -157,8 +169,7 @@ class AnimatedArray extends AnimationObject{
 				moveY_=ai.c_;
 				stateStartTime_=millis();
 				isEmpty_[moveIdx_]=true;
-				println("from moveIdx:" + moveIdx_);
-				println("from v:"+ data_[moveIdx_]);
+
 				break;				
 			case MOVETO:
 				state_=MOVETO;
@@ -167,8 +178,6 @@ class AnimatedArray extends AnimationObject{
 				moveX_=ai.c_;
 				moveY_=ai.d_;
 				stateStartTime_=millis();
-				println("to moveIdx:" + moveIdx_);
-				println("to v:"+ moveVal_);
 				break;
 			case ADDGAP:
 				for(int i=ai.a_;i<sz_-1;i++){

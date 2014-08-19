@@ -151,10 +151,11 @@ class Animation{
 	}
 	void restart(){
 		currStep_=0;
-		for(int i=0;i<numObjects_;i++){
+		int i;
+		for(i=numObjects_-1; i>=0;i--){
 			objects_[i].restart();
 		}
-		for(int i=0;i<numSteps_;i++){
+		for(i=0;i<numSteps_;i++){
 			steps_[i].restart();
 		}
 		animationState_=PAUSED;
