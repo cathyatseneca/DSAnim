@@ -394,4 +394,7 @@ class AnimatedArray extends AnimationObject{
   	void setBarOffset(int offset){
   		barOffset_=offset;
   	}
+  	void changeSpeed(int speed){
+  		animationDuration_=speed*100;
+  	}
 };

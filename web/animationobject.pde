@@ -7,6 +7,9 @@ class AnimationObject{
 		x_=x;
 		y_=y;
 	}
+	void changeSpeed(){
+		
+	}
 	void stop(){
 		isStopped_=true;
 	}

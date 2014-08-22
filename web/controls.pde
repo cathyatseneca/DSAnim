@@ -13,3 +13,7 @@ void restartSketch(){
     anim.restart();
     anim.setState(RUNNING);
 }
+void changeSpeed(int speed){
+	int inverse=11-speed;
+    anim.changeSpeed(inverse);
+}

@@ -16,14 +16,17 @@ bindJavaScript();
 
 function playSketch() {
 
-    pjs.playSketch(pjs.anim);
+    pjs.playSketch();
 }
 function pauseSketch(){
-    pjs.pauseSketch(pjs.anim);      
+    pjs.pauseSketch();      
 } 
 function stepSketch(){
-    pjs.stepSketch(pjs.anim);      
+    pjs.stepSketch();      
 } 
 function restartSketch(){
-    pjs.restartSketch(pjs.anim);      
+    pjs.restartSketch();      
 } 
+function changeSpeed(speed){
+	pjs.changeSpeed(speed);
+}
