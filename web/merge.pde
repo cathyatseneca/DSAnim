@@ -51,16 +51,16 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
   anim.addInstruction(2,SETVISIBILITY,VISIBLE);
   anim.addInstruction(3,SETVISIBILITY,VISIBLE);
   anim.addInstruction(4,SETVISIBILITY,VISIBLE);
-  anim.addInstruction(5,SET,6);
+  anim.addInstruction(6,SET,6);
 
   while(aptr < startB && bptr < endB+1){
     anim.addStep();
-    anim.addInstruction(5,SET,7);
+    anim.addInstruction(6,SET,7);
     if(arr[aptr] < arr[bptr]){
       anim.addStep();
       anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,255);
       anim.addInstruction(0,SETFONTCOLOUR,bptr,255,0,0);
-      anim.addInstruction(5,SET,8);
+      anim.addInstruction(6,SET,8);
       tmp[idx]=arr[aptr];
       anim.addStep();
       anim.addInstruction(0,MOVEFROM,aptr,30+idx*30,215);
@@ -84,7 +84,7 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
       anim.addStep();
       anim.addInstruction(0,SETFONTCOLOUR,aptr,255,0,0);
       anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,255);
-      anim.addInstruction(5,SET,11);
+      anim.addInstruction(6,SET,11);
       tmp[idx]=arr[bptr];
       anim.addStep();
       anim.addInstruction(0,MOVEFROM,bptr,30+idx*30,215);
@@ -106,11 +106,13 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
 
       }
   }
+  anim.addStep();
+  anim.addInstruction(6,SET,14);
   while(aptr<startB){
     tmp[idx]=arr[aptr];
     anim.addStep();
     anim.addInstruction(0,MOVEFROM,aptr,30+idx*30,215);
-    anim.addInstruction(5,SET,15);
+    anim.addInstruction(6,SET,15);
     anim.addStep();
     anim.addInstruction(1,SET,idx,arr[aptr]);
     anim.addInstruction(1,SETFILLED,idx);
@@ -124,11 +126,15 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
       anim.addInstruction(2,SETVISIBILITY,HIDDEN);
     }
     anim.addInstruction(4,SET,idx);
+    anim.addInstruction(6,SET,14);
   }
+  anim.addStep();
+  anim.addInstruction(6,SET,17);
   while(bptr < endB+1){
     tmp[idx]=arr[bptr];
     anim.addStep();
     anim.addInstruction(0,MOVEFROM,bptr,30+idx*30,215);
+    anim.addInstruction(6,SET,18);
     anim.addStep();
     anim.addInstruction(1,SET,idx,arr[bptr]);
     anim.addInstruction(1,SETFILLED,idx);
@@ -142,17 +148,22 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
       anim.addInstruction(3,SETVISIBILITY,HIDDEN);
     }
     anim.addInstruction(4,SET,idx);
+    anim.addInstruction(6,SET,17);
   }
   anim.addStep();
   anim.addInstruction(0,REMOVEGAP,startB-1);
   anim.addInstruction(2,REMOVEGAP,startB-1);
   anim.addInstruction(3,REMOVEGAP,startB-1);
   anim.addInstruction(4,SETVISIBILITY,HIDDEN);
+  anim.addInstruction(6,SET,20);
   for(int i=startA;i<=endB;i++){
     anim.addStep();
     anim.addInstruction(0,MOVETO,tmp[i],i,30+i*30,215);
     anim.addInstruction(1,SETEMPTY,i);
+    anim.addInstruction(6,SET,21);
     arr[i]=tmp[i];
+    anim.addStep();
+    anim.addInstruction(6,SET,20);
   }
   anim.addStep();
   anim.addInstruction(2,SETVISIBILITY,HIDDEN);
@@ -178,8 +189,10 @@ void setup(){
         data[i]=int(random(1,99));
     }
     array=new AnimatedArray(data,15,15,80);
-    array2=new AnimatedArray(data,15,15,200);
-    array2.clear();
+    //println("there");
+    array2=new AnimatedArray(15,15,200);
+    //println("everywhere");
+    //array2.clear();
     array.hasBars_=false;
     aIndicator = new Indicator("aptr",color(255,255,255),30,30,80);
     aIndicator.setColour(color(189,252,201));

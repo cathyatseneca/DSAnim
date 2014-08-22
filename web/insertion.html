@@ -28,9 +28,10 @@
 
 </script>
 <script src="processing.js"></script>
+<script src="javascript.js"></script>
 </head>
 <body>
-      <div id="header">
+  <div id="header">
         <nav>
           <li class="fork"><a href="https://github.com/cathyatseneca/DSAnim">View On GitHub</a></li>
           <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/zipball/master">ZIP</a></li>
@@ -60,15 +61,17 @@
       </nav>
       <br>
       <br>
-          <canvas data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde insertion.pde animatedcode.pde animatedarray.pde utils.pde indicator.pde splitter.pde animatedvariable.pde"></canvas>
+<canvas id="dsanim" data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde insertion.pde animatedcode.pde animatedarray.pde utils.pde indicator.pde splitter.pde animatedvariable.pde controls.pde"></canvas>
+<br>
+<button onclick="playSketch();">Play</button>
+<button onclick="pauseSketch();">Pause</button>
+<button onclick="stepSketch();">Step</button>
+<button onclick="restartSketch();">restart</button>
 </center>
 <br>
 
       </section>
 
     </div>
-   
- 
-
 </body>
 </html>

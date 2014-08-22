@@ -28,6 +28,7 @@
 
 </script>
 <script src="processing.js"></script>
+<script src="javascript.js"></script>
 </head>
 <body>
       <div id="header">
@@ -60,7 +61,12 @@
       </nav>
       <br>
       <br>
-<canvas data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde bubble.pde animatedcode.pde animatedarray.pde utils.pde indicator.pde splitter.pde"></canvas>
+<canvas id='dsanim' data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde bubble.pde animatedcode.pde animatedarray.pde utils.pde indicator.pde splitter.pde controls.pde"></canvas>
+<br>
+<button onclick="playSketch();">Play</button>
+<button onclick="pauseSketch();">Pause</button>
+<button onclick="stepSketch();">Step</button>
+<button onclick="restartSketch();">restart</button>
 </center>
 <br>
 

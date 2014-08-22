@@ -6,12 +6,14 @@ class Indicator extends AnimationObject{
 	boolean up_;
 	int state_;
 	int [] gap_;
+	int initialPosition_;
 
 	Indicator(String label, color indicatorColour,int sz, int x, int y){
 		super(x,y);
 		indicatorColour_= indicatorColour;
 		label_=label;
 		incrementSize_=sz;
+		initialPosition_=0;
 		position_=0;
 		up_=true;
 		state_=VISIBLE;
@@ -19,6 +21,28 @@ class Indicator extends AnimationObject{
 		for(int i=0;i<30;i++){
 			gap_[i]=0;
 		}
+	}
+	Indicator(String label, color indicatorColour,int initial, int sz, int x, int y){
+		super(x,y);
+		indicatorColour_= indicatorColour;
+		label_=label;
+		incrementSize_=sz;
+		initialPosition_=initial;
+		position_=initial;
+		up_=true;
+		state_=VISIBLE;
+		gap_ = new int[30];
+		for(int i=0;i<30;i++){
+			gap_[i]=0;
+		}
+	}
+	void restart(){
+		position_=initialPosition_;
+		for(int i=0;i<30;i++){
+			gap_[i]=0;
+		}
+		//println("in indicator restart" );
+		
 	}
 	void setIdx(int pos){
 		position_=pos;

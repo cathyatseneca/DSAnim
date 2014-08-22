@@ -60,6 +60,9 @@ class AnimationInstruction{
 	boolean isCompleted(){
 		return completed_;
 	}
+	void restart(){
+		completed_=false;
+	}
 }
 
 class AnimationStep{
@@ -80,6 +83,13 @@ class AnimationStep{
 		instructions_=new AnimationInstruction[maxInstructions];
 		completed_=false;
 	}
+	void restart(){
+		completed_=false;
+		for(i=0;i<numInstructions_;i++){
+			instructions_[i].restart();
+		}
+	}
+
 	void add(int objectId, int instruction, int a){
 		if(numInstructions_ < maxInstructions_){
 			instructions_[numInstructions_] = new AnimationInstruction(objectId,instruction,a);

@@ -1,5 +1,5 @@
 
-Animation insertionSort;
+Animation anim;
 AnimatedCode code;
 Splitter split;
 AnimatedArray arr;
@@ -9,49 +9,49 @@ AnimatedVariable animatedVar;
 void insertion(int arr[],int size){
     int curr;
     int i,j;
-    insertionSort.addStep();
-    insertionSort.addInstruction(4,SETBGCOLOUR,0,189,252,201);
+    anim.addStep();
+    anim.addInstruction(4,SETBGCOLOUR,0,189,252,201);
     for(i=0;i<size;i++){
-        insertionSort.addStep();
-        insertionSort.addInstruction(0,SET,4);
+        anim.addStep();
+        anim.addInstruction(0,SET,4);
         curr=arr[i];
-        insertionSort.addStep();
-        insertionSort.addInstruction(0,SET,5);
-        insertionSort.addInstruction(2,SET,i+1);
-        insertionSort.addInstruction(4,MOVEFROM,i,30,315);
-        insertionSort.addStep();
-        insertionSort.addInstruction(1,SET,curr);
-        insertionSort.addInstruction(1,SETEMPTY,0);
-        insertionSort.addInstruction(3,SETVISIBILITY,VISIBLE);
-        insertionSort.addInstruction(3,SET,i);
+        anim.addStep();
+        anim.addInstruction(0,SET,5);
+        anim.addInstruction(2,SET,i+1);
+        anim.addInstruction(4,MOVEFROM,i,30,315);
+        anim.addStep();
+        anim.addInstruction(1,SET,curr);
+        anim.addInstruction(1,SETEMPTY,0);
+        anim.addInstruction(3,SETVISIBILITY,VISIBLE);
+        anim.addInstruction(3,SET,i);
         for(j=i;j>0 && arr[j-1] > curr;j--){
-            insertionSort.addStep();
-            insertionSort.addInstruction(0,SET,6);
-            insertionSort.addInstruction(3,SET,j);
+            anim.addStep();
+            anim.addInstruction(0,SET,6);
+            anim.addInstruction(3,SET,j);
 
             arr[j]=arr[j-1];
-            insertionSort.addStep();
-            insertionSort.addInstruction(4,MOVELOCATION,j-1,j);
-            insertionSort.addInstruction(0,SET,7);
+            anim.addStep();
+            anim.addInstruction(4,MOVELOCATION,j-1,j);
+            anim.addInstruction(0,SET,7);
         }
 
         arr[j]=curr;
-        insertionSort.addStep();
-        insertionSort.addInstruction(3,SETVISIBILITY,HIDDEN);
-        insertionSort.addInstruction(1,SETEMPTY,1);
-        insertionSort.addInstruction(0,SET,9);
-        insertionSort.addInstruction(4,SETBGCOLOUR,i,189,252,201);
-        insertionSort.addInstruction(4,MOVETO,curr,j,30,315);
+        anim.addStep();
+        anim.addInstruction(3,SETVISIBILITY,HIDDEN);
+        anim.addInstruction(1,SETEMPTY,1);
+        anim.addInstruction(0,SET,9);
+        anim.addInstruction(4,SETBGCOLOUR,i,189,252,201);
+        anim.addInstruction(4,MOVETO,curr,j,30,315);
     }
-    insertionSort.addStep();
-    insertionSort.addInstruction(0,SET,0);
-    insertionSort.addInstruction(3,SETVISIBILITY,HIDDEN);
+    anim.addStep();
+    anim.addInstruction(0,SET,0);
+    anim.addInstruction(3,SETVISIBILITY,HIDDEN);
 }
 void setup(){
     size(800,500);
-    insertionSort=new Animation(800, 500);
+    anim=new Animation(800, 500);
     code=new AnimatedCode("insertion.txt", 480,100);
-    insertionSort.setColour(color(46,129,215));
+    anim.setColour(color(46,129,215));
     int [] array=new int[15];
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
@@ -67,16 +67,16 @@ void setup(){
 
 
     int tmp;
-    insertionSort.addObject(code);
-    insertionSort.addObject(animatedVar);
-    insertionSort.addObject(split);
-    insertionSort.addObject(jIndicator);
-    insertionSort.addObject(arr);
+    anim.addObject(code);
+    anim.addObject(animatedVar);
+    anim.addObject(split);
+    anim.addObject(jIndicator);
+    anim.addObject(arr);
     insertion(array,15);
-    insertionSort.start();
+    anim.start();
 }
 void draw(){
-    insertionSort.draw();
+    anim.draw();
 }
 
 
