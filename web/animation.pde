@@ -25,12 +25,17 @@ class Animation{
 		numObjects_=0;
 		animationState_=PAUSED;
 		animationMode_=CONTINUOUS;
-		minimumDuration_=250;  //1000 millisecond minimum duration
-		stepStart_=millis();
+		minimumDuration_=250;
 		bgColour_=color(30,60,90);
 	}
 	void setColour(color c){
 		bgColour_=c;
+	}
+	void changeSpeed(int speed){
+		minimumDuration_=50*speed;
+		for(int i=0;i<numObjects_;i++){
+			objects_[i].changeSpeed(speed);
+		}
 	}
 	void setMode(int mode){
 		animationMode_=mode;
