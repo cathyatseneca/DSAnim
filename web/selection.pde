@@ -64,7 +64,8 @@ void setup(){
     size(800,500);
     anim=new Animation(800, 500);
     code=new AnimatedCode("selection.txt", 480,80);
-    anim.setColour(color(46,129,215));
+    //anim.setColour(color(46,129,215));
+    anim.setColour(blackColour);
     int [] array=new int[15];
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
@@ -72,11 +73,11 @@ void setup(){
     arr=new AnimatedArray(array,15,15,280);
     arr.hasBars_=true;
     arr.setBarOffset(-130);
-    split=new Splitter("sorted","unsorted",color(0,255,0),color(255,0,0),15,30,15,340);
-    minIndicator = new Indicator("minIdx",color(255,255,255),30,30,310);
-    minIndicator.setColour(color(189,252,201));
-    jIndicator = new Indicator("j",color(255,255,255),30,30,280);
-    jIndicator.setColour(color(189,252,201));
+    split=new Splitter("sorted","unsorted",greenColour,redColour,15,30,15,340);
+    minIndicator = new Indicator("minIdx",whiteColour,30,30,310);
+ //   minIndicator.setColour(color(189,252,201));
+    jIndicator = new Indicator("j",whiteColour,30,30,280);
+//    jIndicator.setColour(color(189,252,201));
     jIndicator.pointDown();
     jIndicator.setVisibility(HIDDEN);
 

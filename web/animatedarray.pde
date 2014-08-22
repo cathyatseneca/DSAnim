@@ -50,7 +50,7 @@ class AnimatedArray extends AnimationObject{
 			data_[i]=data[i];
 			initial_[i]=data[i];
 			gap_[i]=0;
-			dataColours_[i]=color(0);
+			dataColours_[i]=blueColour;
 			squareColours_[i]=color(255);
 			isEmpty_[i]=false;
 		}
@@ -58,7 +58,7 @@ class AnimatedArray extends AnimationObject{
 			data_[i]=0;
 			initial_[i]=0;
 			gap_[i]=0;
-			dataColours_[i]=color(0);
+			dataColours_[i]=blueColour;
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 		}

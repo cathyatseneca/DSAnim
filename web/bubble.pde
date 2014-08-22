@@ -30,8 +30,8 @@ void bubble(int array[],int sz){
                 array[j]=array[j+1];
                 array[j+1]=tmp;
                 anim.addStep();
-                anim.addInstruction(1,SETFONTCOLOUR,j,0,0,0);
-                anim.addInstruction(1,SETFONTCOLOUR,j+1,0,0,0);
+                anim.addInstruction(1,SETFONTCOLOUR,j,0,0,255);
+                anim.addInstruction(1,SETFONTCOLOUR,j+1,0,0,255);
             }
         }
         anim.addStep();
@@ -49,7 +49,8 @@ void setup(){
     size(800,500);
     anim=new Animation(800, 500);
     code=new AnimatedCode("bubble.txt", 480,100);
-    anim.setColour(color(46,129,215));
+    //anim.setColour(color(46,129,215));
+    anim.setColour(blackColour);    
     int [] array=new int[15];
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
@@ -57,9 +58,9 @@ void setup(){
     arr=new AnimatedArray(array,15,15,120);
     arr.hasBars_=true;
     arr.setBarOffset(70);
-    split=new Splitter("unsorted","sorted",color(255,0,0),color(0,255,0),15,30,15,50);
-    jIndicator = new Indicator("j",color(255,255,255),30,30,120);
-    jPlusIndicator = new Indicator("j+1",color(255,255,255),1,30,30,150);
+    split=new Splitter("unsorted","sorted",redColour,greenColour,15,30,15,50);
+    jIndicator = new Indicator("j",whiteColour,30,30,120);
+    jPlusIndicator = new Indicator("j+1",whiteColour,1,30,30,150);
     jIndicator.pointDown();
     split.setPosition(15);
     int tmp;

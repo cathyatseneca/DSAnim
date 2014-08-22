@@ -83,7 +83,7 @@ void QuickSort(int arr[], int left, int right){
         }
         anim.addStep();
         anim.addInstruction(0,SETBGCOLOUR,i,189,252,201);
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,i,right,200,200,200);
+        anim.addInstruction(0,SETFONTCOLOURINRANGE,i,right,127,127,127);
         anim.addInstruction(4,SET,21);
         anim.addInstruction(1,SETVISIBILITY,HIDDEN);
         anim.addInstruction(2,SETVISIBILITY,HIDDEN);
@@ -100,8 +100,8 @@ void QuickSort(int arr[], int left, int right){
         anim.addInstruction(2,REMOVEGAP,i-1);
         anim.addInstruction(3,REMOVEGAP,i-1);
         anim.addStep();
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,left,i,200,200,200);
-        anim.addInstruction(0,SETFONTCOLOURINRANGE,i+1,right,0,0,0);
+        anim.addInstruction(0,SETFONTCOLOURINRANGE,left,i,127,127,127);
+        anim.addInstruction(0,SETFONTCOLOURINRANGE,i+1,right,0,0,255);
         anim.addInstruction(4,SET,22);
         anim.addStep();
         anim.addInstruction(0,ADDGAP,i);
@@ -135,7 +135,8 @@ void quickSort(int arr[],int size){
 void setup(){
     size(900,500);
     anim=new Animation(900, 500);
-    anim.setColour(color(46,129,215));
+//    anim.setColour(color(46,129,215));
+    anim.setColour(blackColour);
     int [] array=new int[15];
     for(int i=0;i<15;i++){
         array[i]=int(random(1,99));
@@ -145,7 +146,7 @@ void setup(){
     arr.setBarOffset(-130);
     iIndicator = new Indicator("i",color(189,252,201),30,30,260);
     jIndicator = new Indicator("j",color(189,252,201),30,30,260);
-    pivotIndicator=new Indicator("pivot",color(255,255,255),30,30,230);
+    pivotIndicator=new Indicator("pivot",whiteColour,30,30,230);
     pivotIndicator.pointDown();
     code=new AnimatedCode("quick.txt", 580,50);
     code.setWidth(310);
