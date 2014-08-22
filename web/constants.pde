@@ -32,3 +32,11 @@ final int MAXSTEPS = 2000;
 final int MAXINSTRUCTIONS = 6;
 final int MAXARRAY = 20;
 final int MAXOBJECTS = 20;
+//colours
+final color backgroundColour = color(42,42,41);
+final color blackColour = color(0,0,0);
+final color whiteColour = color(255,255,255);
+final color greyColour = color(127,127,127);
+final color greenColour = color(0,255,0);
+final color redColour = color(255,0,0);
+final color blueColour = color(0,0,255);

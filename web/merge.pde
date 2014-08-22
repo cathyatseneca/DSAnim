@@ -16,16 +16,16 @@ void MergeSort(int arr[],int tmp[],int start,int end){
     anim.addInstruction(0,ADDGAP,mid);
     anim.addInstruction(2,ADDGAP,mid);
     anim.addInstruction(3,ADDGAP,mid);
-    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,200,200,200);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,127,127,127);
     anim.addInstruction(5,SET,11);
     MergeSort(arr,tmp,start,mid);
     anim.addStep();
-    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,0,0,0);
-    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,200,200,200);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,mid+1,end,0,0,255);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,127,127,127);
     anim.addInstruction(5,SET,12);
     MergeSort(arr,tmp,mid+1,end);
     anim.addStep();
-    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,0,0,0);
+    anim.addInstruction(0,SETFONTCOLOURINRANGE,start,mid,0,0,255);
     anim.addInstruction(5,SET,13);
     anim.addStep();
     anim.addInstruction(5,SETVISIBILITY,HIDDEN);
@@ -58,7 +58,7 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
     anim.addInstruction(6,SET,7);
     if(arr[aptr] < arr[bptr]){
       anim.addStep();
-      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,255);
+      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,255,0);
       anim.addInstruction(0,SETFONTCOLOUR,bptr,255,0,0);
       anim.addInstruction(6,SET,8);
       tmp[idx]=arr[aptr];
@@ -67,8 +67,8 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
       anim.addStep();
       anim.addInstruction(1,SET,idx,arr[aptr]);
       anim.addInstruction(1,SETFILLED,idx);
-      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,0);
-      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,0);
+      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,255);
+      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,255);
       idx++;
       aptr++;
       anim.addStep();
@@ -83,7 +83,7 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
     else{
       anim.addStep();
       anim.addInstruction(0,SETFONTCOLOUR,aptr,255,0,0);
-      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,255);
+      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,255,0);
       anim.addInstruction(6,SET,11);
       tmp[idx]=arr[bptr];
       anim.addStep();
@@ -91,8 +91,8 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
       anim.addStep();
       anim.addInstruction(1,SET,idx,arr[bptr]);
       anim.addInstruction(1,SETFILLED,idx);
-      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,0);
-      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,0);
+      anim.addInstruction(0,SETFONTCOLOUR,aptr,0,0,255);
+      anim.addInstruction(0,SETFONTCOLOUR,bptr,0,0,255);
       idx++;
       bptr++;
       anim.addStep();
@@ -183,7 +183,8 @@ void setup(){
     size(800,500);
     anim=new Animation(800, 500);
 
-    anim.setColour(color(46,129,215));
+    //anim.setColour(color(46,129,215));
+    anim.setColour(backgroundColour);
     int [] data=new int[15];
     for(int i=0;i<15;i++){
         data[i]=int(random(1,99));
@@ -194,15 +195,15 @@ void setup(){
     //println("everywhere");
     //array2.clear();
     array.hasBars_=false;
-    aIndicator = new Indicator("aptr",color(255,255,255),30,30,80);
+    aIndicator = new Indicator("aptr",whiteColour,30,30,80);
     aIndicator.setColour(color(189,252,201));
     aIndicator.pointDown();
     aIndicator.hide();
-    bIndicator = new Indicator("bptr",color(255,255,255),30,30,80);
+    bIndicator = new Indicator("bptr",whiteColour,30,30,80);
     bIndicator.setColour(color(189,252,201));
     bIndicator.pointDown();
     bIndicator.hide();
-    idxIndicator = new Indicator("idx",color(255,255,255),30,30,230);
+    idxIndicator = new Indicator("idx",whiteColour,30,30,230);
     idxIndicator.setColour(color(189,252,201));
     idxIndicator.hide();
     mergeCode = new AnimatedCode("merge.txt",480,150);
