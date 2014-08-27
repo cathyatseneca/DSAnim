@@ -118,8 +118,19 @@ class Animation{
 		}
 		return rc;
 	}
+	boolean addToStringStep(int stepNumber,int objectId,int instruction, String s){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].addString(objectId, instruction, s);
+			rc=true;
+		}
+		return rc;
+	}	
 	boolean addInstruction(int objectId,int instruction, int a){
 		return addToStep(numSteps_-1, objectId, instruction, a);
+	}
+	boolean addStringInstruction(int objectId,int instruction, String s){
+		return addToStringStep(numSteps_-1, objectId, instruction, s);
 	}
 	boolean addInstruction(int objectId,int instruction, int a,int b){
 		return addToStep(numSteps_-1, objectId, instruction, a,b);
@@ -135,11 +146,14 @@ class Animation{
 		return addToStep(numSteps_-1, objectId, instruction, a,b,c,d,e);
 	}
 	void start(){
-		for(int i=0;i<steps_[currStep_].numInstructions_;i++){
-			int id = steps_[currStep_].instructions_[i].objectId_;
-			objects_[id].process(steps_[currStep_].instructions_[i]);
+		if(numSteps_ > 0){
+			for(int i=0;i<steps_[currStep_].numInstructions_;i++){
+				int id = steps_[currStep_].instructions_[i].objectId_;
+				objects_[id].process(steps_[currStep_].instructions_[i]);
+			}
 		}
 		setState(RUNNING);
+
 	}
 	void dump(){
 		noLoop();
@@ -170,54 +184,67 @@ class Animation{
 		start();
 	}
 	void draw(){
-		if(animationMode_ == CONTINUOUS){
-			if(animationState_!=PAUSED){
-				if(currStep_ < numSteps_){
-					background(bgColour_);
-					for(int i=0;i<numObjects_;i++){
-						objects_[i].draw();
-					}
-					float currTime=millis();
-					//println(currTime-stepStart_);
-					if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
-						currStep_++;
-						for(int i=0;i<steps_[currStep_].numInstructions_;i++){
-							int id = steps_[currStep_].instructions_[i].objectId_;
-							objects_[id].process(steps_[currStep_].instructions_[i]);
+		if(numSteps_ > 0){
+			if(animationMode_ == CONTINUOUS){
+				if(animationState_!=PAUSED){
+					if(currStep_ < numSteps_){
+						background(bgColour_);
+						for(int i=0;i<numObjects_;i++){
+							objects_[i].draw();
 						}
-						stepStart_=millis();
+						float currTime=millis();
+						//println(currTime-stepStart_);
+						if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
+							currStep_++;
+							if(currStep_ < numSteps_){
+								for(int i=0;i<steps_[currStep_].numInstructions_;i++){
+									int id = steps_[currStep_].instructions_[i].objectId_;
+									objects_[id].process(steps_[currStep_].instructions_[i]);
+								}
+								stepStart_=millis();
+							}
+						}
+				//println(currStep_ + " " + numSteps_);
+					}
+//					else{
+//						setState(PAUSED);
+//					}
+				}
+			}
+			else{
+				if(currStep_ < numSteps_){
+					if(animationState_!=PAUSED){
+						background(bgColour_);
+						for(int i=0;i<numObjects_;i++){
+							objects_[i].draw();
+						}
+						float currTime=millis();
+						//println(currTime-stepStart_);
+						if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
+							currStep_++;
+							if(currStep_ < numSteps_){
+								for(int i=0;i<steps_[currStep_].numInstructions_;i++){
+										int id = steps_[currStep_].instructions_[i].objectId_;
+									objects_[id].process(steps_[currStep_].instructions_[i]);
+								}
+								stepStart_=millis();
+								setState(PAUSED);
+							}
+						}
 					}
 				//println(currStep_ + " " + numSteps_);
 				}
-				else{
-					setState(PAUSED);
-				}
+//				else{
+//					setState(PAUSED);
+//				}	
 			}
 		}
 		else{
-			if(currStep_ < numSteps_){
-				if(animationState_!=PAUSED){
-					background(bgColour_);
-					for(int i=0;i<numObjects_;i++){
-						objects_[i].draw();
-					}
-					float currTime=millis();
-					//println(currTime-stepStart_);
-					if(steps_[currStep_].isCompleted() && (currTime-stepStart_) >= minimumDuration_){
-						currStep_++;
-						for(int i=0;i<steps_[currStep_].numInstructions_;i++){
-							int id = steps_[currStep_].instructions_[i].objectId_;
-							objects_[id].process(steps_[currStep_].instructions_[i]);
-						}
-						stepStart_=millis();
-						setState(PAUSED);
-					}
-				}
-			//println(currStep_ + " " + numSteps_);
+			background(bgColour_);
+			for(int i=0;i<numObjects_;i++){
+				objects_[i].draw();
 			}
-			else{
-				setState(PAUSED);
-			}
+			setState(PAUSED);
 		}
 	}
 
