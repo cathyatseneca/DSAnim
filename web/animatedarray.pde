@@ -81,7 +81,7 @@ class AnimatedArray extends AnimationObject{
 		state_=STABLE;
 		animationDuration_=250;   //1000 millis = 1 sec
 		for(int i=0;i<cap_;i++){
-			dataColours_[i]=color(0);
+			dataColours_[i]=blueColour;
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 			gap_[i]=0;
@@ -99,7 +99,7 @@ class AnimatedArray extends AnimationObject{
 			for(int i=0;i<sz_;i++){
 				data_[i]=initial_[i];
 				gap_[i]=0;
-				dataColours_[i]=color(0);
+				dataColours_[i]=blueColour;
 				squareColours_[i]=color(255);
 				isEmpty_[i]=false;
 			}
@@ -108,7 +108,7 @@ class AnimatedArray extends AnimationObject{
 			for(int i=0;i<sz_;i++){
 				data_[i]=initial_[i];
 				gap_[i]=0;
-				dataColours_[i]=color(0);
+				dataColours_[i]=blueColour;
 				squareColours_[i]=color(255);
 				isEmpty_[i]=true;
 			}
@@ -117,7 +117,7 @@ class AnimatedArray extends AnimationObject{
 		for(int i=sz_;i<cap_;i++){
 			data_[i]=0;
 			gap_[i]=0;
-			dataColours_[i]=color(0);
+			dataColours_[i]=blueColour;
 			squareColours_[i]=color(255);
 			isEmpty_[i]=true;
 		}

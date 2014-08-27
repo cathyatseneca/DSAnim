@@ -27,6 +27,7 @@ final int SETFILLED = 18;
 final int MOVELOCATION = 19;
 final int SETBGCOLOURINRANGE = 20;
 final int SETRANGE = 21;
+final int PAUSEANIM = 22;
 //maximums
 final int MAXSTEPS = 2000;
 final int MAXINSTRUCTIONS = 6;

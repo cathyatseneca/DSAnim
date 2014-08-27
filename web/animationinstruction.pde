@@ -7,7 +7,7 @@ class AnimationInstruction{
 	int c_;
 	int d_;
 	int e_;
-	String s_;
+
 	boolean completed_;
 	AnimationInstruction(int objectId,int instruction, int a){
 		objectId_=objectId;
@@ -36,7 +36,7 @@ class AnimationInstruction{
 	AnimationInstruction(int objectId,int instruction, int a,int b,int c,int d){
 		objectId_=objectId;
 		instruction_=instruction;
-		numParams_=3;
+		numParams_=4;
 		a_=a;
 		b_=b;
 		c_=c;
@@ -46,7 +46,7 @@ class AnimationInstruction{
 	AnimationInstruction(int objectId,int instruction, int a,int b,int c,int d,int e){
 		objectId_=objectId;
 		instruction_=instruction;
-		numParams_=3;
+		numParams_=5;
 		a_=a;
 		b_=b;
 		c_=c;
@@ -64,7 +64,18 @@ class AnimationInstruction{
 		completed_=false;
 	}
 }
+class AnimationStringInstruction extends AnimationInstruction{
+	String s_;
 
+	AnimationStringInstruction(int objectId,int instruction, String s){
+		objectId_=objectId;
+		instruction_=instruction;
+		numParams_=1;
+		s_=s;
+		completed_=false;
+	}
+
+}
 class AnimationStep{
 	AnimationInstruction [] instructions_;
 	int numInstructions_;
@@ -120,7 +131,14 @@ class AnimationStep{
 			numInstructions_++;
 		}
 	}
+	void addString(int objectId, int instruction,String s){
 
+		if(numInstructions_ < maxInstructions_){
+			instructions_[numInstructions_] = new AnimationStringInstruction(objectId,instruction,s);
+			numInstructions_++;
+		}
+
+	}
 	boolean isCompleted(){
 		int i;
 		int numCompleted=0;

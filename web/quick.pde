@@ -124,7 +124,7 @@ void quickSort(int arr[],int size){
   QuickSort(arr,0,size-1);
   anim.addStep();
   anim.addInstruction(0,SETALLBGCOLOUR,255,255,255);
-  anim.addInstruction(0,SETALLFONTCOLOUR,0,0,0);
+  anim.addInstruction(0,SETALLFONTCOLOUR,0,0,255);
   anim.addInstruction(1,SETVISIBILITY,HIDDEN);
   anim.addInstruction(2,SETVISIBILITY,HIDDEN);
   anim.addInstruction(3,SETVISIBILITY,HIDDEN);
