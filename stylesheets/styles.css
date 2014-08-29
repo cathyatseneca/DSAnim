@@ -854,6 +854,9 @@ section #title .credits.left {
 section #title .credits.right {
   float: right;
 }
+section input{
+  height: 32px;
+}
 
 @media print, screen and (max-width: 720px) {
   #title .credits {
