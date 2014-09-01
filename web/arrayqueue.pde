@@ -62,9 +62,14 @@ void removeValue(){
         if(frontPtr == 15)
             frontPtr=0;
         anim.addInstruction(1,SET,frontPtr);
-        anim.start();
-    }
 
+    }
+    else{
+        anim.addStep();
+        anim.addInstruction(2,SETVISIBILITY,VISIBLE);
+        anim.addStringInstruction(2,SET,"Queue is Empty");
+    }
+    anim.start();
 }
 void getValue(){
     anim.addStep();
