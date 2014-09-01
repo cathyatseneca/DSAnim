@@ -70,12 +70,13 @@ void stackTop(){
     anim.start();
 }
 void setup(){
-    size(800,500);
-    anim=new Animation(800, 500);
+    size(800,350);
+    anim=new Animation(800, 350);
     //anim.setColour(color(46,129,215));
     anim.setColour(backgroundColour);    
     array=new int[15];
     arr=new AnimatedArray(15,15,120);
+    arr.setShowIndex(true);
     status = new AnimatedText("",300,250,36,whiteColour);
     status.hide();
     topIndicator = new Indicator("top",whiteColour,30,30,120);

@@ -6,6 +6,16 @@ void drawBar(int idx,float value,float maxHeight, int yOffset, color co,int sz,i
 	value=value/99;
 	rect(xstart,ystart+(maxHeight-(value*maxHeight)),20,value*maxHeight);
 }
+void drawArrayIndex(int idx,int yOffset, color co,int sz,int posX,int posY){
+	stroke(co);
+	fill(co);
+	int ystart=posY+yOffset;
+	int xstart=posX+idx*sz+sz/2;
+	textAlign(CENTER);
+	text(idx,xstart,ystart);
+
+}
+
 class AnimatedArray extends AnimationObject{
 	int [] initial_;
 	int [] data_;
@@ -33,6 +43,7 @@ class AnimatedArray extends AnimationObject{
 	int moveIdx_;
 	int moveVal_;
 	boolean emptyInit_;
+	boolean showIndex_;
 	AnimatedArray(int [] data,int sz,int x,int y){
 		super(x,y);
 		cap_=MAXARRAY;
@@ -66,7 +77,9 @@ class AnimatedArray extends AnimationObject{
 		barOffset_ = 50;
 		moveX_=moveY_=moveIdx_=moveVal_=0;
 		emptyInit_=false;
+		showIndex_=false;
 	}
+
 	AnimatedArray(int cap,int x, int y){
 		super(x,y);
 		cap_=MAXARRAY;
@@ -92,6 +105,10 @@ class AnimatedArray extends AnimationObject{
 		maxHeight_=100;
 		barOffset_=50;
 		emptyInit_=true;
+		showIndex_=false;
+	}
+	void setShowIndex(boolean visibility){
+		showIndex_=visibility;
 	}
 	void restart(){
 		state_=STABLE;
@@ -362,6 +379,12 @@ class AnimatedArray extends AnimationObject{
 	    	drawStable();
 	    }
 	}
+	void drawIndex(){
+
+    	for(int i=0;i<sz_;i++){
+       		drawArrayIndex(i,sqsz_/2 + sqsz_,#FFFFFF,sqsz_,gap_[i]+x_,y_);
+	    }   
+	}
 	void draw(){
 		switch(state_){
 			case STABLE:
@@ -375,8 +398,11 @@ class AnimatedArray extends AnimationObject{
 			case MOVELOCATION:
 				drawMove(); break;		
 		}
-		if(hasBars_){
+		if(hasBars_ == true){
 			drawBars();
+		}
+		if(showIndex_ == true){
+			drawIndex();
 		}
 	}
 	void fillRandom(){
