@@ -30,7 +30,7 @@ function restartSketch(){
 function changeSpeed(speed){
 	pjs.changeSpeed(speed);
 }
-function stackPush(){
+function insert(){
   var v = document.getElementById('val').value;
   if(v != ""){
     pjs.insert(v);
