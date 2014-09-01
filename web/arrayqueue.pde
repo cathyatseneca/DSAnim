@@ -2,29 +2,35 @@
 Animation anim;
 AnimatedCode code;
 AnimatedArray arr;
-Indicator topIndicator;
+Indicator frontIndicator;
+Indicator backIndicator;
 int [] array;
-int topPtr;
+int frontPtr;
+int backPtr;
+int queueSize;
 void insert(int val){
     if(status.isVisible()==true){
         anim.addStep();
         anim.addInstruction(2,SETVISIBILITY,HIDDEN);
     }
-    if(topPtr < 15){
-        array[topPtr]=val;
-        topPtr++;
+    if(queueSize < 15){
+        queueSize++;
+        array[backPtr]=val;
         anim.addStep();
-        anim.addInstruction(0,MOVETO,val,topPtr-1,100,500);
+        anim.addInstruction(0,MOVETO,val,backPtr,100,500);
         anim.addStep();
-        anim.addInstruction(0,SET,topPtr-1,val);
-        anim.addInstruction(1,SET,topPtr);
+        anim.addInstruction(0,SET,backPtr,val);
+        backPtr++;
+        if(backPtr == 15)
+            backPtr=0;
+        anim.addInstruction(3,SET,backPtr);
         anim.start();
     }
 }
 void isEmpty(){
     anim.addStep();
     anim.addInstruction(2,SETVISIBILITY,VISIBLE);
-    if(topPtr == 0){
+    if(queueSize == 0){
         anim.addStringInstruction(2,SET,"isEmpty(): TRUE");
     }
     else{
@@ -35,7 +41,7 @@ void isEmpty(){
 void isFull(){
     anim.addStep();
     anim.addInstruction(2,SETVISIBILITY,VISIBLE);
-    if(topPtr == 15){
+    if(queueSize == 15){
         anim.addStringInstruction(2,SET,"isFull(): TRUE");
     }
     else{
@@ -48,24 +54,32 @@ void removeValue(){
         anim.addStep();
         anim.addInstruction(2,SETVISIBILITY,HIDDEN);
     }
-    if(topPtr > 0){
-        topPtr--;
+    if(queueSize > 0){
+        queueSize--;
         anim.addStep();
-        anim.addInstruction(0,SETEMPTY,topPtr);
-        anim.addInstruction(1,SET,topPtr);
-        anim.start();
-    }
+        anim.addInstruction(0,SETEMPTY,frontPtr);
+        frontPtr++;
+        if(frontPtr == 15)
+            frontPtr=0;
+        anim.addInstruction(1,SET,frontPtr);
 
+    }
+    else{
+        anim.addStep();
+        anim.addInstruction(2,SETVISIBILITY,VISIBLE);
+        anim.addStringInstruction(2,SET,"Queue is Empty");
+    }
+    anim.start();
 }
 void getValue(){
     anim.addStep();
     anim.addInstruction(2,SETVISIBILITY,VISIBLE);
-    if(topPtr == 0){
-        anim.addStringInstruction(2,SET,"Stack is Empty");
+    if(queueSize == 0){
+        anim.addStringInstruction(2,SET,"Queue is Empty");
 
     }
     else{
-       anim.addStringInstruction(2,SET,"Value at top: " + array[topPtr-1]);
+       anim.addStringInstruction(2,SET,"Value at front: " + array[frontPtr]);
     }
     anim.start();
 }
@@ -79,12 +93,14 @@ void setup(){
     arr.setShowIndex(true);
     status = new AnimatedText("",300,250,36,whiteColour);
     status.hide();
-    topIndicator = new Indicator("top",whiteColour,30,30,120);
-    topIndicator.pointDown();
+    frontIndicator = new Indicator("front",whiteColour,30,30,120);
+    frontIndicator.pointDown();
+    backIndicator = new Indicator("back",whiteColour,30,30,150);
     int tmp;
     anim.addObject(arr);
-    anim.addObject(topIndicator);
+    anim.addObject(frontIndicator);
     anim.addObject(status);
+    anim.addObject(backIndicator);
 }
 void draw(){
     anim.draw();
