@@ -855,7 +855,8 @@ section #title .credits.right {
   float: right;
 }
 section input{
-  height: 32px;
+  height: 32
+  px;
 }
 
 @media print, screen and (max-width: 720px) {
