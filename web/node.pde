@@ -8,15 +8,28 @@ class AnimatedNode extends AnimationObject{
 	float animationDuration_;
 	int state_;
 
-	Node(int v, int x, int y){
+	AnimatedNode(int v, int x, int y){
 		super(x,y);
 		data_=v;
 		next_=NULL;
 		prev_=NULL;
 		bgColour_=whiteColour;
 		fontColour_=blueColour;
+		state_=STABLE;
 	}
 	void drawStable(){
+		pushStyle();
+		rectMode(CENTER);
+		fill(bgColour_);
+		stroke(0);
+		rect(x,y,50,100);
+		fill(fontColour_);
+		stroke(fontColour_);
+		textAlign(CENTER);
+		text(data_,x+25,y+25);
+		ellipse(x+25,y+50);
+		ellipse(x+25,y+100);
+		popStyle();
 	}
 	void drawMove(){}
 	void drawChangeNext(){}
