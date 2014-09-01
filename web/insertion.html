@@ -31,14 +31,6 @@
 <script src="javascript.js"></script>
 </head>
 <body>
-  <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/cathyatseneca/DSAnim">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
     <div class="wrapper">
 
       <section>
@@ -49,18 +41,26 @@
           <span class="credits left">Project maintained by <a href="https://github.com/cathyatseneca">cathyatseneca</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
-<center>
-        <nav>
+        <menu>
           <ul>
-
-          <li><a href="bubble.html">Bubble Sort</a></li>
-          <li><a href="selection.html">Selection Sort</a></li>
-          <li><a href="quick.html">Quick Sort</a></li>
-          <li><a href="merge.html">Merge Sort</a></li>
-          <li><a href="arraystack.html">Stack-Array</a></li>
-
+            <li><a href="#">Sorting Algorithms</a>
+              <ul>
+              <li><a href="bubble.html">Bubble Sort</a></li>
+             <li><a href="insertion.html">Insertion  Sort</a></li>
+              <li><a href="selection.html">Selection  Sort</a></li>
+              <li><a href="quick.html">Quick Sort</a></li>
+              <li><a href="merge.html">Merge Sort</a></li>
+             </ul>
+            </li>
+          <li><a href="#">Data Structures</a>
+            <ul>
+            <li><a href="arraystack.html">Stack implemented with an array</a></li>
+            </ul>
+          </li>
         </ul>
-      </nav>
+      </menu>
+
+<center>
 
 <canvas id="dsanim" data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde insertion.pde animatedcode.pde animatedarray.pde utils.pde indicator.pde splitter.pde animatedvariable.pde controls.pde"></canvas>
 <br>
@@ -75,6 +75,14 @@ Speed:<input type="range" name="speed" min="1" max="10" default="5" onchange="ch
       </section>
 
     </div>
+  <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/cathyatseneca/DSAnim">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
 </body>
 </html>

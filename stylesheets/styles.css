@@ -537,7 +537,7 @@ table {
 }
 
 body {
-  padding: 0px 0 20px 0px;
+  padding: 0px 0 0px 0px;
   margin: 0px;
   font: 14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #f0e7d5;
@@ -708,9 +708,8 @@ dt {
   top: 0px;
   height: 60px;
   width: 100%;
-  position: fixed;
   background: url(../images/nav-bg.gif) #353535;
-  border-bottom: 4px solid #434343;
+  border-top: 4px solid #434343;
   -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
   -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
@@ -719,7 +718,7 @@ dt {
 #header nav {
   max-width: 950px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 0px;
   background: blue;
   margin: 6px auto;
 }
@@ -819,7 +818,6 @@ section {
   max-width: 950px;
   padding: 10px 0px 50px 0px;
   margin: 20px 0;
-  margin-top: 70px;
 }
 section #title {
   border: 0;
@@ -859,6 +857,80 @@ section input{
   px;
 }
 
+menu ul ul {
+  display: none;
+}
+
+menu ul li:hover > ul {
+    display: block;
+
+    margin:0px;
+    padding:0px;
+}
+menu ul li:hover > ul li{
+  float: none;
+  display: block;
+  color: #ffcc00;
+  font-weight: 400;
+  text-decoration: none;
+
+  display: block;
+}
+menu ul{
+  padding: 0 20px;
+  border-radius: 10px;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+}
+menu ul li{
+  position: relative;
+  min-width: 150px;
+  float: left;
+}
+menu ul li a{
+  color: white;
+  border: 1px solid #5d910b;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #93bd20), color-stop(100%, #659e10));
+  background: -webkit-linear-gradient(#93bd20, #659e10);
+  background: -moz-linear-gradient(#93bd20, #659e10);
+  background: -o-linear-gradient(#93bd20, #659e10);
+  background: -ms-linear-gradient(#93bd20, #659e10);
+  background: linear-gradient(#93bd20, #659e10);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7);
+  background-color: #93bd20;
+  padding: 10px 12px;
+  margin-top: 6px;
+  line-height: 14px;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+  display: block;
+}
+
+menu ul li ul{
+
+  position: absolute;
+    background: none;
+}
+menu ul li ul li a{
+   background: rgba(42,42,41,0.5);
+   border: none;
+   text-align: left;
+   box-shadow: none;
+   padding: 5px 5px;
+   color: #FC0;
+   width: 300px;
+}
 @media print, screen and (max-width: 720px) {
   #title .credits {
     display: block;
