@@ -33,11 +33,12 @@ function changeSpeed(speed){
 function stackPush(){
   var v = document.getElementById('val').value;
   if(v != ""){
-    pjs.stackPush(v);
+    pjs.insert(v);
   }
 }
-function stackPop(){
-  pjs.stackPop();
+
+function removeValue(){
+  pjs.removeValue();
 }
 function isEmpty(){
   pjs.isEmpty();
@@ -45,6 +46,6 @@ function isEmpty(){
 function isFull(){
   pjs.isFull();
 }
-function stackTop(){
-  pjs.stackTop();
+function getValue(){
+  pjs.getValue();
 }
