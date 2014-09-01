@@ -30,13 +30,13 @@ function restartSketch(){
 function changeSpeed(speed){
 	pjs.changeSpeed(speed);
 }
-function insert(){
+function stackPush(){
   var v = document.getElementById('val').value;
   if(v != ""){
     pjs.stackPush(v);
   }
 }
-function remove(){
+function stackPop(){
   pjs.stackPop();
 }
 function isEmpty(){
