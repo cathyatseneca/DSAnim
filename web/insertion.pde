@@ -47,10 +47,30 @@ void insertion(int arr[],int size){
     anim.addInstruction(0,SET,0);
     anim.addInstruction(3,SETVISIBILITY,HIDDEN);
 }
+void setSortCode(){
+    int i;
+    String [] s={
+    "void insertionSort(int arr[],int size){",
+    "  int curr;",
+    "  int i,j;",
+    "  for(i=0;i<size;i++){",
+    "    curr=arr[i];",
+    "    for(j=i;j>0 && arr[j-1] > curr;j--){",
+    "      arr[j]=arr[j-1];",
+    "    }",
+    "    arr[j]=curr;",
+    "  }",
+    "}"
+    };
+    for(i=0;i<11;i++){
+        code.append(s[i]);
+    }
+}
 void setup(){
     size(800,500);
     anim=new Animation(800, 500);
-    code=new AnimatedCode("insertion.txt", 480,100);
+    code=new AnimatedCode(480,100);
+    setSortCode();
 //    anim.setColour(color(46,129,215));
     anim.setColour(backgroundColour);
     int [] array=new int[15];
