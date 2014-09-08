@@ -59,11 +59,35 @@ void selectionSort(int arr[],int size){
     anim.addInstruction(4,SETVISIBILITY,HIDDEN);
     anim.addInstruction(0,SET,0);
 }
-
+void setSortCode(){
+    int i;
+    String [] s={
+    "void selectionSort(int arr[],int size){",
+    "  int minIdx;",
+    "  int tmp;",
+    "  for(int i=0;i<size;i++){",
+    "    minIdx=i;",
+    "    for(int j=i;j<size;j++){",
+    "      if(arr[j] < arr[minIdx]){",
+    "        minIdx=j;",
+    "      }",
+    "    }",
+    "    //swap",
+    "    tmp=arr[i];",
+    "    arr[i]=arr[minIdx];",
+    "    arr[minIdx]=tmp;",
+    "  }",
+    "}"  
+    };
+    for(i=0;i<16;i++){
+        code.append(s[i]);
+    }
+}
 void setup(){
     size(800,500);
     anim=new Animation(800, 500);
-    code=new AnimatedCode("selection.txt", 480,80);
+    code=new AnimatedCode(480,80);
+    setSortCode();
     //anim.setColour(color(46,129,215));
     anim.setColour(blackColour);
     int [] array=new int[15];

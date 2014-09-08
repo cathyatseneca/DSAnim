@@ -170,6 +170,57 @@ void Merge(int arr[],int tmp[],int startA,int startB,int endB){
   anim.addInstruction(3,SETVISIBILITY,HIDDEN);
 
 }
+void setSortCode(){
+    int i;
+    String [] s={
+    "void Merge(int arr[],int tmp[],",
+    "  int startA,int startB,int endB){",
+    "  int aptr=startA;",
+    "  int bptr=startB;",
+    "  int idx=startA;",
+    "  while(aptr < startB && bptr < endB+1){",
+    "    if(arr[aptr] < arr[bptr]){",
+    "      tmp[idx++]=arr[aptr++];",
+    "    }",
+    "    else{",
+    "      tmp[idx++]=arr[bptr++];",
+    "    }",
+    "  }",
+    "  while(aptr<startB){",
+    "    tmp[idx++]=arr[aptr++];",
+    "  }",
+    "  while(bptr < endB+1){",
+    "    tmp[idx++]=arr[bptr++];",
+    "  }",
+    "  for(int i=startA;i<=endB;i++){",
+    "    arr[i]=tmp[i];",
+    "  }",
+    "}"
+    };
+    for(i=0;i<23;i++){
+        mergeCode.append(s[i]);
+    }
+    String [] s2={
+    "void MergeSort(int arr[],int size){",
+    "  int* tmp=new int[size];",
+    "  MSort(arr,tmp,0,size-1);",
+    "  delete [] tmp;",
+    "}",
+    " ",
+    "void mSort(int arr[],int tmp[],",
+    "          int start,int end){",
+    "  if(start<end){",
+    "    int mid=(start+end)/2;",
+    "    mSort(arr,tmp,start,mid);",
+    "    mSort(arr,tmp,mid+1,end);",
+    "    Merge(arr,tmp,start,mid+1,end);",
+    "  }",
+    "}"
+    };
+    for(i=0;i<15;i++){
+      sortCode.append(s2[i]);
+    }
+}
 
 void mergeSort(int arr[],int size){
 
@@ -206,8 +257,9 @@ void setup(){
     idxIndicator = new Indicator("idx",whiteColour,30,30,230);
     idxIndicator.setColour(color(189,252,201));
     idxIndicator.hide();
-    mergeCode = new AnimatedCode("merge.txt",480,150);
-    sortCode = new AnimatedCode("mergesort.txt",480,150);
+    mergeCode = new AnimatedCode(480,150);
+    sortCode = new AnimatedCode(480,150);
+    setSortCode();
     mergeCode.hide();
     sortCode.setHighLighter(3);
     mergeCode.setHighLighter(3);

@@ -20,6 +20,19 @@ class AnimatedCode extends AnimationObject{
         codeWidth_=300;
         state_=VISIBLE;
 
+    }
+    AnimatedCode(int x,int y){
+        super(x,y);
+        font_=createFont("Courier", 12);
+        lines_=new String[50];
+        cap_=30;
+        sz_=0;
+        highlighterStart_=1;
+        highlighterEnd_=1;
+        lineHeight_=14;
+        codeWidth_=300;
+        state_=VISIBLE;
+
     } 
     void setWidth(int w){
         codeWidth_=w;
