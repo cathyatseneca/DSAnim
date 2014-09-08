@@ -2,10 +2,12 @@ class AnimationObject{
 	boolean isStopped_;
 	int x_;
 	int y_;
+	int id_;
 	AnimationObject(int x,int y){
 		isStopped_=true;
 		x_=x;
 		y_=y;
+		id_=-1;
 	}
 	void changeSpeed(){
 		
@@ -31,5 +33,8 @@ class AnimationObject{
 	}
 	void restart(){
 		
+	}
+	void setID(int id){
+		id_=id;
 	}
 };

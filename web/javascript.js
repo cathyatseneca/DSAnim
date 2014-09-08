@@ -36,6 +36,12 @@ function insert(){
     pjs.insert(v);
   }
 }
+function insertBack(){
+  var v = document.getElementById('val').value;
+  if(v != ""){
+    pjs.insertBack(v);
+  }
+}
 function removeValue(){
   pjs.removeValue();
 }
