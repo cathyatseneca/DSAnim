@@ -25,7 +25,7 @@ class AnimatedCode extends AnimationObject{
         super(x,y);
         font_=createFont("Courier", 12);
         lines_=new String[50];
-        cap_=30;
+        cap_=50;
         sz_=0;
         highlighterStart_=1;
         highlighterEnd_=1;
