@@ -8,6 +8,13 @@ int [] array;
 int frontPtr;
 int backPtr;
 int queueSize;
+boolean midStep(){
+    boolean rc=true;
+    if(anim.animationState_==PAUSED){
+        rc=false;
+    }
+    return rc;
+}
 void insert(int val){
     if(status.isVisible()==true){
         anim.addStep();

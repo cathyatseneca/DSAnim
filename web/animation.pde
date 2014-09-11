@@ -65,6 +65,7 @@ class Animation{
 		if(numObjects_ < capacity_){
 			objects_[numObjects_]=ao;
 			rc=numObjects_;
+			ao.setID(numObjects_);
 			numObjects_++;
 		}
 		return rc;
@@ -74,6 +75,14 @@ class Animation{
 		if(numSteps_ < MAXSTEPS){
 			steps_[numSteps_]=new AnimationStep();
 			numSteps_++;
+			rc=true;
+		}
+		return rc;
+	}
+	boolean addToStep(int stepNumber,int objectId,int instruction){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].add(objectId, instruction);
 			rc=true;
 		}
 		return rc;
@@ -126,8 +135,27 @@ class Animation{
 		}
 		return rc;
 	}	
+	boolean addToNodeStep(int stepNumber,int objectId,int instruction, AnimationNode s){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].addAnimationNode(objectId, instruction, s);
+			rc=true;
+		}
+		return rc;
+	}
+	boolean addToNodeStep(int stepNumber,int objectId,int instruction, AnimationNode s,int a){
+		boolean rc=false;
+		if((stepNumber>=0 && stepNumber<numSteps_) && (objectId >= 0 && objectId < numObjects_)){
+			steps_[stepNumber].addAnimationNode(objectId, instruction, s,a);
+			rc=true;
+		}
+		return rc;
+	}
 	boolean addInstruction(int objectId,int instruction, int a){
 		return addToStep(numSteps_-1, objectId, instruction, a);
+	}
+	boolean addInstruction(int objectId,int instruction){
+		return addToStep(numSteps_-1, objectId, instruction);
 	}
 	boolean addStringInstruction(int objectId,int instruction, String s){
 		return addToStringStep(numSteps_-1, objectId, instruction, s);
@@ -144,6 +172,12 @@ class Animation{
 	}
 	boolean addInstruction(int objectId,int instruction, int a,int b,int c,int d,int e){
 		return addToStep(numSteps_-1, objectId, instruction, a,b,c,d,e);
+	}
+	boolean addNodeInstruction(int objectId,int instruction, AnimatedNode s){
+		return addToNodeStep(numSteps_-1, objectId, instruction, s);
+	}
+	boolean addNodeInstruction(int objectId,int instruction, AnimatedNode s,int a){
+		return addToNodeStep(numSteps_-1, objectId, instruction, s,a);
 	}
 	void start(){
 		if(numSteps_ > 0){
@@ -204,11 +238,10 @@ class Animation{
 								stepStart_=millis();
 							}
 						}
-				//println(currStep_ + " " + numSteps_);
 					}
-//					else{
-//						setState(PAUSED);
-//					}
+					else{
+						setState(PAUSED);
+					}
 				}
 			}
 			else{

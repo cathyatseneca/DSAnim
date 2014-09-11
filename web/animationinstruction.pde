@@ -9,6 +9,13 @@ class AnimationInstruction{
 	int e_;
 
 	boolean completed_;
+	AnimationInstruction(int objectId,int instruction){
+		objectId_=objectId;
+		instruction_=instruction;
+		numParams_=0;
+		completed_=false;
+	}
+
 	AnimationInstruction(int objectId,int instruction, int a){
 		objectId_=objectId;
 		instruction_=instruction;
@@ -76,6 +83,25 @@ class AnimationStringInstruction extends AnimationInstruction{
 	}
 
 }
+class AnimationNodeInstruction extends AnimationInstruction{
+	AnimatedNode n_;
+
+	AnimationNodeInstruction(int objectId,int instruction, AnimatedNode n){
+		objectId_=objectId;
+		instruction_=instruction;
+		numParams_=1;
+		n_=n;
+		completed_=false;
+	}
+	AnimationNodeInstruction(int objectId,int instruction, AnimatedNode n,int a){
+		objectId_=objectId;
+		instruction_=instruction;
+		numParams_=2;
+		n_=n;
+		a_=a;
+		completed_=false;
+	}
+}
 class AnimationStep{
 	AnimationInstruction [] instructions_;
 	int numInstructions_;
@@ -107,6 +133,12 @@ class AnimationStep{
 			numInstructions_++;
 		}
 	}	
+	void add(int objectId, int instruction){
+		if(numInstructions_ < maxInstructions_){
+			instructions_[numInstructions_] = new AnimationInstruction(objectId,instruction);
+			numInstructions_++;
+		}
+	}
 	void add(int objectId, int instruction,int a,int b){
 		if(numInstructions_ < maxInstructions_){
 			instructions_[numInstructions_] = new AnimationInstruction(objectId,instruction,a,b);
@@ -135,6 +167,20 @@ class AnimationStep{
 
 		if(numInstructions_ < maxInstructions_){
 			instructions_[numInstructions_] = new AnimationStringInstruction(objectId,instruction,s);
+			numInstructions_++;
+		}
+
+	}
+	void addAnimationNode(int objectId, int instruction,AnimationNode n){
+		if(numInstructions_ < maxInstructions_){
+			instructions_[numInstructions_] = new AnimationNodeInstruction(objectId,instruction,n);
+			numInstructions_++;
+		}
+
+	}
+	void addAnimationNode(int objectId, int instruction,AnimationNode n,int a){
+		if(numInstructions_ < maxInstructions_){
+			instructions_[numInstructions_] = new AnimationNodeInstruction(objectId,instruction,n,a);
 			numInstructions_++;
 		}
 

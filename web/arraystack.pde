@@ -5,6 +5,13 @@ AnimatedArray arr;
 Indicator topIndicator;
 int [] array;
 int topPtr;
+boolean midStep(){
+    boolean rc=true;
+    if(anim.animationState_==PAUSED){
+        rc=false;
+    }
+    return rc;
+}
 void insert(int val){
     if(status.isVisible()==true){
         anim.addStep();
