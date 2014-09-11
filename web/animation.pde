@@ -238,11 +238,10 @@ class Animation{
 								stepStart_=millis();
 							}
 						}
-				//println(currStep_ + " " + numSteps_);
 					}
-//					else{
-//						setState(PAUSED);
-//					}
+					else{
+						setState(PAUSED);
+					}
 				}
 			}
 			else{

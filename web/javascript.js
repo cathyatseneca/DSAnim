@@ -31,19 +31,30 @@ function changeSpeed(speed){
 	pjs.changeSpeed(speed);
 }
 function insert(){
-  var v = document.getElementById('val').value;
-  if(v != ""){
-    pjs.insert(v);
+  if(!pjs.midStep()){
+    var v = document.getElementById('val').value;
+    if(v != ""){
+      pjs.insert(v);
+    }
   }
 }
 function insertBack(){
-  var v = document.getElementById('val').value;
-  if(v != ""){
-    pjs.insertBack(v);
+  if(!pjs.midStep()){
+    var v = document.getElementById('val').value;
+    if(v != ""){
+      pjs.insertBack(v);
+    }
   }
 }
 function removeValue(){
-  pjs.removeValue();
+  if(!pjs.midStep()){
+    pjs.removeValue();
+  }
+}
+function removeBack(){
+  if(!pjs.midStep()){
+    pjs.removeBack();
+  }
 }
 function isEmpty(){
   pjs.isEmpty();

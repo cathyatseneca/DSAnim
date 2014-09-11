@@ -18,7 +18,6 @@ class ListNode extends AnimatedNode{
 	}
 
 	void setNext(AnimatedNode n,int idx){
-
 		pointers_[idx]=n;
 		ptrIdx_=idx;
 	}
@@ -170,7 +169,7 @@ class ListNode extends AnimatedNode{
 		drawNode();
 		float currTime=millis();
 		float frame = (currTime-stateStartTime_)/animationDuration_;
-		if(frame < 1){
+		if(frame < 1 && pointers_[idx]!=null){
 			int i;
 			for(i=0;i<numLabels_;i++){
 				if(i!=idx){

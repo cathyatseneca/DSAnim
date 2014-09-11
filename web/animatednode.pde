@@ -161,17 +161,17 @@ class AnimatedNode extends AnimationObject{
 		drawNode();
 		float currTime=millis();
 		float frame = (currTime-stateStartTime_)/animationDuration_;
- 		stroke(nextColour_);
+		stroke(nextColour_);
 		fill(nextColour_);
 		ellipse(x_,y_+10,5,5);
-		if(frame < 1){
+		if(next_!= null && frame < 1){
 			int endX=next_.x_ - (next_.nodeWidth_)/2-2;
 			int endY=next_.y_+10;
 			float px =bezierPoint(x_, x_+(endX-x_)/2, x_+(endX-x_)/2, endX, 0);
-  			float py = bezierPoint(y_+10, endY+30, endY+30, endY, 0);
-  			float cx,cy;
-  			float tx,ty;
-  			float a;
+			float py = bezierPoint(y_+10, endY+30, endY+30, endY, 0);
+			float cx,cy;
+			float tx,ty;
+			float a;
 			float cx1 = x_+(endX-x_)/2;
 			float cx2 = x_+(endX-x_)/2;
 			float cy1 = endY+30;
@@ -233,6 +233,7 @@ class AnimatedNode extends AnimationObject{
 		}
 	}
 	void drawRemoveNode(){
+
 		drawStable();
 		float currTime=millis();
 		float frame = (currTime-stateStartTime_)/animationDuration_;

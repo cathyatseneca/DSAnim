@@ -9,6 +9,7 @@ class Pointer extends AnimationObject{
 	float stateStartTime_;
 	float animationDuration_;
 	int state_;
+	int visibility_;
 	AnimationInstruction ai_;
 	Pointer(String name,int x, int y){
 		super(x,y);
@@ -47,7 +48,9 @@ class Pointer extends AnimationObject{
 				println("error no such instruction: " + ai.instruction_);
 		}
 	}
-
+	void setVisibility(int v){
+		visibility_=v;
+	}
 	void drawNode(){
 		pushStyle();
 		rectMode(CENTER);
@@ -105,6 +108,11 @@ class Pointer extends AnimationObject{
 				triangle(-4,4,4,4,0,-4);
 				popMatrix(); 			
 
+			}
+			else{
+				state_=STABLE;
+				drawPtr();
+				ai_.setCompleted(true);
 			}	
 		}
 		else{
@@ -117,9 +125,7 @@ class Pointer extends AnimationObject{
 		drawNode();
 		drawPtr();
 	}
-	void setVisibility(int v){
-		visibility_=v;
-	}
+
 	void draw(){
 		if(visibility_ == VISIBLE){
 			switch (state_){
