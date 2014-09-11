@@ -1,9 +1,74 @@
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Data Structure Animations using Processing.js by cathyatseneca</title>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="../javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33546996-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
 <script src="processing.js"></script>
 <script src="javascript.js"></script>
 </head>
 <body>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Singly Linked List - first and last pointers</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/cathyatseneca">cathyatseneca</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+         <menu>
+          <ul>
+            <li><a href="#">Sorting Algorithms</a>
+              <ul>
+              <li><a href="bubble.html">Bubble Sort</a></li>
+             <li><a href="insertion.html">Insertion  Sort</a></li>
+              <li><a href="selection.html">Selection  Sort</a></li>
+              <li><a href="quick.html">Quick Sort</a></li>
+              <li><a href="merge.html">Merge Sort</a></li>
+             </ul>
+            </li>
+            <li><a href="#">Linked Lists</a>
+            <ul>
+            <li><a href="singlylinked.html">Singly Linked List</a></li>
+            </ul>
+          </li>  
+          <li><a href="#">Stacks and Queues</a>
+            <ul>
+            <li><a href="arraystack.html">Stack implemented with an array</a></li>
+            <li><a href="arrayqueue.html">Queue implemented with an array</a></li>
+            </ul>
+          </li>
+        </ul>
+      </menu>
+<center>
+
 <canvas id='dsanim' data-processing-sources="constants.pde animation.pde animationinstruction.pde animationobject.pde singlylinked.pde animatedcode.pde utils.pde animatedtext.pde listnode.pde animatednode.pde pointer.pde"></canvas>
 <br>
 <input type="number" id="val" min="1" max="99" value="50">
@@ -11,6 +76,20 @@
 <button onclick="insertBack();">insert back</button>
 <button onclick="removeValue();">remove front</button>
 <button onclick="removeBack();">remove back</button>
+</center>
+<br>
+
+      </section>
+
+    </div>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/cathyatseneca/DSAnim">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 </body>
 </html>
 
