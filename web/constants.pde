@@ -28,11 +28,21 @@ final int MOVELOCATION = 19;
 final int SETBGCOLOURINRANGE = 20;
 final int SETRANGE = 21;
 final int PAUSEANIM = 22;
+final int BREAKNEXT=23;
+final int BREAKPREV=24;
+final int CHANGENEXT=25;
+final int CHANGEPREV=26;
+final int REMOVENODE=27;
 //maximums
 final int MAXSTEPS = 2000;
 final int MAXINSTRUCTIONS = 6;
 final int MAXARRAY = 20;
-final int MAXOBJECTS = 20;
+final int MAXOBJECTS = 100;
+//sides
+final int LEFT = 1;
+final int RIGHT = 2;
+final int TOP = 3;
+final int BOTTOM = 4;
 //colours
 final color backgroundColour = color(42,42,41);
 final color blackColour = color(0,0,0);

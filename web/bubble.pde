@@ -45,10 +45,32 @@ void bubble(int array[],int sz){
     anim.addInstruction(3,SETVISIBILITY,HIDDEN);
     anim.addInstruction(4,SETVISIBILITY,HIDDEN);
 }
+void setSortCode(){
+    int i;
+    String [] s={
+    "void bubble(int array[],int sz){",
+    "int i,j;",
+    "int tmp;",
+    "for(i=0;i<sz-1;i++){",
+    "    for(j=0;j<sz-i-1;j++){",
+    "        if(array[j] > array[j+1]){",
+    "            /*swap arr[j] and arr[j+1]*/",
+    "            tmp=array[j];",
+    "            array[j]=array[j+1];",
+    "            array[j+1]=tmp;",
+    "        }",
+    "    }",
+    "}"
+    };
+    for(i=0;i<13;i++){
+        code.append(s[i]);
+    }
+}
 void setup(){
     size(800,500);
     anim=new Animation(800, 500);
-    code=new AnimatedCode("bubble.txt", 480,100);
+    code=new AnimatedCode(480,100);
+    setSortCode(code);
     //anim.setColour(color(46,129,215));
     anim.setColour(backgroundColour);    
     int [] array=new int[15];

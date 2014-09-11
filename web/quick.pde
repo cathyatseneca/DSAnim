@@ -131,7 +131,41 @@ void quickSort(int arr[],int size){
   anim.addStep();
   anim.addInstruction(4,SET,0);
 }
-
+void setSortCode(){
+    int i;
+    String [] s={
+    "void quick(int arr[],int left,int right){",
+    "  if(left<right){",
+    "    int sz=right-left+1;",
+    "    int pivotpt=(left+right)/2;",
+    "    int i=left;",
+    "    int j=right-1;",
+    "    int pivot=arr[pivotpt];",
+    "    swap(arr[pivotpt],arr[right]);",
+    "    pivotpt=right;",
+    "    while(i<j){",
+    "      while(i< right-1 && arr[i]<pivot)", 
+    "        i++;",
+    "      while(j > 0 && arr[j]>pivot)",
+    "        j--;",
+    "      if(i<j)",
+    "        swap(arr[i++],arr[j--]);",
+    "    }",
+    "    if(i==j && arr[i] < arr[pivotpt])",
+    "      i++;",
+    "    swap(arr[i],arr[pivotpt]);",
+    "    quick(arr,left,i-1);",
+    "    quick(arr,i+1,right);",
+    "  }",
+    "}",
+    "void quick(int arr[],int size){",
+    "  quick(arr,0,size-1);",
+    "}" 
+    };
+    for(i=0;i<27;i++){
+        code.append(s[i]);
+    }
+}
 void setup(){
     size(900,500);
     anim=new Animation(900, 500);
@@ -148,9 +182,9 @@ void setup(){
     jIndicator = new Indicator("j",color(189,252,201),30,30,260);
     pivotIndicator=new Indicator("pivot",whiteColour,30,30,230);
     pivotIndicator.pointDown();
-    code=new AnimatedCode("quick.txt", 580,50);
+    code=new AnimatedCode(580,50);
     code.setWidth(310);
-
+    setSortCode();
     int tmp;
 
     anim.addObject(arr);
