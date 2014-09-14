@@ -1,0 +1,39 @@
+ class Queue{
+     int data_[15];
+     int front_;
+     int back_;
+     int numInQueue_;
+ public:
+     Queue;
+         ront_=back_=numInQueue_=0;
+     }
+     void enqueue(int data);
+     void dequeue();
+     int front() const;
+     boolean isEmpty() const;
+     boolean isFull() const;
+ };
+ void Queue::enqueue(int ata){
+     if(numInQueue_!=15){
+         data_[back_]=data;
+         back_=(back_+1)%15;
+         numInQueue_++;
+     }
+ }
+ void Queue::dequeue(){
+     if(numInQueue_>0){
+         front_=(front_+1)%15;
+         numInQueue_--;
+     }
+ }
+ int Queue::front() const{
+     if(numInQueue_!=0){
+         return data_[front_];
+     }
+ }
+ boolean Queue::isEmpty() const{
+     return numInQueue_==0;
+ }
+ boolean Queue::isFull() const{
+     return numInQueue_==15;
+ }
