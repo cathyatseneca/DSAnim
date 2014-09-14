@@ -65,6 +65,11 @@ class AnimatedCode extends AnimationObject{
     void show(){
         state_=VISIBLE;
     }
+    boolean isVisible(){
+        boolean rc=true;
+        if(state_==HIDDEN)
+            rc=false;
+    }
     void process(AnimationInstruction ai){
         switch(ai.instruction_){
             case SET:
