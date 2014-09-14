@@ -142,11 +142,11 @@ void insert(int val){
     anim.addStep();
     anim.addNodeInstruction(1,CHANGENEXT,node);
     anim.addStep();
-    anim.addInstruction(3,SET,5);
+    anim.addInstruction(3,SET,6);
     anim.addInstruction(id,SETVISIBILITY,VISIBLE);
     if(numNodes!=0){
         anim.addStep();
-        anim.addInstruction(3,SET,6);
+        anim.addInstruction(3,SET,7);
         anim.addNodeInstruction(id,CHANGENEXT,list.pointers_[0]);
         anim.addStep();
         anim.addInstruction(3,SET,0);
@@ -157,7 +157,7 @@ void insert(int val){
     }
     else{
         anim.addStep();
-        anim.addInstruction(3,SET,6);
+        anim.addInstruction(3,SET,7);
         anim.addStep();
         anim.addInstruction(3,SET,0);
         anim.addInstruction(5,SET,3);
@@ -194,12 +194,12 @@ void insertBack(int val){
     anim.addStep();
     anim.addNodeInstruction(1,CHANGENEXT,node);
     anim.addStep();
-    anim.addInstruction(3,SET,5);
+    anim.addInstruction(3,SET,6);
     anim.addInstruction(id,SETVISIBILITY,VISIBLE);
 
     if(numNodes==0){
         anim.addStep();
-        anim.addInstruction(3,SET,6);
+        anim.addInstruction(3,SET,7);
         anim.addStep();
         anim.addInstruction(3,SET,0);
         anim.addInstruction(6,SET,3);
@@ -215,7 +215,7 @@ void insertBack(int val){
     else{
         int lastID=list.pointers_[1].id_;
         anim.addStep();
-        anim.addInstruction(3,SET,6);
+        anim.addInstruction(3,SET,7);
         anim.addStep();
         anim.addInstruction(3,SET,0);
         anim.addInstruction(6,SET,3);
