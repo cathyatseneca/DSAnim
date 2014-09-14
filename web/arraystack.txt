@@ -1,0 +1,35 @@
+class Stack{
+    int data_[15];
+    int top_;
+public:
+    Stack;
+        top_=0;
+    }
+    void push(int data);
+    void pop();
+    int top() const;
+    boolean isEmpty() const;
+    boolean isFull() const;
+};
+void Stack::push(int data){
+    if(top_!=15){
+        data_[top_]=data;
+        top_++;
+    }
+}
+void Stack::pop(){
+    if(top_>0){
+        top_--;
+    }
+}
+int Stack::top() const{
+    if(top_!=0){
+        return data_[top_-1];
+    }
+}
+boolean Stack::isEmpty() const{
+    return top_==0;
+}
+boolean Stack::isFull() const{
+    return top_==15;
+}
