@@ -11,6 +11,7 @@ int queueSize;
 AnimatedCode source;
 int oldMemberIdx=-1;
 int currMemberIdx;
+AnimatedText status;
 boolean midStep(){
     boolean rc=true;
     if(anim.animationState_==PAUSED){
