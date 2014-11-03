@@ -1,34 +1,7 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Data Structure Animations using Processing.js by cathyatseneca</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/cathyatseneca/DSAnim">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/cathyatseneca/DSAnim/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
-    <div class="wrapper">
-
+---
+layout: default
+title: Data Structures Animations
+---
       <section>
         <div id="title">
           <h1>Data Structure Animations using Processing.js</h1>
@@ -39,32 +12,31 @@
         </div>
 
         <p>This page contains animations made with Processing.js for common computer algorithms.</p>
-        
-          <h2>Sorting Algorithms</h2>
-            <ul>
-              <li><a href="web/bubble.html">Bubble Sort</a></li>
-             <li><a href="web/insertion.html">Insertion  Sort</a></li>
-              <li><a href="web/selection.html">Selection  Sort</a></li>
-              <li><a href="web/quick.html">Quick Sort</a></li>
-              <li><a href="web/merge.html">Merge Sort</a></li>
-             </ul>
-          <h2>Linked Lists</h2>
-          <ul>
-            <li><a href="web/singlylinked.html">Singly Linked List with first and last pointers</a></li>          
-          </ul>
-          <h2>Stacks and Queues</h2>
-            <ul>
-            <li><a href="web/arraystack.html">Stack implemented with an array</a></li>
-            <li><a href="web/arrayqueue.html">Queue implemented with an array</a></li>
-            <li><a href="web/llstack.html">Stack implemented with a linked list</a></li>
-            <li><a href="web/llqueue.html">Queue implemented with a linked list</a></li>
-            </ul>
-        
-      </menu>
-      </section>
+             
+<h2>Sorting Algorithms</h2>
+  <ul>
+    {% for page in site.pages %}
+      {% if page.categories contains 'sorting' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
+<h2>Linked Lists</h2>
+  <ul>
+    {% for page in site.pages %}
+      {% if page.categories contains 'linkedlists' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
 
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
-</html>
+  <h2>Stacks and Queues</h2>
+  <ul>
+    {% for page in site.pages %}
+      {% if page.categories contains 'stacksandqueues' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
+
+</section>

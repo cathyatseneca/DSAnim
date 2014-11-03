@@ -1,0 +1,34 @@
+         <menu>
+          <ul>
+            <li><a href="#">Sorting Algorithms</a>
+    <ul>
+      {% for page in site.pages %}
+      {% if page.categories contains 'sorting' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
+
+            </li>
+            <li><a href="#">Linked Lists</a>
+    <ul>
+      {% for page in site.pages %}
+      {% if page.categories contains 'linkedlists' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
+
+          </li>  
+          <li><a href="#">Stacks and Queues</a>
+     <ul>
+      {% for page in site.pages %}
+      {% if page.categories contains 'stacksandqueues' %}
+        <li><a href="{{page.url}}">{{page.title}}</a>
+        </li> {% endif %}
+{% endfor %}
+  </ul>
+
+          </li>
+        </ul>
+      </menu>
