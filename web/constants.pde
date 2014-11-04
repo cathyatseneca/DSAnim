@@ -44,10 +44,12 @@ final int RIGHT = 2;
 final int TOP = 3;
 final int BOTTOM = 4;
 //colours
-final color backgroundColour = color(0,0,0);
+final color backgroundColour = color(42,42,41);
 final color blackColour = color(0,0,0);
 final color whiteColour = color(255,255,255);
 final color greyColour = color(127,127,127);
 final color greenColour = color(0,255,0);
 final color redColour = color(255,0,0);
 final color blueColour = color(0,0,255);
+final color goldColour = color(255,204,0);
+final color pageButtonColour = color(147, 189, 32, 127);
