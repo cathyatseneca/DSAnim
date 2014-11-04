@@ -51,3 +51,5 @@ final color greyColour = color(127,127,127);
 final color greenColour = color(0,255,0);
 final color redColour = color(255,0,0);
 final color blueColour = color(0,0,255);
+final color goldColour = color(255,204,0);
+final color pageButtonColour = color(147, 189, 32, 127);
