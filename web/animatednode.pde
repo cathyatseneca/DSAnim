@@ -120,10 +120,10 @@ class AnimatedNode extends AnimationObject{
 			float cy1 = endY+30;
 			float cy2 = endY+30;
 			if(endX < x_){
-				cy1 = endY + 60;
-				cy2 = endY + 60;
-				cx1 = x_ + 30;
-				cx2 = endX -30;
+				cy1 = endY + 80;
+				cy2 = endY + 80;
+				cx1 = x_ + 40;
+				cx2 = endX -40;
 			}
 			bezier(x_,y_+10, cx1,cy1,cx2,cy2,  endX,endY);
   			float tx = bezierTangent(x_, cx1,cx2, endX, 1);
@@ -177,10 +177,10 @@ class AnimatedNode extends AnimationObject{
 			float cy1 = endY+30;
 			float cy2 = endY+30;
 			if(endX < x_){
-				cy1 = endY + 60;
-				cy2 = endY + 60;
-				cx1 = x_ + 30;
-				cx2 = endX -30;
+				cy1 = endY + 80;
+				cy2 = endY + 80;
+				cx1 = x_ + 40;
+				cx2 = endX -40;
 			}
 			for(int i=1;i<frame*1000;i++){
 				cx = bezierPoint(x_, cx1,cx2, endX, i*0.001);
