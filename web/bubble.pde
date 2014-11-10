@@ -24,7 +24,7 @@ void bubble(int array[],int sz){
                 anim.addInstruction(1,SETFONTCOLOUR,j,255,0,0);
                 anim.addInstruction(1,SETFONTCOLOUR,j+1,255,0,0);
                // anim.addStep();
-                anim.addInstruction(0,SETRANGE,7,11);
+                anim.addInstruction(0,SETRANGE,7,10);
                 anim.addInstruction(1,SWAP,j,j+1);
                 tmp=array[j];
                 array[j]=array[j+1];
@@ -67,8 +67,8 @@ void setSortCode(){
     }
 }
 void setup(){
-    size(800,500);
-    anim=new Animation(800, 500);
+    size(800,350);
+    anim=new Animation(800, 350);
     code=new AnimatedCode(480,100);
     setSortCode(code);
     //anim.setColour(color(46,129,215));
