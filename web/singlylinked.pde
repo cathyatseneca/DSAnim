@@ -115,7 +115,7 @@ void hideOldInfo(){
     }
     oldMemberIdx=currMemberIdx;
 }
-void insert(int val){
+void insertFront(int val){
     int id;
     currMemberIdx=0;
     hideOldInfo();
@@ -236,7 +236,7 @@ void insertBack(int val){
 
 }
 
-void removeValue(){
+void removeFront(){
     int id;
     currMemberIdx=2;
     hideOldInfo();

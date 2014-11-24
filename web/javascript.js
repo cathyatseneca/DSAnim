@@ -30,11 +30,19 @@ function restartSketch(){
 function changeSpeed(speed){
 	pjs.changeSpeed(speed);
 }
-function insert(){
+function insertValue(){
   if(!pjs.midStep()){
     var v = document.getElementById('val').value;
     if(v != ""){
-      pjs.insert(v);
+      pjs.insertValue(v);
+    }
+  }
+}
+function insertFront(){
+  if(!pjs.midStep()){
+    var v = document.getElementById('val').value;
+    if(v != ""){
+      pjs.insertFront(v);
     }
   }
 }
@@ -46,14 +54,26 @@ function insertBack(){
     }
   }
 }
-function removeValue(){
+function removeFront(){
   if(!pjs.midStep()){
-    pjs.removeValue();
+    pjs.removeFront();
   }
 }
 function removeBack(){
   if(!pjs.midStep()){
     pjs.removeBack();
+  }
+}
+function removeValue(){
+  if(!pjs.midStep()){
+    var v = document.getElementById('val').value;
+    if(v != ""){
+      pjs.removeValue(v);
+    }  }
+}
+function rm(){
+  if(!pjs.midStep()){
+    pjs.rm();
   }
 }
 function isEmpty(){

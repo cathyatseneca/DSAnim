@@ -89,7 +89,7 @@ void setCode(){
         }
     }
 }
-void insert(int val){
+void insertValue(int val){
     currMemberIdx=0;
     hideOldInfo();
     anim.addStep();
@@ -166,7 +166,7 @@ void isFull(){
     anim.addInstruction(9,SET,0);
     anim.start();
 }
-void removeValue(){
+void rm(){
     currMemberIdx=1;
     hideOldInfo();
     anim.addStep();

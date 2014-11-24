@@ -21,7 +21,7 @@ void hideOldInfo(){
         anim.addInstruction(2,SETVISIBILITY,HIDDEN);
     }
 }
-void insert(int val){
+void insertValue(int val){
     int id;
     hideOldInfo();
     anim.addStep();
@@ -59,7 +59,7 @@ void insert(int val){
     numNodes++;
     anim.start();
 }
-void removeValue(){
+void rm(){
     int id;
     hideOldInfo();
 
