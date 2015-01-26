@@ -1,0 +1,27 @@
+// end: one elem past last element in range
+void quickAlt(int arr[], int left, int end){
+  int sz = end - left;
+  if (sz >= 2) {
+    int pivotPt = (left + end) / 2;
+    int pivotVal = arr[pivotPt];
+
+    swap(arr, pivotPt, end - 1);
+
+    int greater = 1, i = left;
+    while (i < end - greater) {
+      if (arr[i] < pivotVal)
+        i++;
+      else {
+        greater++;
+        swap(arr, i, end - greater);
+      }
+    }
+
+    swap(arr, end - greater, end - 1);
+    quickAlt(arr, left, end - greater);
+    quickAlt(arr, (end - greater) + 1, end);
+  }
+}
+void quickAlt(int arr[],int size){
+  quickAlt(arr,0,size);
+}
