@@ -4,12 +4,48 @@ var AnimationInstruction = function(spec){
 	var objectId_;
 	var params_;
 	var isCompleted_;
+	instruction_=spec.instruction_;
+	objectId_=spec.objectId_;
+	params_=spec.params_;
+	isCompleted_=false;
 
+	var that.restart = function(){
+		isCompleted_=false;
+	}
+	var that.isCompleted = function(){
+		return isCompleted_;
+	}
+	var that.setCompleted = function(c){
+		isCompleted_=c;
+	}
 
 	return that;
 }
 var AnimationStep = function(spec){
+	var that = {};
+	var instructions_ = [];
+	var isCompleted_=false;
 
+	var that.restart = function(){
+		isCompleted_=false;
+		for (var i=0;i<instructions_.length;i++){
+			instructions_[i].restart();
+		}
+	}
+	var that.add=function(objectId,instructions,params){
+		instructions_.push(AnimationInstruction({objectId_:objectId,instruction_:instruction,params_:params}))
+	}
+	var that.isCompleted = function(){
+		int i;
+		int numCompleted=0;
+		for(var i=0;i<instructions_.length;i++){
+			if(instructions_[i].isCompleted()){
+				numCompleted++;
+			}
+		}
+		return (numCompleted==instructions_.length));
+	}
+	return that;
 }
 var AnimationObject = function (spec){
 	var that = {};
@@ -70,10 +106,10 @@ var Animation = function (spec){
 		drawnObjects_.push(ao);
 	};
 	that.addStep = function(){
-
+		steps_.push(AnimationStep({}));
 	};
 	that.addInstruction = function(objectId,instruction,params){
-
+		steps_[steps_.length-1].addInstruction(objectId,instruction,params)
 	};
 	that.start = function(){
 		if (steps_.length > 0 ){
