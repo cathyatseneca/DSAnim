@@ -1,72 +1,80 @@
-var AnimationInstruction = function(spec){
-	var that={};
-	var instruction_;
-	var objectId_;
-	var params_;
-	var isCompleted_;
-	instruction_=spec.instruction_;
-	objectId_=spec.objectId_;
-	params_=spec.params_;
-	isCompleted_=false;
 
-	var that.restart = function(){
-		isCompleted_=false;
-	}
-	var that.isCompleted = function(){
-		return isCompleted_;
-	}
-	var that.setCompleted = function(c){
-		isCompleted_=c;
-	}
-
-	return that;
-}
 var AnimationStep = function(spec){
 	var that = {};
 	var instructions_ = [];
 	var isCompleted_=false;
 
-	var that.restart = function(){
+	that.restart = function(){
 		isCompleted_=false;
 		for (var i=0;i<instructions_.length;i++){
 			instructions_[i].restart();
 		}
 	}
-	var that.add=function(objectId,instructions,params){
-		instructions_.push(AnimationInstruction({objectId_:objectId,instruction_:instruction,params_:params}))
+	that.add = function(objectId,instruction,params){
+		instructions_.push(AnimationInstruction({ objectId_:objectId,
+												  instruction_:instruction,
+												  params_:params}));
 	}
-	var that.isCompleted = function(){
-		int i;
-		int numCompleted=0;
+	that.instruction = function(idx){
+		return instructions_[idx];
+	}
+	that.isCompleted = function(){
+		var i;
+		var numCompleted=0;
 		for(var i=0;i<instructions_.length;i++){
 			if(instructions_[i].isCompleted()){
 				numCompleted++;
 			}
 		}
-		return (numCompleted==instructions_.length));
+		return (numCompleted==instructions_.length);
+	}
+	return that;
+}
+var AnimationInstruction = function(spec){
+	var that={};
+	var instruction_=spec.instruction_;
+	var objectId_=spec.objectId_;
+	var params_=spec.params_;
+	var isCompleted_=false;
+
+	that.restart = function(){
+		isCompleted_=false;
+	}
+	that.isCompleted = function(){
+		return isCompleted_;
+	}
+	that.setCompleted = function(c){
+		isCompleted_=c;
+	}
+	that.objectId = function(){
+		return objectsId_;
 	}
 	return that;
 }
 var AnimationObject = function (spec){
 	var that = {};
+	var isStopped_ = spec.isStopped;
+	var x_= 0 || spec.x;
+	var y_= 0 ||spec.y;
+	id_=spec.id;
 	that.stop = function(){
-		spec.isStopped_=true;
+		isStopped_=true;
 	};
 	that.start = function(){
-		spec.isStopped_=false;
+		isStopped_=false;
 	};
 	that.setPosition = function(x,y){
-		spec.x_=x;
-		spec.y_=y;
+		x_=x;
+		y_=y;
 	}
 	that.setID = function(id){
-		spec.id_=id;
+		id_=id;
 	}
 	that.getX = function(){
-		return spec.x_;
+		return x_;
 	}
 	that.getY = function(){
-		return spec.y_;
+		return y_;
 	}
 	return that;
 }
@@ -75,8 +83,8 @@ var Animation = function (spec){
 	var drawnObjects_ = [];
 	var steps_ = []
 	var currStep_=0;
-	var height_;
-	var width_;
+	var height_=450 || spec.height;
+	var width_=950 || spec.width;
 	var isPaused_ = true;
 	var isContinuous_ = true;
 	var bgColour_;
@@ -109,11 +117,14 @@ var Animation = function (spec){
 		steps_.push(AnimationStep({}));
 	};
 	that.addInstruction = function(objectId,instruction,params){
-		steps_[steps_.length-1].addInstruction(objectId,instruction,params)
+		steps_[steps_.length-1].add(objectId,instruction,params)
 	};
 	that.start = function(){
 		if (steps_.length > 0 ){
-			//process instructions on current step.
+			for(var i=0;i<steps_[currStep_].numInstructions();i++){
+				var id = steps_[currStep_].instructions_[i].objectId();
+				drawnObjects_[id].process(steps_[currStep_].instructions_[i]);
+			}
 		}
 		isPaused_=false;
 	};
