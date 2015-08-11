@@ -18,6 +18,9 @@ var AnimationStep = function(spec){
 	that.instruction = function(idx){
 		return instructions_[idx];
 	}
+	that.numInstructions = function(){
+		return instructions_.length;
+	}
 	that.isCompleted = function(){
 		var i;
 		var numCompleted=0;
@@ -47,7 +50,7 @@ var AnimationInstruction = function(spec){
 		isCompleted_=c;
 	}
 	that.objectId = function(){
-		return objectsId_;
+		return objectId_;
 	}
 	return that;
 }
@@ -122,8 +125,8 @@ var Animation = function (spec){
 	that.start = function(){
 		if (steps_.length > 0 ){
 			for(var i=0;i<steps_[currStep_].numInstructions();i++){
-				var id = steps_[currStep_].instructions_[i].objectId();
-				drawnObjects_[id].process(steps_[currStep_].instructions_[i]);
+				var id = steps_[currStep_].instruction(i).objectId();
+				drawnObjects_[id].process(steps_[currStep_].instruction(i));
 			}
 		}
 		isPaused_=false;
