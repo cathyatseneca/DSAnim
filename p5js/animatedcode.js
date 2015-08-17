@@ -2,11 +2,14 @@ var AnimatedCode = function(spec){
 	var that = AnimationObject (spec);
 	var lines_ = spec.code;
 	var highlighterStart_ = 1;
-	var varhighlighterEnd_=1;
-	var lineHeight_=14
+	var highlighterEnd_=1;
+	var lineHeight_=14;
 	var codeWidth_=300;
 	var isVisible_=true;
 	var font_="Courier";
+	var bgColour_;
+	var fontColour_;
+	var hlColour_;
 
 	that.setWidth=function(w){
 		width_=w;
@@ -17,16 +20,26 @@ var AnimatedCode = function(spec){
 	that.setLineHeight=function(lh){
 		lineHeight_=lh;
 	}
-	that.setHighLighter = function (ln){
-		if(ln <= lines_.length){
-			highlighterStart_=ln-1;
-			highlighterEnd_=ln-1;
+	that.setHighLighter = function (params){
+		if(params.ln <= lines_.length){
+			highlighterStart_=params.ln-1;
+			highlighterEnd_=params.ln-1;
 		}
 	}
-	that.setHighLighter = function (sln , eln){
-		if(sln <= lines_.length && eln <= lines.length){
-			highlighterStart_=sln-1;
-			highlighterEnd_=eln-1;
+	that.setBGColour = function (c){
+		bgColour_=c;
+	}
+	that.setHighLighterColour = function(c){
+		hlColour_=c;
+	}
+	that.setFontColour = function(c){
+		fontColour_=c;
+	}
+
+	that.setMultiHighLighter = function (params){
+		if(params.sln <= lines_.length && params.eln <= lines_.length){
+			highlighterStart_=params.sln-1;
+			highlighterEnd_=params.eln-1;
 		}
 	}
 	that.setVisibility = function (vis){
@@ -42,28 +55,30 @@ var AnimatedCode = function(spec){
 		return isVisible_;
 	}
 	that.process = function(ai){
-		ai.instruction_(a1.param_);
+		ai.instruction();
+		ai.setCompleted(true);
 	}
 	that.draw = function(){
 		if(isVisible_){
-			pushStyle();
+			push();
 			textFont(font_);
             textAlign(LEFT);
-            fill(backgroundColour);
-            stroke(backgroundColour);
-            rect(x_,y_,codeWidth_,sz_*lineHeight_+10);
-            fill(pageButtonColour);
-            stroke(pageButtonColour);
+            fill(bgColour_);
+            stroke(bgColour_);
+            rect(that.getX(),that.getY(),codeWidth_,lines_.length*lineHeight_+10);
+            fill(hlColour_);
+            stroke(hlColour_);
             if(highlighterStart_!=-1){
                 for(var i=highlighterStart_; i<= highlighterEnd_;i++){
-                    rect(x_+5,y_+(i*lineHeight_+lineHeight_/4),codeWidth_-10,lineHeight_);
+                    rect(that.getX()+5,that.getY()+(i*lineHeight_+lineHeight_/4),codeWidth_-10,lineHeight_);
                 }
-            } 
-            fill(goldColour);
-            for(var i=0;i<sz_;i++){
-                text(lines_[i],x_+10,y_+((i+1)*lineHeight_));
             }
-            popStyle();
+            stroke(bgColour_); 
+            fill(fontColour_);
+            for(var i=0;i<lines_.length;i++){
+                text(lines_[i],that.getX()+10,that.getY()+((i+1)*lineHeight_));
+            }
+            pop();
         }
 
 	}

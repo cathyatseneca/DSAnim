@@ -1,8 +1,9 @@
-var anim=Animation();
+var anim=Animation({height:500,width:800});
+var src;
 function setup(){
+	anim.setBGColour(color(0,0,255));
 	createCanvas(800,500);
-	var anim=Animation({height:500,width:800});
-	var src=[
+	src=[
     "void bubble(int array[],int sz){",
     "int i,j;",
     "int tmp;",
@@ -19,24 +20,20 @@ function setup(){
     ];
     var array=[1,2,3,4,5,6,8,7,15,14,13,12,11,9];
 	var a=AnimatedCode({code:src,x:100,y:100});
+	a.setBGColour(color(255,255,255));
+	a.setHighLighterColour(color(0,255,0));
+	a.setFontColour(color(0,0,0));
 	anim.addObject(a);
-	for(var i=0;i<14;i++){
-		anim.addStep();
-		anim.addInstruction({objecID:0,instruction:"setHighLighter",params:{ln:1}});
-		for(var j=0;j<14-i-1;j++){
-		anim.addInstruction({objecID:0,instruction:"setHighLighter",params:{ln:5}});
-			anim.addStep();
-			anim.addInstruction({objecID:0,instruction:"setHighLighter",params:{ln:6}});
-			if(array[j] < array[j+1]){
-				anim.addStep();
-				anim.addInstruction({objecID:0,instruction:"setHighLighter",params:{ln:7}});
-				tmp=array[j];
-				array[j]=array[j+1];
-				array[j+1]=tmp;
-			}		
-		}
-	}
-
+	anim.addStep();
+	anim.addInstruction(a,a.setHighLighter,{ln:1});
+	anim.addStep();
+	anim.addInstruction(a,a.setHighLighter,{ln:2});
+    anim.addStep();
+    anim.addInstruction(a,a.setHighLighter,{ln:3});
+    anim.addStep();
+    anim.addInstruction(a,a.setHighLighter,{ln:4});
+    anim.addStep();
+    anim.addInstruction(a,a.setMultiHighLighter,{sln:6, eln:9});
 	anim.start();
 }
 function  draw(){

@@ -10,8 +10,8 @@ var AnimationStep = function(spec){
 			instructions_[i].restart();
 		}
 	}
-	that.add = function(objectId,instruction,params){
-		instructions_.push(AnimationInstruction({ objectId_:objectId,
+	that.add = function(obj,instruction,params){
+		instructions_.push(AnimationInstruction({ obj_:obj,
 												  instruction_:instruction,
 												  params_:params}));
 	}
@@ -36,7 +36,7 @@ var AnimationStep = function(spec){
 var AnimationInstruction = function(spec){
 	var that={};
 	var instruction_=spec.instruction_;
-	var objectId_=spec.objectId_;
+	var drawnObject_=spec.obj_;
 	var params_=spec.params_;
 	var isCompleted_=false;
 
@@ -49,17 +49,20 @@ var AnimationInstruction = function(spec){
 	that.setCompleted = function(c){
 		isCompleted_=c;
 	}
-	that.objectId = function(){
-		return objectId_;
+	that.drawnObject = function(){
+		return drawnObject_;
+	}
+	that.instruction = function(){
+		instruction_(params_)
 	}
 	return that;
 }
 var AnimationObject = function (spec){
 	var that = {};
 	var isStopped_ = spec.isStopped;
-	var x_= 0 || spec.x;
-	var y_= 0 ||spec.y;
-	id_=spec.id;
+	var x_= spec.x || 0;
+	var y_= spec.y || 0;
+	var objectId_=spec.id;
 	that.stop = function(){
 		isStopped_=true;
 	};
@@ -71,7 +74,7 @@ var AnimationObject = function (spec){
 		y_=y;
 	}
 	that.setID = function(id){
-		id_=id;
+		objectId_=id;
 	}
 	that.getX = function(){
 		return x_;
@@ -86,49 +89,51 @@ var Animation = function (spec){
 	var drawnObjects_ = [];
 	var steps_ = []
 	var currStep_=0;
-	var height_=450 || spec.height;
-	var width_=950 || spec.width;
+	var height_=spec.height ||450;
+	var width_=spec.width ||950 ;
 	var isPaused_ = true;
 	var isContinuous_ = true;
 	var bgColour_;
-	var minDuration_=250;
+	var minDuration_= spec.minDuration || 250;
 	var stepStart_;
 
-	that.setColour=function(c){
+	that.setBGColour=function(c){
 		bgColour_=c;
 	};
 	that.changeSpeed = function(s){
-		minDuration_=50*s;
+		minDuration_= 50 * s;
 	};
 	that.setContiuous = function(m){
-		isContinuous_=s;
+		isContinuous_= s;
 	};
 	that.setPaused = function(p){
-		isPaused_=p;
-		if(isPaused_==true){
+		isPaused_ = p;
+		if(isPaused_ == true){
 			noLoop();
 		}
 		else{
 			loop();
-			stepStart_=millis();
+			stepStart_ = millis();
 		}
 	};
 	that.addObject = function (ao){
 		drawnObjects_.push(ao);
+		ao.setID(drawnObjects_.length);
 	};
 	that.addStep = function(){
 		steps_.push(AnimationStep({}));
 	};
-	that.addInstruction = function(objectId,instruction,params){
-		steps_[steps_.length-1].add(objectId,instruction,params)
+	that.addInstruction = function(obj,instruction,params){
+		steps_[steps_.length-1].add(obj,instruction,params)
 	};
 	that.start = function(){
 		if (steps_.length > 0 ){
 			for(var i=0;i<steps_[currStep_].numInstructions();i++){
-				var id = steps_[currStep_].instruction(i).objectId();
-				drawnObjects_[id].process(steps_[currStep_].instruction(i));
+				var obj = steps_[currStep_].instruction(i).drawnObject();
+				obj.process(steps_[currStep_].instruction(i));
 			}
 		}
+		stepStart_=millis();
 		isPaused_=false;
 	};
 	that.restart = function(){
@@ -151,20 +156,20 @@ var Animation = function (spec){
 		var id;
 		var currTime;
 		if(steps_.length > 0){
-			if(isContinuous_==true){
-				if(isPaused_==false){
+			if(isContinuous_){
+				if(!isPaused_){
 					if(currStep_ < steps_.length){
 						background(bgColour_);
 						for(i=0;i<drawnObjects_.length;i++){
 							drawnObjects_[i].draw();
 						}
 						currTime = millis();
-						if(steps_[currStep_].isCompleted() && (currTime - stepStart_) >= minDuration_){
+						if (steps_[currStep_].isCompleted() && (currTime - stepStart_) >= minDuration_){
 							currStep_++;
 							if(currStep_ < steps_.length){
 								for(i=0;i<steps_[currStep_].numInstructions();i++){
-									id = steps_[currStep_].instructions_[i].objectId();
-									drawnObjects_[i].process(steps_[currStep_].instructions_[i]);
+									obj = steps_[currStep_].instruction(i).drawnObject();
+									obj.process(steps_[currStep_].instruction(i));
 								}
 								stepStart_=millis();
 							}
@@ -187,8 +192,8 @@ var Animation = function (spec){
 							currStep_++;
 							if(currStep_<steps_.length){
 								for(i=0;i<steps_[currStep_].numInstructions();i++){
-									id=steps_[currStep_].instructions_[i].objectId();
-									drawnObjects_[id].process(steps_[currStep_].instructions_[i]);
+									obj=steps_[currStep_].instruction(i).drawnObject();
+									obj.process(steps_[currStep_].instruction(i));
 								}
 								stepStart_=millis();
 								isPaused_=true;
