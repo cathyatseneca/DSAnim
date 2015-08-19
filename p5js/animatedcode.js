@@ -7,9 +7,19 @@ var AnimatedCode = function(spec){
 	var codeWidth_=300;
 	var isVisible_=true;
 	var font_="Courier";
-	var bgColour_;
-	var fontColour_;
-	var hlColour_;
+	var bgColour_ = spec.bgColour;
+	var fontColour_ = spec.fontColour;
+	var hlColour_ = spec.hlColour;
+
+	if(bgColour_ == undefined){
+		bgColour_=color(255);
+	}
+	if(fontColour_==undefined){
+		fontColour_=color(0);
+	}
+	if(hlColour_==undefined){
+		hlColour_=color(goldColour)
+	}
 
 	that.setWidth=function(w){
 		width_=w;

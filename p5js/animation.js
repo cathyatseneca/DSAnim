@@ -103,8 +103,8 @@ var Animation = function (spec){
 	that.changeSpeed = function(s){
 		minDuration_= 50 * s;
 	};
-	that.setContiuous = function(m){
-		isContinuous_= s;
+	that.setContinuous = function(m){
+		isContinuous_= m;
 	};
 	that.setPaused = function(p){
 		isPaused_ = p;
@@ -181,7 +181,7 @@ var Animation = function (spec){
 				}
 			}
 			else{
-				if(currStep_ < steps.length){
+				if(currStep_ < steps_.length){
 					if(isPaused_==false){
 						background(bgColour_);
 						for( i=0;i<drawnObjects_.length;i++){

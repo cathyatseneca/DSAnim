@@ -57,7 +57,15 @@ var AnimatedArray = function(spec){
 		squareColours_.push(color(255));
 		isEmpty_.push(false);
 	}
-
+	that.gap = function(idx){
+		return gap_[idx];
+	}
+	that.sqsz = function(){
+		return sqsz_;
+	}
+	that.cap = function(){
+		return cap_;
+	}
 	that.setShowIndex = function(visibility){
 		showIndex_=visibility;
 	}
@@ -130,7 +138,7 @@ var AnimatedArray = function(spec){
 		ai_.setCompleted(true);
 	}
 	that.removeGap = function(params){
-		for(var i=ai.pos;i<cap_-1;i++){
+		for(var i=params.pos;i<cap_-1;i++){
 			gap_[i+1]-=(sqsz_/2);
 		}
 		ai_.setCompleted(true);		
@@ -358,4 +366,125 @@ var AnimatedArray = function(spec){
 
 	}
 	return that;
+}
+var Indicator = function(spec){
+	var that=AnimationObject(spec);
+	var array_ = spec.array;
+	var label_ = spec.label || "";
+	var idx_ = spec.idx || 0;
+	var isUp_ = spec.isUp || true;
+	var isVisible_ = spec.visible || true;
+	var initidx_= idx_;
+	var colour_= spec.colour;
+
+	if(colour_ == undefined){
+		colour_=color(255);
+	}
+
+	that.setPosition(array_.getX(), array_.getY());
+
+	that.restart = function(){
+		idx_=initidx_;
+	}
+	that.setIdx = function(params){
+		idx_=params.idx;
+	}
+	that.pointDown = function(){
+		isUp_=false;
+	}
+	that.pointUp = function(){
+		isUp_=true;
+	}
+	that.hide = function(){
+		isVisible_=false;
+	}
+	that.show = function(){
+		isVisible_=true;
+	}
+	that.process = function(ai){
+		ai.instruction();
+		ai.setCompleted(true);
+	}
+	that.draw = function(){
+		var sz=array_.sqsz();
+		var offset=sz/2;
+		var posX = array_.gap(idx_);
+		if(isVisible_){
+			if(isUp_){
+				drawTriangle(colour_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+sz);
+				textAlign(CENTER);
+				text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+25+sz);
+			}
+			else{
+				drawDownTriangle(colour_,array_.gap(idx_)+ that.getX()+idx_*sz + offset,that.getY());
+				textAlign(CENTER);
+				text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()-15);
+
+			}
+		}
+	}
+	return that;
+}
+
+var Splitter = function(spec){
+	var that = AnimationObject(spec);
+	var array_ = spec.array;
+	var leftLabel_ = spec.leftLabel || "";
+	var rightLabel_ = spec.rightLabel || "";
+	var leftColour_ = spec.leftColour; 
+	var rightColour_ = spec.rightColour;
+	var idx_ = spec.idx|| 0;
+	var yOffset_=0;  //normally splitter appears 60 units above top of array
+	                 //when yOFFset_ is negative it moves further up, positive further down
+
+	that.setPosition(array_.getX(),array_.getY());
+	that.setIdx = function(params){
+		if(params.idx >=0 && params.idx <= array_.cap()){
+			idx_=params.idx;
+		}
+	}
+	that.changeYOffset = function(params){
+		yOffset_=params.yOffset;
+	}
+	that.process = function(ai){
+		ai.instruction();
+		ai.setCompleted(true);
+	}
+	that.draw = function(){
+		var topY= that.getY()-60;
+		var endpt= that.getX()+(array_.sqsz()*array_.cap()) + (array_.gap(array_.cap()-1));
+		var gapOffset = array_.gap(idx_>0?idx_-1:0);
+		if(array_.gap(idx_) != gapOffset){
+			gapOffset += array_.cap()/2;
+		}
+	 	var topX= that.getX()+ gapOffset +(idx_*array_.sqsz());
+		fill("#FFFFFF");
+		stroke("#FFFFFF");
+
+		strokeWeight(3);
+		line(topX,topY, topX, topY+30);
+		strokeWeight(1);
+		if(idx_ !=0){
+			push();
+			textAlign(LEFT);
+			text(leftLabel_,that.getX(),topY);    
+			fill(leftColour_);
+			stroke(leftColour_);
+			line(that.getX(),topY+15,topX-5,topY+15);
+			triangle(that.getX(),topY+15,that.getX()+10,topY+10,that.getX()+10,topY+20);
+			pop();
+
+		}
+		if(idx_!=array_.cap()){
+			push();
+			text(rightLabel_,endpt,topY);    
+			fill(rightColour_);
+			stroke(rightColour_);
+			line(topX+5,topY+15,endpt,topY+15);
+			triangle(endpt,topY+15,endpt-10,topY+10,endpt-10,topY+20);
+			pop();
+		}		
+	}
+	return that;
+
 }

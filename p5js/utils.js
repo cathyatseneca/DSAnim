@@ -8,6 +8,7 @@ function drawSqWithNum(c, co, bg, sz, offsetX, offsetY){
   stroke(0);
   fill(bg);
   rect(offsetX,offsetY,sz,sz);
+  stroke(co);
   fill(co);
   if(c>0){
     textAlign(CENTER);
@@ -27,7 +28,7 @@ function drawSquare(sz, bg, offsetX, offsetY){
 //draws a  triangle that is placed under a square that has size of sz.
 //posX and posY are positional offset from top left corner of draw
 //area and the position of the square
-function drawTriangle(co, sz, posX, posY){
+function drawTriangle(co, posX, posY){
   stroke(co);
   fill(co);
   triangle(posX,posY,posX+10,posY+10,posX-10,posY+10);
@@ -36,7 +37,7 @@ function drawTriangle(co, sz, posX, posY){
 //draws a  triangle that is placed under a square that has size of sz.
 //posX and posY are positional offset from top left corner of draw
 //area and the position of the square
-function drawDownTriangle(co, sz, posX, posY){
+function drawDownTriangle(co, posX, posY){
   stroke(co);
   fill(co);
   triangle(posX,posY,posX+10,posY-10,posX-10,posY-10);
