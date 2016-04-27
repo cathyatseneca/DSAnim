@@ -4,13 +4,15 @@ var AnimatedCode = function(spec){
 	var highlighterStart_ = 1;
 	var highlighterEnd_=1;
 	var lineHeight_=14;
-	var codeWidth_=300;
-	var isVisible_=true;
+	var codeWidth_=spec.width||300;
+	var isVisible_= true;
 	var font_="Courier";
 	var bgColour_ = spec.bgColour;
 	var fontColour_ = spec.fontColour;
 	var hlColour_ = spec.hlColour;
-
+	if(spec.isVisible != undefined){
+		isVisible_=spec.isVisible_;
+	}
 	if(bgColour_ == undefined){
 		bgColour_=color(255);
 	}
@@ -20,7 +22,10 @@ var AnimatedCode = function(spec){
 	if(hlColour_==undefined){
 		hlColour_=color(goldColour)
 	}
-
+	that.restart = function(){
+		highlighterEnd_=1;
+		highlighterStart_=1;
+	}
 	that.setWidth=function(w){
 		width_=w;
 	}

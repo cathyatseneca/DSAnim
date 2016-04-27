@@ -82,6 +82,12 @@ var AnimationObject = function (spec){
 	that.getY = function(){
 		return y_;
 	}
+	that.changeSpeed = function(speed){
+	}
+	that.restart = function() {
+
+	}
+
 	return that;
 }
 var Animation = function (spec){
@@ -102,6 +108,9 @@ var Animation = function (spec){
 	};
 	that.changeSpeed = function(s){
 		minDuration_= 50 * s;
+		for(var i=0;i<drawnObjects_.length;i++){
+			drawnObjects_[i].changeSpeed(s);
+		}
 	};
 	that.setContinuous = function(m){
 		isContinuous_= m;
@@ -136,6 +145,9 @@ var Animation = function (spec){
 		stepStart_=millis();
 		isPaused_=false;
 	};
+	that.isPaused = function(){
+		return isPaused_;
+	}
 	that.restart = function(){
 		var i;
 		currStep_=0;
@@ -149,7 +161,7 @@ var Animation = function (spec){
 		isContinuous_=true;
 		minDuration_=250;
 		stepStart_=millis();
-		start();
+		that.start();
 	};
 	that.draw = function(){
 		var i;
@@ -206,6 +218,13 @@ var Animation = function (spec){
 				}
 
 			}
+		}
+		else{
+			background(bgColour_);
+			for(i=0;i<drawnObjects_.length;i++){
+				drawnObjects_[i].draw();
+			}
+			isPaused_=true;
 		}
 	};
 

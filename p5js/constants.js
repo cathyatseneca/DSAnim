@@ -4,8 +4,16 @@ const blueColour = "rgb(0,0,255)";
 const redColour = "rgb(255,0,0)";
 const greenColour = "rgb(0,255,0)";
 const goldColour = "rgb(255,204,0)";
+const blackColour = "rgb(0,0,0)";
+const whiteColour = "rgb(255,255,255)";
+const greyColour = "rgb(127,127,127)";
+const mintGreenColour = "rgb(189,252,201)";
+
 const STABLE = 1;
 const SWAP = 2;
 const MOVETO = 3;
 const MOVEFROM = 4;
 const MOVELOCATION = 5;
+const CHANGENEXT=6;
+const BREAKNEXT=7;
+const REMOVENODE=8;

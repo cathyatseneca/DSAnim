@@ -23,14 +23,14 @@ var AnimatedArray = function(spec){
 	var squareColours_ = [];
 	var gap_ = [];
 	var state_ = STABLE;
-	var cap_ = spec.cap_ || 15 ;
-	var sqsz_ = spec.sqsz_ || 30;
+	var cap_ = spec.cap || 15 ;
+	var sqsz_ = spec.sqsz|| 30;
 	var from_ = 0;
 	var to_ = 0;
 	var stateStartTime_ = 0;
 	var animationDuration_ = spec.animationDuration || 500;
-	var hasBars_ = false;
-	var barOffset_ = 50;
+	var hasBars_ = spec.hasBars || false;
+	var barOffset_ = spec.barOffset || 80;
 	var ai_;
 	var maxHeight_=100;
 	var moveX_ = 0;
@@ -56,6 +56,9 @@ var AnimatedArray = function(spec){
 		dataColours_.push(color(blueColour));
 		squareColours_.push(color(255));
 		isEmpty_.push(false);
+	}
+	that.changeSpeed = function(speed){
+		animationDuration_ = 100 * speed;
 	}
 	that.gap = function(idx){
 		return gap_[idx];
@@ -96,22 +99,22 @@ var AnimatedArray = function(spec){
 	}
 	that.setFontColour = function (params){
 		ai_.setCompleted(true);
-		dataColours_[params.idx]=color(params.r,params.g,params.b);
+		dataColours_[params.idx]=params.colour;
 	}
 	that.setBGColour = function(params){
 		ai_.setCompleted(true);
-		squareColours_[params.idx]=color(params.r,params.g,params.b);		
+		squareColours_[params.idx]=params.colour;		
 	}
 	that.setAllBGColour = function(params){
 		ai_.setCompleted(true);
 		for(var i=0;i<cap_;i++){
-			squareColours_[i]=color(params.r,params.g,params.b);
+			squareColours_[i]=params.colour;
 		}
 	}
 	that.setAllFontColour = function(params){
 		ai_.setCompleted(true);
 		for(var i=0;i<cap_;i++){
-			dataColours_[i]=color(params.r,params.g,params.b);
+			dataColours_[i]=params.colour;
 		}		
 	}
 	that.moveFrom = function(params){
@@ -132,13 +135,13 @@ var AnimatedArray = function(spec){
 		stateStartTime_=millis();
 	}
 	that.addGap = function (params){
-		for(var i=params.pos;i<cap_-1;i++){
+		for(var i=params.idx;i<cap_-1;i++){
 			gap_[i+1]+=(sqsz_/2);
 		}
 		ai_.setCompleted(true);
 	}
 	that.removeGap = function(params){
-		for(var i=params.pos;i<cap_-1;i++){
+		for(var i=params.idx;i<cap_-1;i++){
 			gap_[i+1]-=(sqsz_/2);
 		}
 		ai_.setCompleted(true);		
@@ -146,13 +149,13 @@ var AnimatedArray = function(spec){
 	that.setFontColourInRange = function(params){
 		ai_.setCompleted(true);
 		for(var i=params.from;i<=params.to;i++){
-			dataColours_[i]=color(params.r,params.g,params.b);
+			dataColours_[i]=params.colour;
 		}
 	}
 	that.setBGColourInRange = function(params){
 		ai_.setCompleted(true);
 		for(var i=params.from;i<=params.to;i++){
-			squareColours_[i]=color(params.r,params.g,params.b);
+			squareColours_[i]=params.colour;
 		}	
 	}
 	that.setEmpty = function(params){
@@ -226,7 +229,7 @@ var AnimatedArray = function(spec){
 		}
 
 	}
-	that.drawBar = function(){
+	that.drawBars = function(){
     	for(var i=0;i<cap_;i++){
       		if(!isEmpty_[i]){
         		drawBar(i,data_[i],maxHeight_,barOffset_,color(255,255,255),sqsz_,gap_[i]+that.getX(),that.getY());
@@ -372,17 +375,21 @@ var Indicator = function(spec){
 	var array_ = spec.array;
 	var label_ = spec.label || "";
 	var idx_ = spec.idx || 0;
-	var isUp_ = spec.isUp || true;
-	var isVisible_ = spec.visible || true;
+	var isUp_ = spec.isUp;
+	var isVisible_ = spec.isVisible;
 	var initidx_= idx_;
 	var colour_= spec.colour;
-
+	if(isUp_ == undefined){
+		isUp_=true;
+	}
+	if(isVisible_ == undefined){
+		isVisible_=true;
+	}
 	if(colour_ == undefined){
 		colour_=color(255);
 	}
 
 	that.setPosition(array_.getX(), array_.getY());
-
 	that.restart = function(){
 		idx_=initidx_;
 	}
@@ -434,7 +441,8 @@ var Splitter = function(spec){
 	var leftColour_ = spec.leftColour; 
 	var rightColour_ = spec.rightColour;
 	var idx_ = spec.idx|| 0;
-	var yOffset_=0;  //normally splitter appears 60 units above top of array
+	var yOffset_=spec.yOffset || 0; 
+					 //normally splitter appears 60 units above top of array
 	                 //when yOFFset_ is negative it moves further up, positive further down
 
 	that.setPosition(array_.getX(),array_.getY());
@@ -442,6 +450,9 @@ var Splitter = function(spec){
 		if(params.idx >=0 && params.idx <= array_.cap()){
 			idx_=params.idx;
 		}
+	}
+	that.restart = function(){
+		idx_=spec.idx || 0;
 	}
 	that.changeYOffset = function(params){
 		yOffset_=params.yOffset;
@@ -451,7 +462,7 @@ var Splitter = function(spec){
 		ai.setCompleted(true);
 	}
 	that.draw = function(){
-		var topY= that.getY()-60;
+		var topY= that.getY()-60 + yOffset_;
 		var endpt= that.getX()+(array_.sqsz()*array_.cap()) + (array_.gap(array_.cap()-1));
 		var gapOffset = array_.gap(idx_>0?idx_-1:0);
 		if(array_.gap(idx_) != gapOffset){
@@ -477,6 +488,7 @@ var Splitter = function(spec){
 		}
 		if(idx_!=array_.cap()){
 			push();
+			textAlign(RIGHT);
 			text(rightLabel_,endpt,topY);    
 			fill(rightColour_);
 			stroke(rightColour_);
@@ -484,6 +496,66 @@ var Splitter = function(spec){
 			triangle(endpt,topY+15,endpt-10,topY+10,endpt-10,topY+20);
 			pop();
 		}		
+	}
+	return that;
+}
+
+var AnimatedVariable =function (spec){
+	var that = AnimationObject(spec);
+	var value_ = spec.value;
+	var initial_ = spec.value;
+	var textColour_ = spec.textColour;
+	var bgColour_ = spec.bgColour;
+	var size_ = spec.size || 30;
+	var isEmpty_ = spec.isEmpty || true;
+	if(textColour_==undefined){
+		textColour_=color(0);
+	}
+	if(bgColour_ == undefined){
+		bgColour_=color(255);
+	}
+	that.setEmpty = function(e){
+		isEmpty_=e;
+	}
+	that.set = function(params){
+		value_=params.value;
+	}
+	that.setFontColour = function(params){
+		textColour_=params.colour;
+	}
+	that.setBGColour = function(params){
+		bgColour_=params.colour;
+	}
+	that.setEmpty = function(){
+		isEmpty_=true;
+	}
+	that.setFilled = function(){
+		isEmpty_=false;
+	}
+	that.process = function(ai){
+		ai.instruction();
+		ai.setCompleted(true);
+	}
+
+	that.restart = function(){
+		value_=initial_;
+		textColour_ = spec.textColour;
+		bgColour_ = spec.bgColour;
+		if(textColour_==undefined){
+			textColour_=color(0);
+		}
+		if(bgColour_ == undefined){
+			bgColour_=color(255);
+		}
+		isEmpty_=spec.isEmpty || true;
+	}
+	that.draw=function(){
+    	if(!isEmpty_){
+    		drawSqWithNum(value_,textColour_,bgColour_,size_,that.getX(),that.getY());
+	    }
+    	else{
+    		drawSquare(size_,bgColour_, that.getX(), that.getY());
+    	}
 	}
 	return that;
 

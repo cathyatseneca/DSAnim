@@ -10,10 +10,8 @@ function drawSqWithNum(c, co, bg, sz, offsetX, offsetY){
   rect(offsetX,offsetY,sz,sz);
   stroke(co);
   fill(co);
-  if(c>0){
-    textAlign(CENTER);
-    text(c,offsetX+0.5*sz,offsetY+(sz*0.5)+5);
-  }
+  textAlign(CENTER);
+  text(c,offsetX+0.5*sz,offsetY+(sz*0.5)+5);
 }
 
 //draws a square 
