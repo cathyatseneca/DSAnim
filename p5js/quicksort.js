@@ -47,7 +47,7 @@ function QuickSort(array, left, right){
                 anim.addInstruction(iIndicator,iIndicator.setIdx,{idx:i});
                 anim.addInstruction(code,code.setHighLighter,{ln:12});
             } 
-            while(j > 0 && array[j]>pivot){
+            while(j > 0 && array[j]>=pivot){
                 anim.addStep();
                 anim.addInstruction(code,code.setHighLighter,{ln:13});
                 j--;
