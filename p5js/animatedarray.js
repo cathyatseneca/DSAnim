@@ -40,11 +40,14 @@ var AnimatedArray = function(spec){
 	var emptyInit_ = false;
 	var showIndex_ = false;
 
+	var initiallyEmpty_=false;
+
 	if(initial_.length ==0){
 		for(var i = 0 ;i< cap_;i++){
 			initial_.push(0);
 			isEmpty_.push(true);
 		}
+		initiallyEmpty_=true;
 	}
 	else{
 		cap_=initial_.length;
@@ -54,7 +57,12 @@ var AnimatedArray = function(spec){
 		gap_.push(0);
 		dataColours_.push(color(blueColour));
 		squareColours_.push(color(255));
-		isEmpty_.push(false);
+		if(initiallyEmpty_){
+			isEmpty_.push(true);
+		}
+		else{
+			isEmpty_.push(false);
+		}
 	}
 	that.changeSpeed = function(speed){
 		animationDuration_ = 100 * speed;
@@ -78,7 +86,12 @@ var AnimatedArray = function(spec){
 			gap_[i]=0;
 			dataColours_[i]=color(blueColour);
 			squareColours_[i]=color(255);
-			isEmpty_[i]=false;
+			if(initiallyEmpty_){
+				isEmpty_.push(true);
+			}
+			else{
+				isEmpty_.push(false);
+			}
 		}
 		maxHeight_=100;
 		moveX_=moveY_=moveIdx_=moveVal_=0;

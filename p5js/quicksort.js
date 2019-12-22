@@ -64,6 +64,7 @@ function QuickSort(array, left, right){
                 anim.addStep();
                 anim.addInstruction(iIndicator,iIndicator.setIdx,{idx:i});
                 anim.addInstruction(code,code.setHighLighter,{ln:9});
+
                 anim.addStep();
                 anim.addInstruction(arr,arr.swap,{from:i, to:j});
                 anim.addInstruction(code,code.setHighLighter,{ln:10});
