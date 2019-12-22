@@ -77,20 +77,25 @@ function QuickSort(array, left, right){
             anim.addInstruction(jIndicator,jIndicator.setIdx,{idx:j+1});
             anim.addInstruction(code,code.setHighLighter,{ln:7}); 
         }
-        tmp=array[i+1];
-        array[i+1]=array[pivotpt];
+        i=i+1;
+        anim.addStep();
+        anim.addInstruction(iIndicator,iIndicator.setIdx,{idx:i});
+        anim.addInstruction(code,code.setHighLighter,{ln:13});
+
+        tmp=array[i];
+        array[i]=array[pivotpt];
         array[pivotpt]=tmp;
         anim.addStep();
-        anim.addInstruction(arr,arr.swap,{from:i+1, to: pivotpt});
-        anim.addInstruction(code,code.setHighLighter,{ln:13});
+        anim.addInstruction(arr,arr.swap,{from:i, to: pivotpt});
+        anim.addInstruction(code,code.setHighLighter,{ln:14});
 
         //colour pivot mint green to indicate it is sorted
         anim.addStep();
-        anim.addInstruction(arr,arr.setBGColour,{idx:i+1,colour:mintGreenColour});
+        anim.addInstruction(arr,arr.setBGColour,{idx:i,colour:mintGreenColour});
 
         //grey out values from pivot+1 to right 
-        anim.addInstruction(arr,arr.setFontColourInRange,{from:i,to:right,colour:greyColour});
-        anim.addInstruction(code,code.setHighLighter,{ln:14});
+        anim.addInstruction(arr,arr.setFontColourInRange,{from:i+1,to:right,colour:greyColour});
+        anim.addInstruction(code,code.setHighLighter,{ln:15});
 
         //hide indicators
         anim.addInstruction(iIndicator,iIndicator.hide);
@@ -98,30 +103,32 @@ function QuickSort(array, left, right){
         anim.addInstruction(pivotIndicator,pivotIndicator.hide)
 
         //create gaps between pivot and the two pieces of the array
-        anim.addStep();
+        if(i!=left || i!= right){
+            anim.addStep();
+        }
         if(i!=left){
-            anim.addInstruction(arr,arr.addGap,{idx:i});
+            anim.addInstruction(arr,arr.addGap,{idx:i-1});
         }
         if(i!=right){
-            anim.addInstruction(arr,arr.addGap,{idx:i+1});
+            anim.addInstruction(arr,arr.addGap,{idx:i});
         }
 
 
-        QuickSort(array,left,i);
+        QuickSort(array,left,i-1);
         if(i!=left){
             anim.addStep();
-            anim.addInstruction(arr,arr.removeGap,{idx:i});
+            anim.addInstruction(arr,arr.removeGap,{idx:i-1});
         }
 
         anim.addStep();
         anim.addInstruction(arr,arr.setFontColourInRange,{from:left,to:i+1,colour:greyColour});
-        anim.addInstruction(arr,arr.setFontColourInRange,{from:i+2,to:right,colour:blueColour});
-        anim.addInstruction(code,code.setHighLighter,{ln:15});
+        anim.addInstruction(arr,arr.setFontColourInRange,{from:i+1,to:right,colour:blueColour});
+        anim.addInstruction(code,code.setHighLighter,{ln:16});
 
-         QuickSort(array,i+2,right);
+         QuickSort(array,i+1,right);
          if(i!=right){
              anim.addStep();
-             anim.addInstruction(arr,arr.removeGap,{idx:i+1});
+             anim.addInstruction(arr,arr.removeGap,{idx:i});
          }
     }
     anim.addStep();
@@ -130,15 +137,17 @@ function QuickSort(array, left, right){
  
 
 function quickSort(array,size){
-  QuickSort(array,0,size-1);
-  anim.addStep();
-  anim.addInstruction(arr,arr.setAllBGColour,{colour:whiteColour});
-  anim.addInstruction(arr,arr.setAllFontColour,{colour:blueColour});
-  anim.addInstruction(iIndicator,iIndicator.hide);
-  anim.addInstruction(jIndicator,jIndicator.hide);
-  anim.addInstruction(pivotIndicator,pivotIndicator.hide);
-  anim.addStep();
-  anim.addInstruction(code,code.setHighLighter,{ln:0});
+    anim.addStep();
+    anim.addInstruction(code,code.setHighLighter,{ln:20});
+    QuickSort(array,0,size-1);
+    anim.addStep();
+    anim.addInstruction(arr,arr.setAllBGColour,{colour:whiteColour});
+    anim.addInstruction(arr,arr.setAllFontColour,{colour:blueColour});
+    anim.addInstruction(iIndicator,iIndicator.hide);
+    anim.addInstruction(jIndicator,jIndicator.hide);
+    anim.addInstruction(pivotIndicator,pivotIndicator.hide);
+    anim.addStep();
+    anim.addInstruction(code,code.setHighLighter,{ln:0});
 }
 
 function setSortCode(){
@@ -155,16 +164,17 @@ function setSortCode(){
     "               swap(arr[i],arr[j]);",
     "           }",
     "       }",
-    "       swap(arr[i+1],arr[right]);",
-    "       quick(arr,left,i);",
-    "       quick(arr,i+2,right);",
+    "       i=i+1;",
+    "       swap(arr[i],arr[right]);",
+    "       quick(arr,left,i-1);",
+    "       quick(arr,i+1,right);",
     "   }",
     "}",
     "void quick(int arr[],int size){",
     "  quick(arr,0,size-1);",
     "}" 
     ];
-    code = AnimatedCode({code:s,x:580,y:50,width:320})
+    code = AnimatedCode({code:s,x:580,y:50,width:325})
 }
 function setup(){
     createCanvas(950,400);
