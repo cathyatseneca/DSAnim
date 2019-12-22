@@ -56,33 +56,42 @@ function insertion(array,size){
 function setSortCode(){
     var s=[
     "void insertionSort(int arr[],int size){",
-    "  int curr;",
-    "  int i,j;",
-    "  for(i=0;i<size;i++){",
-    "    curr=arr[i];",
-    "    for(j=i;j>0 && arr[j-1] > curr;j--){",
-    "      arr[j]=arr[j-1];",
+    "    int curr;",
+    "    int i,j;",
+    "    for(i=0;i<size;i++){",
+    "        curr=arr[i];",
+    "        for(j=i;j>0 && arr[j-1] > curr;j--){",
+    "            arr[j]=arr[j-1];",
+    "        }",
+    "        arr[j]=curr;",
     "    }",
-    "    arr[j]=curr;",
-    "  }",
     "}"
     ];
-    code = AnimatedCode({code:s,x:520,y:80});
+    code = AnimatedCode({code:s,x:500,y:80, width:350});
 }
 
 function setup(){
     createCanvas(950,400);
     playButton=createButton("Play");
     playButton.mousePressed(playSketch);
+    playButton.position (15, 425);
+
     pauseButton=createButton("Pause");
     pauseButton.mousePressed(pauseSketch);
+    pauseButton.position(70, 425);
+
     stepButton=createButton("Step");
     stepButton.mousePressed(stepSketch);
+    stepButton.position(135, 425);
+
     restartButton=createButton("Restart");
     restartButton.mousePressed(restartSketch);
+    restartButton.position(195, 425);
+
     speedSlider = createSlider(1,10,5);
+    speedSlider.position(270, 425);
     anim=Animation(950, 400);
-    code=AnimatedCode(480,100);
+
     setSortCode();
     anim.setBGColour(blackColour);
     var array=[];
@@ -95,7 +104,7 @@ function setup(){
                         yOffset: -100});
     jIndicator = Indicator({array:arr,label:"",isVisible:false, isUp:false});
 
-    animatedVar = AnimatedVariable({x:15,y:300});
+    animatedVar = AnimatedVariable({x:15,y:250});
 
 
     anim.addObject(code);

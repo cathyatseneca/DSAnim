@@ -69,16 +69,27 @@ function setSortCode(){
 }
 
 function setup(){
-    createCanvas(900,450);
+    createCanvas(900,400);
     playButton=createButton("Play");
     playButton.mousePressed(playSketch);
+    playButton.position (15, 425);
+
     pauseButton=createButton("Pause");
     pauseButton.mousePressed(pauseSketch);
+    pauseButton.position(70, 425);
+
     stepButton=createButton("Step");
     stepButton.mousePressed(stepSketch);
+    stepButton.position(135, 425);
+
+
     restartButton=createButton("Restart");
     restartButton.mousePressed(restartSketch);
+    pauseButton.position(70, 425);
+
     speedSlider = createSlider(1,10,5);
+    speedSlider.position(270, 425);
+
     anim=Animation({width:800, height:350});
     setSortCode();
     anim.setBGColour(color(0,0,0));    

@@ -39,13 +39,12 @@ var AnimatedArray = function(spec){
 	var moveVal_ = 0;
 	var emptyInit_ = false;
 	var showIndex_ = false;
-	var empty=false;
 
 	if(initial_.length ==0){
 		for(var i = 0 ;i< cap_;i++){
 			initial_.push(0);
+			isEmpty_.push(true);
 		}
-		empty=true;
 	}
 	else{
 		cap_=initial_.length;
@@ -417,16 +416,29 @@ var Indicator = function(spec){
 		var offset=sz/2;
 		var posX = array_.gap(idx_);
 		if(isVisible_){
-			if(isUp_){
-				drawTriangle(colour_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+sz);
-				textAlign(CENTER);
-				text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+25+sz);
+			if(idx_ >=0){
+				if(isUp_){
+					drawTriangle(colour_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+sz);
+					textAlign(CENTER);
+					text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()+25+sz);
+				}
+				else{
+					drawDownTriangle(colour_,array_.gap(idx_)+ that.getX()+idx_*sz + offset,that.getY());
+					textAlign(CENTER);
+					text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()-15);
+				}
 			}
 			else{
-				drawDownTriangle(colour_,array_.gap(idx_)+ that.getX()+idx_*sz + offset,that.getY());
-				textAlign(CENTER);
-				text(label_,array_.gap(idx_)+that.getX()+idx_*sz+offset,that.getY()-15);
-
+				if(isUp_){
+					drawTriangle(colour_,that.getX()+idx_*sz+offset,that.getY()+sz);
+					textAlign(CENTER);
+					text(label_,that.getX()+idx_*sz+offset,that.getY()+25+sz);
+				}
+				else{
+					drawDownTriangle(colour_, that.getX()+idx_*sz + offset,that.getY());
+					textAlign(CENTER);
+					text(label_,that.getX()+idx_*sz+offset,that.getY()-15);
+				}
 			}
 		}
 	}

@@ -94,13 +94,23 @@ function setup(){
     createCanvas(950,400);
     playButton=createButton("Play");
     playButton.mousePressed(playSketch);
+    playButton.position (15, 425);
+
     pauseButton=createButton("Pause");
     pauseButton.mousePressed(pauseSketch);
+    pauseButton.position(70, 425);
+
     stepButton=createButton("Step");
     stepButton.mousePressed(stepSketch);
+    stepButton.position(135, 425);
+
     restartButton=createButton("Restart");
     restartButton.mousePressed(restartSketch);
+    restartButton.position(195, 425);
+
     speedSlider = createSlider(1,10,5);
+    speedSlider.position(270, 425);
+
     RED= color(redColour);
     GREEN=color(greenColour);
     MINTGREEN = color(189,252,201);
